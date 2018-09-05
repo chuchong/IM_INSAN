@@ -5,11 +5,12 @@ ComponentPaint::ComponentPaint(QPaintDevice *device):device_(device)
 
 }
 
-void ComponentPaint::paint(Object *ob)
+void ComponentPaint::paint(GameObject *ob)
 {
-    QPainter painter(this->device);
-    QPixmap  pix(ob->size_);
+    QRect& rect = ob->getRect();
+    QPainter painter(this->device_);
+    QPixmap  pix(rect.size());
     pix.load(ob->imageRc_);
     qDebug() << pix.size();
-    painter.drawPixmap(ob->point_, pix);
+    painter.drawPixmap(rect.topLeft(), pix);
 }

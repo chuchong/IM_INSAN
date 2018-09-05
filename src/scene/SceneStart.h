@@ -8,8 +8,6 @@
 class SceneStart : public Scene
 {
 private:
-    QList<BlockObject *> buttonList;
-    BlockObject *background;
 public:
     SceneStart();
     virtual void update();

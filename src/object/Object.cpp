@@ -1,12 +1,17 @@
 #include "Object.h"
 
-Object::Object(QString image, int x, int y, qreal px, qreal py)
-    :imageRc_(image),size_(x,y),point_(px,pz)
+GameObject::GameObject(QString image, int x, int y, qreal px, qreal py)
+    :imageRc_(image),rect_(px, py, x, y)
 {
 
 }
 
-void Object::paint(ComponentPaint &cp)
+void GameObject::setHP(int hp)
 {
-    cp.paint(this);
+    hp = hp_;
+}
+
+QRect &GameObject::getRect()
+{
+    return rect_;
 }

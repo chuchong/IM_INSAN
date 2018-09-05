@@ -4,14 +4,16 @@
 #include <QObject>
 #include <QPainter>
 #include <QImage>
+#include "../Constant.h"
 #include "../object/Object.h"
+class GameObject;
 class ComponentPaint
 {
 private:
-    QPaintDevice *device;
+    QPaintDevice *device_;
 public:
-    ComponentPaint();
-    void paint(Object *ob);
+    ComponentPaint(QPaintDevice *device);
+    void paint(GameObject *ob);
 };
 
 #endif // COMPONENTPAINT_H

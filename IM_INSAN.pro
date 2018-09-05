@@ -26,7 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/scene/SceneManager.cpp \
     src/scene/Scene.cpp \
     src/scene/SceneStart.cpp \
     src/scene/SceneStory.cpp \
@@ -45,7 +44,6 @@ SOURCES += \
 
 HEADERS += \
     src/mainwindow.h \
-    src/scene/SceneManager.h \
     src/scene/Scene.h \
     src/scene/SceneStart.h \
     src/scene/SceneStory.h \

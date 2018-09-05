@@ -4,15 +4,13 @@
 
 #include <QObject>
 #include "Object.h"
-class SpriteObject :public Object/* public QObject*/
+class SpriteObject :public GameObject
 {
 //    Q_OBJECT
 public:
-    explicit SpriteObject();
+    SpriteObject();
+    SpriteObject(QString image, int x, int y, qreal px, qreal py);
 
-signals:
-
-public slots:
 };
 
 #endif // SPRITEOBJECT_H

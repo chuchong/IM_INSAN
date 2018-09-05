@@ -1,5 +1,6 @@
 #ifndef CONSTANT_H
 #define CONSTANT_H
+#include "QDebug"
 //场景编号
 const int SCENE_START = 1000;
 const int SCENE_BATTLE_1 = 2000;
@@ -16,4 +17,6 @@ const int SCENE_STORY_THANKS = 3006;
 const int SCENE_SELECT_1 = 4000;
 typedef int SCENE_NUMBER;
 
+
+#define HP_OF_BLOCK 1
 #endif // CONSTANT_H
