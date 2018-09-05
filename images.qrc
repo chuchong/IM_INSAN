@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="BG_STARTMENU">images/background/startMenu.jpg</file>
+    </qresource>
+</RCC>
