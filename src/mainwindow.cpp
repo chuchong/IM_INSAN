@@ -36,6 +36,7 @@ void MainWindow::changeScene(Scene *newScene)
         if(!loadThread.isRunning())
             loadThread.start();
         //TODO:objManager变为加载中或者接受加载页面
+        update();
         }
 
    if (currScene != nullptr)

@@ -8,20 +8,21 @@ int main(int argc, char *argv[])
     MainWindow w;
 
 
-//    QPixmap pixmap(":/BG_DEBUG");      //绑定一个图片
-//    QSplashScreen *splash=new QSplashScreen;
-//    splash->setPixmap(pixmap);
-//    splash->show();
+    //调皮一下
+    QPixmap pixmap(":/BG_WELCOME");      //绑定一个图片
+    QSplashScreen *splash=new QSplashScreen;
+    splash->setPixmap(pixmap);
+    splash->show();
 
-//    QDateTime n=QDateTime::currentDateTime();
-//    QDateTime now;
-//    do{
-//    now=QDateTime::currentDateTime();
-//    } while (n.secsTo(now)<=6);
+    QDateTime n=QDateTime::currentDateTime();
+    QDateTime now;
+    do{
+    now=QDateTime::currentDateTime();
+    } while (n.secsTo(now)<=2);
 
     w.show();
-//    splash->finish(&w);
-//    delete splash;
+    splash->finish(&w);
+    delete splash;
 
     return a.exec();
 }
