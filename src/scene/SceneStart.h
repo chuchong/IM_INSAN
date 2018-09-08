@@ -10,6 +10,7 @@ class SceneStart : public Scene
 private:
 public:
     SceneStart();
+    virtual void parseFromJason(QString j);
     virtual void update();
     virtual void redraw();
     virtual void load();

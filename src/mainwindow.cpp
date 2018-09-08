@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
             &loadThread, SLOT(deleteLater()));
     connect(&loadThread, SIGNAL(sendFinishedScreen(ObjectManager*)),
             this, SLOT(receiveLoadScreen(ObjectManager*)));
-
+    currScene = new SceneStory(":/configure/INI_STORY_1");
 }
 
 MainWindow::~MainWindow()

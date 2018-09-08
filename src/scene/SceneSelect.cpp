@@ -5,6 +5,11 @@ SceneSelect::SceneSelect()
 
 }
 
+void SceneSelect::parseFromJason(QString j)
+{
+
+}
+
 void SceneSelect::update()
 {
 

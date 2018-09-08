@@ -5,6 +5,11 @@ SceneStart::SceneStart()
 
 }
 
+void SceneStart::parseFromJason(QString j)
+{
+
+}
+
 
 void SceneStart::redraw()
 {

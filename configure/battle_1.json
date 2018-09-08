@@ -1,0 +1,18 @@
+{
+  "background":
+  {
+    "url" : "BG_BATTLE_1",
+  },
+  "enemy":[
+    {
+      "json的注释只能长成这个样子":"",
+      "是不是很搞笑":"",
+      "name" : "fish",
+      "img" : "",
+      "number" : "1",
+    },
+    {
+
+    }
+  ]
+}

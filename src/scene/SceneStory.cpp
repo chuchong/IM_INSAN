@@ -1,8 +1,17 @@
 #include "SceneStory.h"
 
-SceneStory::SceneStory()
+SceneStory::SceneStory(QString url)
 {
+    parseFromJason(url);
+}
 
+void SceneStory::parseFromJason(QString j)
+{
+    QSettings config(j,QSettings::IniFormat);
+    QString background = config.value("/background/url").toString();
+    QString script = config.value("/script/url").toString();
+
+    qDebug()<< background << script;
 }
 
 void SceneStory::update()

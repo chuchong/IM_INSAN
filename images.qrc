@@ -4,4 +4,11 @@
         <file alias="BG_DEBUG">images/background/DEBUG.jpg</file>
         <file alias="BG_WELCOME">images/background/WELCOME.jpg</file>
     </qresource>
+    <qresource prefix="/configure">
+        <file alias="INI_STORY_1">configure/story_1.INI</file>
+        <file alias="INI_BATTLE_1">configure/battle_1.json</file>
+    </qresource>
+    <qresource prefix="/script">
+        <file alias="SCRIPT_STORY_1">script/story1.txt</file>
+    </qresource>
 </RCC>

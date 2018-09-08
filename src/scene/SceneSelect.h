@@ -6,6 +6,7 @@ class SceneSelect : public Scene
 {
 public:
     SceneSelect();
+    virtual void parseFromJason(QString j);
     virtual void update();
     virtual void redraw();
     virtual void load();

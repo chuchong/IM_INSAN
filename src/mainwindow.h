@@ -9,13 +9,13 @@
 #include "scene/SceneManager.h"
 #include "Constant.h"
 #include "scene/Scene.h"
+#include "scene/SceneStory.h"
 #include "object/ObjectManager.h"
 #include "component/ComponentPaint.h"
 namespace Ui {
 class MainWindow;
 }
-//
-
+//这是为实现多线程准备的类
 class LoadingThread : public QThread
 {
     Q_OBJECT
