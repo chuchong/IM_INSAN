@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="BG_STARTMENU">images/background/startMenu.jpg</file>
+        <file alias ="BG_DEBUG">images/background/DEBUG.jpg</file>
     </qresource>
 </RCC>
