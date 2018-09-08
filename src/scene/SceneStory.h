@@ -8,7 +8,7 @@ class SceneStory : public Scene
 {
 public:
     SceneStory(QString url);
-    virtual void parseFromJason(QString url);
+    virtual void parseFromFile(QString url);
     virtual void update();
     virtual void redraw();
     virtual void load();

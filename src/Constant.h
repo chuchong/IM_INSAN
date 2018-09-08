@@ -2,6 +2,8 @@
 #define CONSTANT_H
 #include "QDebug"
 //场景编号
+enum SCENE_TYPE{START,BATTLE,STORY,SELECT
+};
 const int SCENE_START = 1000;
 const int SCENE_BATTLE_1 = 2000;
 const int SCENE_BATTLE_2 = 2001;

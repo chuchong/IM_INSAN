@@ -2,10 +2,10 @@
 
 SceneStory::SceneStory(QString url)
 {
-    parseFromJason(url);
+    parseFromFile(url);
 }
 
-void SceneStory::parseFromJason(QString j)
+void SceneStory::parseFromFile(QString j)
 {
     QSettings config(j,QSettings::IniFormat);
     QString background = config.value("/background/url").toString();

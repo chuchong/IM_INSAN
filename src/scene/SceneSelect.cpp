@@ -5,7 +5,7 @@ SceneSelect::SceneSelect()
 
 }
 
-void SceneSelect::parseFromJason(QString j)
+void SceneSelect::parseFromFile(QString j)
 {
 
 }

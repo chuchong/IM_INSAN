@@ -5,7 +5,7 @@ SceneStart::SceneStart()
 
 }
 
-void SceneStart::parseFromJason(QString j)
+void SceneStart::parseFromFile(QString j)
 {
 
 }

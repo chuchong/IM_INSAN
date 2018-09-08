@@ -3,13 +3,19 @@
 #define SCENE_H
 
 #include <QObject>
-class Scene
+#include "../Constant.h"
+class Scene:public QObject
 {
+    Q_OBJECT
+private:
+    SCENE_TYPE sceneType;
 public:
     Scene();
-    virtual void parseFromJason(QString j) = 0;
-    virtual void update() = 0;
-    virtual void redraw() = 0;
+
+    //从本地文档中读取配置文件,大体上包含json ini
+    virtual void parseFromFile(QString j) = 0;
+    virtual void update() = 0;//逻辑
+    virtual void redraw() = 0;//绘制
     virtual void load() = 0;
     virtual void unload() = 0;
 };
