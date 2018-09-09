@@ -5,9 +5,10 @@ BreedFactury::BreedFactury()
 
 }
 
-GameObject *BreedFactury::getBG(QString image, int x, int y, qreal px, qreal py)
+BlockObject *BreedFactury::getBG(QString image, int x, int y, qreal px, qreal py)
 {
-    GameObject * o_ptr= new BlockObject(image, x, y, px, py);
+    BlockObject * o_ptr= new BlockObject();
+    o_ptr->setImage(image, x, y, px, py);
     o_ptr->setHP(HP_OF_BLOCK);
     return o_ptr;
 }

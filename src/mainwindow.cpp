@@ -8,12 +8,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     this->paintComponent = new ComponentPaint(this);
-    this->objManager = new ObjectManager(paintComponent);
     connect(&loadThread, SIGNAL(finished()),
             &loadThread, SLOT(deleteLater()));
-    connect(&loadThread, SIGNAL(sendFinishedScreen(ObjectManager*)),
-            this, SLOT(receiveLoadScreen(ObjectManager*)));
-    currScene = new SceneStory(":/configure/INI_STORY_1");
+    connect(&loadThread, SIGNAL(sendFinishedScreen(Scene*)),
+            this, SLOT(receiveLoadScreen(Scene*)));
+    currScene = new SceneStart();
+    currScene -> load();
 }
 
 MainWindow::~MainWindow()
@@ -21,10 +21,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 //以下为利用多线程来显示加载页面的函数*2
-void MainWindow::receiveLoadScreen(ObjectManager *newOb)
+void MainWindow::receiveLoadScreen(Scene * newOb)
 {
-    delete objManager;
-    objManager = newOb;
+    delete currScene;
+    currScene = newOb;
     update();
 
 }
@@ -48,9 +48,13 @@ void MainWindow::changeScene(Scene *newScene)
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
-    //TODO 注释以下代码,代码仅供调试
-    objManager->setBG(":/BG_STARTMENU",900,600,0,0);
-    objManager->sortAndPaintPhase();
+    ui->graphicsView->setScene(currScene);
+    currScene->setSceneRect(0,0,900,600);
+}
+
+void MainWindow::start()
+{
+    currScene = new SceneStart();
 }
 
 //-----------以下为loadingthread所用

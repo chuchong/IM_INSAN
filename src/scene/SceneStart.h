@@ -3,11 +3,12 @@
 
 #include <QList>
 #include "Scene.h"
-#include "../object/Object.h"
+#include "../object/GameObject.h"
 #include "../object/BlockObject.h"
 class SceneStart : public Scene
 {
 private:
+   BlockObject *background;
 public:
     SceneStart();
     virtual void parseFromFile(QString j);

@@ -10,6 +10,9 @@
 #include "Constant.h"
 #include "scene/Scene.h"
 #include "scene/SceneStory.h"
+#include "scene/SceneStart.h"
+#include "scene/SceneBattle.h"
+#include "scene/SceneSelect.h"
 #include "object/ObjectManager.h"
 #include "component/ComponentPaint.h"
 namespace Ui {
@@ -23,7 +26,7 @@ public:
     explicit LoadingThread(QObject *parent = 0);
     ~LoadingThread();
 signals:
-    void sendFinishedScreen(ObjectManager *);
+    void sendFinishedScreen(Scene *);
 protected:
     virtual void run() Q_DECL_OVERRIDE;
 };
@@ -33,7 +36,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private slots:
-    void receiveLoadScreen(ObjectManager *);
+    void receiveLoadScreen(Scene *);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -43,11 +46,11 @@ public:
     //TODO 确定场景切换方式 自动机orswitch
     void chooseNewScene(SCENE_NUMBER old_scene, int/*TODO information*/ );//选择新场景,场景切换利用SWITCH大概就够了
      void paintEvent(QPaintEvent *event);
+     void start();
 private:
     Ui::MainWindow *ui;
     friend class SceneManager;
     Scene* currScene;
-    ObjectManager *objManager;
     ComponentPaint *paintComponent;
 
     LoadingThread loadThread;

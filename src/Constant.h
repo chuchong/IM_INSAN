@@ -19,6 +19,8 @@ const int SCENE_STORY_THANKS = 3006;
 const int SCENE_SELECT_1 = 4000;
 typedef int SCENE_NUMBER;
 
+const int DEFAULT_FPS = 60;
+const double DEFAULT_INTERVAL = 1000.0/DEFAULT_FPS;
 
 #define HP_OF_BLOCK 1
 #endif // CONSTANT_H

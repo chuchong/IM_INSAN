@@ -31,7 +31,6 @@ SOURCES += \
     src/scene/SceneStory.cpp \
     src/scene/SceneBattle.cpp \
     src/scene/SceneSelect.cpp \
-    src/object/Object.cpp \
     src/object/SpriteObject.cpp \
     src/object/BlockObject.cpp \
     src/object/BreedFactury.cpp \
@@ -40,7 +39,8 @@ SOURCES += \
     src/object/LogicDFAutomata.cpp \
     src/object/Effect.cpp \
     src/object/EffectContainer.cpp \
-    src/component/ComponentPaint.cpp
+    src/component/ComponentPaint.cpp \
+    src/object/GameObject.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -50,7 +50,6 @@ HEADERS += \
     src/scene/SceneBattle.h \
     src/scene/SceneSelect.h \
     src/Constant.h \
-    src/object/Object.h \
     src/object/SpriteObject.h \
     src/object/BlockObject.h \
     src/object/BreedFactury.h \
@@ -59,7 +58,8 @@ HEADERS += \
     src/object/LogicDFAutomata.h \
     src/object/Effect.h \
     src/object/EffectContainer.h \
-    src/component/ComponentPaint.h
+    src/component/ComponentPaint.h \
+    src/object/GameObject.h
 
 FORMS += \
     src/mainwindow.ui

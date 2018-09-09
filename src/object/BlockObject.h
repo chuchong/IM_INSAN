@@ -2,7 +2,7 @@
 #ifndef BLOCKOBJECT_H
 #define BLOCKOBJECT_H
 #include <QObject>
-#include "Object.h"
+#include "GameObject.h"
 class BlockObject : public GameObject
 {
 
