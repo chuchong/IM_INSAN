@@ -4,6 +4,7 @@
 
 class SceneSelect : public Scene
 {
+
 public:
     SceneSelect();
     virtual void parseFromFile(QString j);
@@ -11,6 +12,7 @@ public:
     virtual void redraw();
     virtual void load();
     virtual void unload();
+//    virtual Scene *duplicateScene(Scene *);
 };
 
 #endif // SCENESELECT_H

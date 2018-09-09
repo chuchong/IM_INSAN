@@ -10,6 +10,7 @@ public:
     BlockObject();
     BlockObject(QString image, int x, int y, qreal px, qreal py);
     virtual void setHP (int hp = 1){}//无逻辑物体生命值为1,在工厂中生命清零,然后被管理器析构
+
 };
 
 #endif // BLOCKOBJECT_H

@@ -26,10 +26,8 @@ public:
     QGraphicsPixmapItem(parent){}//以让工厂类能较好的工作而设计,直接使用会出错
 
     //TODO 各种set方便工厂类
-    virtual void setPoint(int x, int y);
-    virtual void setSize(int size_x, int size_y);
     virtual void setHP(int);
-    virtual void setImage(QString image, int x, int y, qreal px, qreal py);
+    virtual void setImage(QString image);
 
     virtual bool isDead(){
         return (hp_ <= 0);

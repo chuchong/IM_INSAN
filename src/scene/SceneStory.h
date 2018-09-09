@@ -6,13 +6,15 @@
 
 class SceneStory : public Scene
 {
+    BlockObject *background;
 public:
-    SceneStory(QString url);
+    SceneStory();
     virtual void parseFromFile(QString url);
     virtual void update();
     virtual void redraw();
     virtual void load();
     virtual void unload();
+//    virtual Scene *duplicateScene(Scene *);
 };
 
 #endif // SCENESTORY_H

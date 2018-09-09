@@ -6,6 +6,16 @@ Scene::Scene(QObject *parent):
 
 }
 
+SCENE_ID Scene::getSceneId()
+{
+    return sceneId;
+}
+
+bool Scene::equal(Scene *newScene)
+{
+    return (this->sceneId == newScene->getSceneId());
+}
+
 void Scene::sortAndPaintPhase()
 {
     qSort(allList.begin(),allList.end(),

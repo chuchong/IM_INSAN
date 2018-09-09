@@ -9,7 +9,8 @@ QRectF GameObject::boundingRect() const
 
 void GameObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawPixmap(point_,
+
+    painter->drawPixmap(QPoint(0,0),
                         pixmap());
 }
 
@@ -20,29 +21,15 @@ QPainterPath GameObject::shape() const
     return path;
 }
 
-void GameObject::setPoint(int x, int y)
-{
-    point_.setX(x);
-    point_.setY(y);
-//    pixmap().rect().setTopLeft(point_);
-}
-
-void GameObject::setSize(int size_x, int size_y)
-{
-    pixmap().rect().setSize(QSize(size_x,size_y));
-}
-
 void GameObject::setHP(int hp)
 {
     hp = hp_;
 }
 
-void GameObject::setImage(QString image, int x, int y, qreal px, qreal py)
+void GameObject::setImage(QString image)
 {
     QPixmap pixmap;
     pixmap.load(image);
-    setPoint(px, py);
-    setSize(x, y);
     setPixmap(pixmap);
 }
 

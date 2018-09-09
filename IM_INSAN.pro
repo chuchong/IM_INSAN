@@ -34,13 +34,13 @@ SOURCES += \
     src/object/SpriteObject.cpp \
     src/object/BlockObject.cpp \
     src/object/BreedFactury.cpp \
-    src/object/ObjectManager.cpp \
     src/object/Logic.cpp \
     src/object/LogicDFAutomata.cpp \
     src/object/Effect.cpp \
     src/object/EffectContainer.cpp \
     src/component/ComponentPaint.cpp \
-    src/object/GameObject.cpp
+    src/object/GameObject.cpp \
+    src/scene/SceneMachine.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -53,13 +53,13 @@ HEADERS += \
     src/object/SpriteObject.h \
     src/object/BlockObject.h \
     src/object/BreedFactury.h \
-    src/object/ObjectManager.h \
     src/object/Logic.h \
     src/object/LogicDFAutomata.h \
     src/object/Effect.h \
     src/object/EffectContainer.h \
     src/component/ComponentPaint.h \
-    src/object/GameObject.h
+    src/object/GameObject.h \
+    src/scene/SceneMachine.h
 
 FORMS += \
     src/mainwindow.ui

@@ -8,6 +8,7 @@
 class SceneStart : public Scene
 {
 private:
+   QList<BlockObject *>buttons;
    BlockObject *background;
 public:
     SceneStart();
@@ -16,6 +17,8 @@ public:
     virtual void redraw();
     virtual void load();
     virtual void unload();
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+//    virtual Scene *duplicateScene(Scene *);
 };
 
 #endif // SCENESTART_H

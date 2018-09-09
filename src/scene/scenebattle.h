@@ -10,6 +10,8 @@
 
 class SceneBattle : public Scene
 {
+private:
+    SCENE_ID next;//
 public:
     SceneBattle();
     virtual void parseFromFile(QString j);
@@ -17,6 +19,7 @@ public:
     virtual void redraw();
     virtual void load();
     virtual void unload();
+//    virtual Scene *duplicateScene(Scene *);
 };
 
 #endif // SCENEBATTLE_H

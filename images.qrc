@@ -6,6 +6,7 @@
         <file alias="BUTTON_EXIT">images/ui_frame/BUTTON_EXIT.jpg</file>
         <file alias="BUTTON_LOAD">images/ui_frame/BUTTON_LOAD.jpg</file>
         <file alias="BUTTON_START">images/ui_frame/BUTTON_START.jpg</file>
+        <file alias="BG_STORY_1">images/background/STORY_1.jpg</file>
     </qresource>
     <qresource prefix="/configure">
         <file alias="INI_STORY_1">configure/story_1.INI</file>
