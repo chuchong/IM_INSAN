@@ -28,7 +28,7 @@ void SceneStart::load()
 
 
     BlockObject *button = factury.getButton(":/BUTTON_START",
-                                            101, 28, 0, 0,
+                                            101, 28, 200, 300,
                                             CONDITION_START);
     this->allList.append(button);
     buttons.append(button);
@@ -53,6 +53,8 @@ void SceneStart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(!buttons.isEmpty()){
         for(auto button: buttons){
+            qDebug() << event->scenePos().x();
+            qDebug() << event->scenePos().y();
             if(button->contains(event->scenePos())){
                     S_CONDITIONS buf = button->getCondition();
                     emit sendCondition(buf);
