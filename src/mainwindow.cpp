@@ -47,7 +47,6 @@ void MainWindow::handleConditions(S_CONDITIONS conditions)
                     this, SLOT(changeSceneFromThread(Scene*)));
             loadThread->setCondition(conditions);
             loadThread->setMachine(this->machine);
-            loadThread->setScene(currScene);
             if(!loadThread->isRunning())
                 loadThread->start();
             //只能用repaint
@@ -67,6 +66,7 @@ void MainWindow::changeSceneFromThread(Scene *newScene)
 {
     //这时因为load unload 费事才放到子线程中,所以不需要再用了
    //更改Scene 实际上实现的是一个自动机
+    currScene->unload();
     currScene = newScene;
     loadThread->requestInterruption();
     loadThread = nullptr;
@@ -140,13 +140,13 @@ void LoadingThread::run()
     while (!isInterruptionRequested())
     { // 是否请求终止
        if(!changed){
-           if (sceneFromMain != nullptr)
-                sceneFromMain->unload();//不可以delete
-           sceneFromMain = machine->getNextScene(conditions);
+//           if (sceneFromMain != nullptr)
+//                sceneFromMain->unload();//不可以delete !!这是一切问题的根源
+           Scene* newScene = machine->getNextScene(conditions);
            machine->apply(conditions);
-           sceneFromMain->load();
+           newScene->load();
            msleep(1000);//至少让人看到我写了加载页面
-           emit sendFinishedScreen(sceneFromMain);
+           emit sendFinishedScreen(newScene);
            changed = 1;
        }
        else{

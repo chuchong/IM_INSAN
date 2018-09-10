@@ -69,7 +69,7 @@ void SceneStart::mousePressEvent(QGraphicsSceneMouseEvent *event)
             if(button != nullptr && button->contains(event->scenePos())){
                     S_CONDITIONS buf = button->getCondition();
                     emit sendCondition(buf);
-//???                    /*return;*///!!否则两线程撞车
+//???                    return;//!!否则两线程撞车
              }
          }
     }
