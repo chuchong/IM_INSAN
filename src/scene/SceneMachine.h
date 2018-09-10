@@ -21,6 +21,7 @@ struct Transition{
 
     }
 private:
+    friend class GVariantKeeper;//负责让他帮忙析构
     friend class QList<Transition>;
     ~Transition(){//他不能去delete,因为这指针不属于他
     qDebug() << "delete transition";

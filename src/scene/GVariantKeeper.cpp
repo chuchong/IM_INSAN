@@ -51,6 +51,9 @@ GVariantKeeper::~GVariantKeeper()
     for(auto iter: allConditions)
         delete iter;
     allConditions.clear();
+    for(auto tran:allTransitions)
+        delete tran;
+    allTransitions.clear();
 }
 
 

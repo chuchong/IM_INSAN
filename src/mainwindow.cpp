@@ -16,8 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
     currScene = machine->getStartScene();
     currScene -> load();
     currScene->setSceneRect(0,0,900,600);
-
-    loadThread = new LoadingThread(this);
     //TODO:注意的是每个不同的SCENE的指针也不一样,所以这个connect要在change的时候也要写
     connectToScene();
     update();
@@ -41,7 +39,7 @@ void MainWindow::handleConditions(S_CONDITIONS conditions)
 
     //if判断用不用多线程
     if( machine->getNextScene(conditions)!= nullptr){
-        if(1/*machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
+        if(loadThread == nullptr /* && machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
             loadThread = new LoadingThread(this);
             connect(loadThread, SIGNAL(finished()),
                     loadThread, SLOT(deleteLater()));
@@ -89,7 +87,7 @@ void MainWindow::changeSceneNoThread(Scene *newScene){
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     //当loading的时候,不能使用currScene,必须先判断是否指针为空
-    if(loadThread == nullptr || loadThread->isRunning() == false){
+    if(loadThread == nullptr){
      ui->graphicsView->setScene(currScene);
      currScene->setSceneRect(0,0,900,600);
     }

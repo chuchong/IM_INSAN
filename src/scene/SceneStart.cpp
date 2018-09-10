@@ -63,12 +63,13 @@ void SceneStart::unload()
 void SceneStart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(!buttons.isEmpty()){
-        for(auto button: buttons){
+        for(BlockObject* button: buttons){
             qDebug() << event->scenePos().x();
             qDebug() << event->scenePos().y();
-            if(button->contains(event->scenePos())){
+            if(button != nullptr && button->contains(event->scenePos())){
                     S_CONDITIONS buf = button->getCondition();
                     emit sendCondition(buf);
+//???                    /*return;*///!!否则两线程撞车
              }
          }
     }

@@ -65,7 +65,7 @@ private:
 //    static SceneStory* loadingScene;
     Ui::MainWindow *ui;
     friend class SceneManager;
-    SceneMachine *machine;
+    SceneMachine *machine = nullptr;
     Scene* currScene = nullptr;
 //    ComponentPaint *paintComponent;
     GVariantKeeper *gVariantIns = nullptr;
