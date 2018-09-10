@@ -7,7 +7,7 @@ SceneMachine *GVariantKeeper::secondWMachine = nullptr;
 std::mutex GVariantKeeper::mutex_;
 QList<Scene *> GVariantKeeper::allScenes;
 QList<S_CONDITIONS *> GVariantKeeper::allConditions;
-
+QList<Transition *> GVariantKeeper::allTransitions;
 
 
 GVariantKeeper::GVariantKeeper()
@@ -20,12 +20,14 @@ GVariantKeeper::GVariantKeeper()
     allScenes.append(story1);
     story1->parseFromFile(":/configure/INI_STORY_1_1");
 
-    Transition debugTrans(startScene,
+    Transition *debugTrans = new Transition
+                         (startScene,
                           story1,
                           QSet<int>::fromList({CONDITION_START}));
+    allTransitions.append(debugTrans);
 
     QList<Transition>  qli;
-    qli.append(debugTrans);
+    qli.append(*debugTrans);
 
     firstWMachine =new SceneMachine(qli,startScene);//好烦啊,这些Machine里面的指针好容易漏出去
     secondWMachine =new SceneMachine(qli,startScene);

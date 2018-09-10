@@ -35,6 +35,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::handleConditions(S_CONDITIONS conditions)
 {
+    if(conditions == QSet<int>({CONDITION_QUIT}))
+        this->close();
+
+
     //if判断用不用多线程
     if( machine->getNextScene(conditions)!= nullptr){
         if(1/*machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
@@ -127,6 +131,7 @@ LoadingThread::~LoadingThread()
     //以下是来自
     //https://blog.csdn.net/liang19890820/article/details/52186626
     //推荐的结束方法
+    qDebug()<<"thread die";
     requestInterruption();
     quit();
     wait();

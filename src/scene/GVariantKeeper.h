@@ -44,6 +44,7 @@ private://这里以下的要考虑他们的析构
     static SceneMachine *secondWMachine;//二周目所有的自动机
     static QList<Scene*> allScenes;//负责所有Scene的析构
     static QList<S_CONDITIONS*> allConditions;
+    static QList<Transition *> allTransitions;
 };
 
 class GVariantKeeper::Auto{

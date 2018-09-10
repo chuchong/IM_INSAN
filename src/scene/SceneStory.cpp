@@ -37,7 +37,9 @@ void SceneStory::load()
 
 void SceneStory::unload()
 {
-    delete background;
+    for(GameObject* iter : allList)
+        delete iter;
+    allList.clear();
     delete script;
     disconnect();
 }

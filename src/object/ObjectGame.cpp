@@ -22,6 +22,7 @@ void GameObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 QPainterPath GameObject::shape() const
 {
+    //注意paint默认返回boundingrect 坑啊
     QPainterPath path;
     QRect r(this->pos().x(),this->pos().y(),pixmap().width(),pixmap().height());
     path.addRect(r);

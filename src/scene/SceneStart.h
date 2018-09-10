@@ -10,7 +10,6 @@ class SceneStart : public Scene
 private:
    QList<BlockObject *>buttons;
    BlockObject *background;
-
 public:
    ~SceneStart(){ this->unload();}
     SceneStart();

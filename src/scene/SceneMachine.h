@@ -6,7 +6,7 @@
 //以上已经修改了一下,现在Scene只能在栈上,且运行时不能delete了
 #ifndef SCENEMACHINE_H
 #define SCENEMACHINE_H
-
+#include <QtDebug>
 #include <QObject>
 #include <QSet>
 #include <QList>
@@ -20,7 +20,10 @@ struct Transition{
     from(f),to(t),consitions(sc){
 
     }
+private:
+    friend class QList<Transition>;
     ~Transition(){//他不能去delete,因为这指针不属于他
+    qDebug() << "delete transition";
     }
 };
 class SceneMachine : public QObject
@@ -47,7 +50,7 @@ public:
         current = getNextScene(conditions);
     }
     Scene *getNextScene(S_CONDITIONS conditions){
-        for(Transition transition : transitions){
+        for(Transition& transition : transitions){
             bool currentMatches = transition.from->equal(current);
             bool conditionMatches = transition.consitions.operator ==(conditions);
             if(currentMatches && conditionMatches){
@@ -57,7 +60,7 @@ public:
         return nullptr;
     }
     ~SceneMachine(){
-        //do not delete current;
+        qDebug() << "delete machine";      //do not delete current;
     }
 
 signals:

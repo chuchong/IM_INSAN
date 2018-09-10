@@ -27,13 +27,24 @@ void SceneStart::load()
     bg->setZValue(0);
 
 
-    BlockObject *button = factury.getButton(":/BUTTON_START",
-                                            101, 28, 200, 300,
+    BlockObject *startButton = factury.getButton(":/BUTTON_START",
+                                            101, 28, 700, 400,
                                             CONDITION_START);
-    this->allList.append(button);
-    buttons.append(button);
-    this->addItem(button);
-    button->setZValue(1);
+    BlockObject *exitButton = factury.getButton(":/BUTTON_EXIT",
+                                             101,28,700,500,
+                                                CONDITION_QUIT);
+
+    this->allList.append(startButton);
+    allList.append(exitButton);
+
+    buttons.append(startButton);
+    buttons.append(exitButton);
+
+    this->addItem(startButton);
+    this->addItem(exitButton);
+
+    startButton->setZValue(1);
+    exitButton->setZValue(1);
 }
 
 void SceneStart::unload()
