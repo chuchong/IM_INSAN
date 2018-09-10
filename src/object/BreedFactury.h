@@ -3,6 +3,12 @@
 #ifndef BREEDFACTURY_H
 #define BREEDFACTURY_H
 //#include <QHash>
+#include <QJsonDocument>
+#include <QJsonParseError>
+#include <QFile>
+#include <QJsonObject>
+#include <QDebug>
+#include <QJsonArray>
 #include "../Constant.h"
 #include "ObjectGame.h"
 #include "ObjectSprite.h"
@@ -15,7 +21,7 @@ private:
 public:
     BreedFactury();
     BlockObject *getBG(QString image, int x, int y, qreal px, qreal py);
-//    BlockObject *getButton(QString url,)
+    BlockObject *getButton(QString image, int x, int y, qreal px, qreal py, CONDITIONS_ID a_cond);
     void killBG(GameObject *);
 };
 

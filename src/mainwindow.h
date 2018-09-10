@@ -48,12 +48,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private slots:
-    void receiveLoadScreen(Scene *);
+//    void receiveLoadScreen(Scene *);
     void handleConditions(S_CONDITIONS conditions);
+    void changeSceneFromThread(Scene* newScene);
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void changeSceneFromThread(Scene* newScene);
+
     void changeSceneNoThread(Scene* newScene);
 
     //TODO 确定场景切换方式 自动机orswitch
@@ -69,6 +70,8 @@ private:
 //    ComponentPaint *paintComponent;
     GVariantKeeper *gVariantIns = nullptr;
     LoadingThread* loadThread = nullptr;
+private:
+    void connectToScene();
 };
 
 

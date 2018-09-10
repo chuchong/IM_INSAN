@@ -39,12 +39,17 @@ void SceneStory::unload()
 {
     delete background;
     delete script;
+    disconnect();
 }
 
 void SceneStory::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(!script->showNextLine())
-        1==1;
+    if(script != nullptr){
+        if(!script->showNextLine()){
+            S_CONDITIONS battle; battle.insert(CONDITION_START);
+            emit sendCondition(battle);
+        }
+    }
 }
 
 

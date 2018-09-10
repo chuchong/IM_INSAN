@@ -13,24 +13,22 @@ QList<S_CONDITIONS *> GVariantKeeper::allConditions;
 GVariantKeeper::GVariantKeeper()
 {
     //初始化那个Transition
-    SceneStart *currScene = new SceneStart;
-    allScenes.append(currScene);
+    SceneStart *startScene = new SceneStart;
+    allScenes.append(startScene);
 
     SceneStory *story1 = new SceneStory;
     allScenes.append(story1);
     story1->parseFromFile(":/configure/INI_STORY_1_1");
 
-    S_CONDITIONS *cond = new S_CONDITIONS;
-    allConditions.append(cond);
+    Transition debugTrans(startScene,
+                          story1,
+                          QSet<int>::fromList({CONDITION_START}));
 
-    cond->insert(CONDITION_DEBUG);
-    Transition* debugTrans = new Transition(currScene,story1,*cond);
+    QList<Transition>  qli;
+    qli.append(debugTrans);
 
-    QList<Transition>  *qli = new QList<Transition>();
-    qli->append(*debugTrans);
-
-    firstWMachine =new SceneMachine(*qli,currScene);//好烦啊,这些Machine里面的指针好容易漏出去
-    secondWMachine =new SceneMachine(*qli,currScene);
+    firstWMachine =new SceneMachine(qli,startScene);//好烦啊,这些Machine里面的指针好容易漏出去
+    secondWMachine =new SceneMachine(qli,startScene);
 
     //以上的都要给我活着
     //!!!!TODO 弄好这些Scene*的析构 和初始化,全部都要是获得

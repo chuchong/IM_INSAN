@@ -19,8 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     loadThread = new LoadingThread(this);
     //TODO:注意的是每个不同的SCENE的指针也不一样,所以这个connect要在change的时候也要写
-    connect(currScene, SIGNAL(sendCondition(S_CONDITIONS)),
-            this, SLOT(handleConditions(S_CONDITIONS)));
+    connectToScene();
     update();
 }
 
@@ -29,43 +28,47 @@ MainWindow::~MainWindow()
     delete ui;
 }
 //以下为利用多线程来显示加载页面的函数*3
-void MainWindow::receiveLoadScreen(Scene * newOb)
-{
-    changeSceneFromThread(newOb);
-}
+//void MainWindow::receiveLoadScreen(Scene * newOb)
+//{
+//    changeSceneFromThread(newOb);
+//}
 
 void MainWindow::handleConditions(S_CONDITIONS conditions)
 {
     //if判断用不用多线程
-    if(1/*machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
-        loadThread = new LoadingThread(this);
-        connect(loadThread, SIGNAL(finished()),
-                loadThread, SLOT(deleteLater()));
-        connect(loadThread, SIGNAL(sendFinishedScreen(Scene*)),
-                this, SLOT(receiveLoadScreen(Scene*)));
-        loadThread->setCondition(conditions);
-        loadThread->setMachine(this->machine);
-        loadThread->setScene(currScene);
-        if(!loadThread->isRunning())
-            loadThread->start();
-        //只能用repaint
-        //此时currScene = loadingScene正在被加工,不能使用
-        //已经试用了将currScene指向loadingScene,并把paint事件更改的方法
-        //上面那个方法内存突然炸掉了...
-        repaint();
+    if( machine->getNextScene(conditions)!= nullptr){
+        if(1/*machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
+            loadThread = new LoadingThread(this);
+            connect(loadThread, SIGNAL(finished()),
+                    loadThread, SLOT(deleteLater()));
+            connect(loadThread, SIGNAL(sendFinishedScreen(Scene*)),
+                    this, SLOT(changeSceneFromThread(Scene*)));
+            loadThread->setCondition(conditions);
+            loadThread->setMachine(this->machine);
+            loadThread->setScene(currScene);
+            if(!loadThread->isRunning())
+                loadThread->start();
+            //只能用repaint
+            //此时currScene = loadingScene正在被加工,不能使用
+            //已经试用了将currScene指向loadingScene,并把paint事件更改的方法
+            //上面那个方法内存突然炸掉了...
+            repaint();
+            }
+        else{
+           changeSceneNoThread(machine->getNextScene(conditions));
+           machine->apply(conditions);
         }
-    else{
-       changeSceneNoThread(machine->getNextScene(conditions));
     }
 }
 
 void MainWindow::changeSceneFromThread(Scene *newScene)
 {
-
+    //这时因为load unload 费事才放到子线程中,所以不需要再用了
    //更改Scene 实际上实现的是一个自动机
     currScene = newScene;
     loadThread->requestInterruption();
     loadThread = nullptr;
+    connectToScene();
     update();
 }
 
@@ -75,6 +78,7 @@ void MainWindow::changeSceneNoThread(Scene *newScene){
     currScene->unload();
     currScene=newScene;
     currScene->load();
+    connectToScene();
     update();
 }
 
@@ -92,7 +96,11 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 void MainWindow::start()
 {
-//    currScene = new SceneStart();
+    //    currScene = new SceneStart();
+}
+
+void MainWindow::connectToScene(){
+    connect(currScene, SIGNAL(sendCondition(S_CONDITIONS)),this, SLOT(handleConditions(S_CONDITIONS)));
 }
 
 //-----------以下为loadingthread所用
@@ -132,6 +140,7 @@ void LoadingThread::run()
            if (sceneFromMain != nullptr)
                 sceneFromMain->unload();//不可以delete
            sceneFromMain = machine->getNextScene(conditions);
+           machine->apply(conditions);
            sceneFromMain->load();
            msleep(1000);//至少让人看到我写了加载页面
            emit sendFinishedScreen(sceneFromMain);

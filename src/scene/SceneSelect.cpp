@@ -27,5 +27,5 @@ void SceneSelect::load()
 
 void SceneSelect::unload()
 {
-
+    disconnect();
 }

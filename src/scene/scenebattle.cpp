@@ -49,6 +49,6 @@ void SceneBattle::load()
 
 void SceneBattle::unload()
 {
-
+    disconnect();
 }
 

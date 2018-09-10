@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QPainter>
+#include "../Constant.h"
 class ComponentPaint;
 class BreedFactury;
 class GameObject: public QObject,public QGraphicsPixmapItem

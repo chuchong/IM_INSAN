@@ -43,6 +43,9 @@ public:
     Scene *getStartScene(){
         return start_;
     }
+    void apply(S_CONDITIONS conditions){
+        current = getNextScene(conditions);
+    }
     Scene *getNextScene(S_CONDITIONS conditions){
         for(Transition transition : transitions){
             bool currentMatches = transition.from->equal(current);

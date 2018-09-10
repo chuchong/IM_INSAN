@@ -4,6 +4,7 @@
 #include <iostream>
 #include <mutex>
 #include <QList>
+#include <QSet>
 #include "SceneMachine.h"
 #include "Scene.h"
 #include "SceneBattle.h"

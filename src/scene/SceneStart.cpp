@@ -27,7 +27,9 @@ void SceneStart::load()
     bg->setZValue(0);
 
 
-    BlockObject *button = factury.getBG(":/BUTTON_START", 101, 28, 0, 0);
+    BlockObject *button = factury.getButton(":/BUTTON_START",
+                                            101, 28, 0, 0,
+                                            CONDITION_START);
     this->allList.append(button);
     buttons.append(button);
     this->addItem(button);
@@ -43,6 +45,7 @@ void SceneStart::unload()
     this->clear();
     allList.clear();
     buttons.clear();
+    disconnect();
 
 }
 
@@ -50,19 +53,11 @@ void SceneStart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(!buttons.isEmpty()){
         for(auto button: buttons){
-            qDebug() << button->x();
-            qDebug() << button->y();
-            qDebug() << event->scenePos().x();
-            qDebug() << event->scenePos().y();
             if(button->contains(event->scenePos())){
-    //            this->unload();
-                button->setPos(button->x() + 5,0);
-                if(button->x() > 10){
-                    S_CONDITIONS buf; buf.insert(CONDITION_DEBUG);
+                    S_CONDITIONS buf = button->getCondition();
                     emit sendCondition(buf);
-                }
-            }
-        }
+             }
+         }
     }
 }
 
