@@ -12,8 +12,10 @@ class SceneBattle : public Scene
 {
 private:
     SCENE_ID next;//
+
 public:
     SceneBattle();
+    ~SceneBattle(){ this->unload();}
     virtual void parseFromFile(QString j);
     virtual void update();
     virtual void redraw();

@@ -3,6 +3,7 @@
 //如你所见,这里存在一个很难处理的问题,那就是getNextScene时返回的是指针
 //--也就是说一开始存放好的scene外界不能delete
 //--但外界却能更改scene,也就是说这个只能靠默契
+//以上已经修改了一下,现在Scene只能在栈上,且运行时不能delete了
 #ifndef SCENEMACHINE_H
 #define SCENEMACHINE_H
 
@@ -19,25 +20,28 @@ struct Transition{
     from(f),to(t),consitions(sc){
 
     }
-    ~Transition(){
-//        delete from;
-//        delete to;
+    ~Transition(){//他不能去delete,因为这指针不属于他
     }
 };
 class SceneMachine : public QObject
 {
     Q_OBJECT
 private:
-    QList<Transition> transitions;
+    Scene *start_;
     Scene *current;
+    QList<Transition> transitions;
 public:
     explicit SceneMachine(QList<Transition> trans,
                           Scene *start,
                           QObject *parent = nullptr)
-        :transitions(trans),
+        : start_(start),
           current(start),
+          transitions(trans),
           QObject(parent){
 
+    }
+    Scene *getStartScene(){
+        return start_;
     }
     Scene *getNextScene(S_CONDITIONS conditions){
         for(Transition transition : transitions){

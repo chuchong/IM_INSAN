@@ -4,8 +4,10 @@
 
 class SceneSelect : public Scene
 {
+private:
 
 public:
+    ~SceneSelect(){ this->unload();}
     SceneSelect();
     virtual void parseFromFile(QString j);
     virtual void update();

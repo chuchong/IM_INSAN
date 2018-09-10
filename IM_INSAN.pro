@@ -40,7 +40,8 @@ SOURCES += \
     src/object/EffectContainer.cpp \
     src/component/ComponentPaint.cpp \
     src/object/GameObject.cpp \
-    src/scene/SceneMachine.cpp
+    src/scene/SceneMachine.cpp \
+    src/scene/GVariantKeeper.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -59,7 +60,8 @@ HEADERS += \
     src/object/EffectContainer.h \
     src/component/ComponentPaint.h \
     src/object/GameObject.h \
-    src/scene/SceneMachine.h
+    src/scene/SceneMachine.h \
+    src/scene/GVariantKeeper.h
 
 FORMS += \
     src/mainwindow.ui

@@ -10,7 +10,9 @@ class SceneStart : public Scene
 private:
    QList<BlockObject *>buttons;
    BlockObject *background;
+
 public:
+   ~SceneStart(){ this->unload();}
     SceneStart();
     virtual void parseFromFile(QString j);
     virtual void update();

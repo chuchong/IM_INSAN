@@ -6,8 +6,11 @@
 
 class SceneStory : public Scene
 {
+private:
     BlockObject *background;
+
 public:
+    ~SceneStory(){ this->unload();}
     SceneStory();
     virtual void parseFromFile(QString url);
     virtual void update();

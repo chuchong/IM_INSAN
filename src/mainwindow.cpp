@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-SceneStory* MainWindow::loadingScene;
-
 
 //加载页面
 MainWindow::MainWindow(QWidget *parent) :
@@ -10,30 +8,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    this->paintComponent = new ComponentPaint(this);
+//    this->paintComponent = new ComponentPaint(this);
+    gVariantIns = GVariantKeeper::getInstance();
+    //TODO 这里加上判断,区分一二周目
+    machine = GVariantKeeper::getFirstWeekMachine();
 
-
-    loadingScene = new SceneStory();
-    loadingScene->parseFromFile(":/configure/INI_STORY_1");
-
-    //初始化那个Transition
-    //!!!!TODO 弄好这些Scene*的析构 和初始化,全部都要是获得
-    currScene = new SceneStart();
-    S_CONDITIONS *cond = new S_CONDITIONS;
-    cond->insert(CONDITION_DEBUG);
-    Transition* debugTrans = new Transition(currScene,currScene,*cond);
-    QList<Transition>  *qli = new QList<Transition>();
-    qli->append(*debugTrans);
-    machine =new SceneMachine(*qli,currScene);
-    //以上的都要给我活着
-
+    currScene = machine->getStartScene();
     currScene -> load();
     currScene->setSceneRect(0,0,900,600);
+
     loadThread = new LoadingThread(this);
-//注意的是每个不同的SCENE的指针也不一样,所以这个connect要完全
+    //TODO:注意的是每个不同的SCENE的指针也不一样,所以这个connect要在change的时候也要写
     connect(currScene, SIGNAL(sendCondition(S_CONDITIONS)),
             this, SLOT(handleConditions(S_CONDITIONS)));
-
     update();
 }
 
@@ -49,7 +36,7 @@ void MainWindow::receiveLoadScreen(Scene * newOb)
 
 void MainWindow::handleConditions(S_CONDITIONS conditions)
 {
-    if(currScene->getSceneId() == SCENE_START/*TODO 何时显示loading screen*/){
+    if(machine->getNextScene(conditions)->getSceneId() == SCENE_START/*TODO 何时显示loading screen*/){
         loadThread = new LoadingThread(this);
         connect(loadThread, SIGNAL(finished()),
                 loadThread, SLOT(deleteLater()));
@@ -60,8 +47,10 @@ void MainWindow::handleConditions(S_CONDITIONS conditions)
         loadThread->setScene(currScene);
         if(!loadThread->isRunning())
             loadThread->start();
-        //TODO:objManager变为加载中或者接受加载页面
+        //只能用repaint
         //此时currScene = loadingScene正在被加工,不能使用
+        //已经试用了将currScene指向loadingScene,并把paint事件更改的方法
+        //上面那个方法内存突然炸掉了...
         repaint();
         }
 }
@@ -86,7 +75,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
      currScene->setSceneRect(0,0,900,600);
     }
     else{
-     ui->graphicsView->setScene(loadingScene);
+     ui->graphicsView->setScene(gVariantIns->getLoadingScene());
     }
 }
 

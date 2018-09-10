@@ -18,6 +18,7 @@
 #include "scene/SceneSelect.h"
 #include "scene/SceneMachine.h"
 #include "component/ComponentPaint.h"
+#include "scene/GVariantKeeper.h"
 namespace Ui {
 class MainWindow;
 }
@@ -59,13 +60,13 @@ public:
      void paintEvent(QPaintEvent *event);
      void start();
 private:
-    static SceneStory* loadingScene;
+//    static SceneStory* loadingScene;
     Ui::MainWindow *ui;
     friend class SceneManager;
     SceneMachine *machine;
     Scene* currScene = nullptr;
-    ComponentPaint *paintComponent;
-
+//    ComponentPaint *paintComponent;
+    GVariantKeeper *gVariantIns = nullptr;
     LoadingThread* loadThread = nullptr;
 };
 
