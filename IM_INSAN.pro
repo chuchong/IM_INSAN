@@ -31,17 +31,18 @@ SOURCES += \
     src/scene/SceneStory.cpp \
     src/scene/SceneBattle.cpp \
     src/scene/SceneSelect.cpp \
-    src/object/SpriteObject.cpp \
-    src/object/BlockObject.cpp \
     src/object/BreedFactury.cpp \
     src/object/Logic.cpp \
     src/object/LogicDFAutomata.cpp \
     src/object/Effect.cpp \
     src/object/EffectContainer.cpp \
     src/component/ComponentPaint.cpp \
-    src/object/GameObject.cpp \
     src/scene/SceneMachine.cpp \
-    src/scene/GVariantKeeper.cpp
+    src/scene/GVariantKeeper.cpp \
+    src/object/ObjectScript.cpp \
+    src/object/ObjectBlock.cpp \
+    src/object/ObjectSprite.cpp \
+    src/object/ObjectGame.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -51,17 +52,18 @@ HEADERS += \
     src/scene/SceneBattle.h \
     src/scene/SceneSelect.h \
     src/Constant.h \
-    src/object/SpriteObject.h \
-    src/object/BlockObject.h \
     src/object/BreedFactury.h \
     src/object/Logic.h \
     src/object/LogicDFAutomata.h \
     src/object/Effect.h \
     src/object/EffectContainer.h \
     src/component/ComponentPaint.h \
-    src/object/GameObject.h \
     src/scene/SceneMachine.h \
-    src/scene/GVariantKeeper.h
+    src/scene/GVariantKeeper.h \
+    src/object/ObjectScript.h \
+    src/object/ObjectBlock.h \
+    src/object/ObjectSprite.h \
+    src/object/ObjectGame.h
 
 FORMS += \
     src/mainwindow.ui

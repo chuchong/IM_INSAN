@@ -14,6 +14,9 @@ public:
     virtual void redraw();
     virtual void load();
     virtual void unload();
+    virtual SCENE_TYPE getSceneType(){
+        return SELECT;
+    }
 //    virtual Scene *duplicateScene(Scene *);
 };
 

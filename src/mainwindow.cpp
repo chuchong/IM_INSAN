@@ -31,12 +31,13 @@ MainWindow::~MainWindow()
 //以下为利用多线程来显示加载页面的函数*3
 void MainWindow::receiveLoadScreen(Scene * newOb)
 {
-    changeScene(newOb);
+    changeSceneFromThread(newOb);
 }
 
 void MainWindow::handleConditions(S_CONDITIONS conditions)
 {
-    if(machine->getNextScene(conditions)->getSceneId() == SCENE_START/*TODO 何时显示loading screen*/){
+    //if判断用不用多线程
+    if(1/*machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
         loadThread = new LoadingThread(this);
         connect(loadThread, SIGNAL(finished()),
                 loadThread, SLOT(deleteLater()));
@@ -53,9 +54,12 @@ void MainWindow::handleConditions(S_CONDITIONS conditions)
         //上面那个方法内存突然炸掉了...
         repaint();
         }
+    else{
+       changeSceneNoThread(machine->getNextScene(conditions));
+    }
 }
 
-void MainWindow::changeScene(Scene *newScene)
+void MainWindow::changeSceneFromThread(Scene *newScene)
 {
 
    //更改Scene 实际上实现的是一个自动机
@@ -63,9 +67,16 @@ void MainWindow::changeScene(Scene *newScene)
     loadThread->requestInterruption();
     loadThread = nullptr;
     update();
-
 }
+
 //-------以上为需要多线程的地方
+
+void MainWindow::changeSceneNoThread(Scene *newScene){
+    currScene->unload();
+    currScene=newScene;
+    currScene->load();
+    update();
+}
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {

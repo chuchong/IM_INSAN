@@ -5,7 +5,7 @@
 #include <QPainter>
 #include <QImage>
 #include "../Constant.h"
-#include "../object/GameObject.h"
+#include "../object/ObjectGame.h"
 class GameObject;
 class ComponentPaint
 {

@@ -3,8 +3,8 @@
 
 #include <QList>
 #include "Scene.h"
-#include "../object/GameObject.h"
-#include "../object/BlockObject.h"
+#include "../object/ObjectGame.h"
+#include "../object/ObjectBlock.h"
 class SceneStart : public Scene
 {
 private:
@@ -20,6 +20,9 @@ public:
     virtual void load();
     virtual void unload();
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual SCENE_TYPE getSceneType(){
+        return START;
+    }
 //    virtual Scene *duplicateScene(Scene *);
 };
 

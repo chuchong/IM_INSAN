@@ -1,4 +1,4 @@
-#include "SpriteObject.h"
+#include "ObjectSprite.h"
 
 SpriteObject::SpriteObject()
 {

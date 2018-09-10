@@ -43,5 +43,7 @@ const int CONDITION_SELECT_GE = 1008;
 const int CONDITION_SELECT_IE = 1009;//insanity ending
 //
 const int CONDITION_NEW_GAME_PLUS = 1010;
+
+#define COLOR_AOI 139,129,195,50
 #define HP_OF_BLOCK 1
 #endif // CONSTANT_H

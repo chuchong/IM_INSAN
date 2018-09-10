@@ -10,9 +10,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include "../Constant.h"
-#include "../object/BlockObject.h"
-#include "../object/SpriteObject.h"
+#include "../object/ObjectBlock.h"
+#include "../object/ObjectSprite.h"
 #include "../object/BreedFactury.h"
+#include "../object/ObjectScript.h"
 class SceneStart;
 class SceneBattle;
 class SceneSelect;
@@ -26,6 +27,8 @@ protected:
     SCENE_ID sceneId;
     QList<GameObject *> allList;
     BlockObject *background;
+
+    QString background_url;
     virtual ~Scene(){}//只允许在栈上使用
     friend class GVariantKeeper;//负责让他帮忙析构
 signals:
@@ -38,6 +41,7 @@ public:
     virtual void redraw() = 0;//绘制
     virtual void load() = 0;
     virtual void unload() = 0;
+    virtual SCENE_TYPE getSceneType() = 0;
 //    virtual Scene *duplicateScene(Scene *) = 0;
 
     //送给子类的类函数

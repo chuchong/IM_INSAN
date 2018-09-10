@@ -19,8 +19,8 @@ class GameObject: public QObject,public QGraphicsPixmapItem
 public:
     //继承而来
     QRectF boundingRect()const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    QPainterPath shape()const;
+//    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+//    QPainterPath shape()const;
 
     GameObject(QGraphicsPixmapItem *parent = nullptr):
     QGraphicsPixmapItem(parent){}//以让工厂类能较好的工作而设计,直接使用会出错

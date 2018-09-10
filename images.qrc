@@ -7,12 +7,26 @@
         <file alias="BUTTON_LOAD">images/ui_frame/BUTTON_LOAD.jpg</file>
         <file alias="BUTTON_START">images/ui_frame/BUTTON_START.jpg</file>
         <file alias="BG_STORY_1">images/background/STORY_1.jpg</file>
+        <file alias="BG_LOADING">images/background/loading.jpg</file>
+        <file alias="BG_GE">images/background/ge.jpg</file>
+        <file alias="BG_BE">images/background/be.jpg</file>
+        <file alias="BG_IE">images/background/ie.jpg</file>
+        <file alias="BG_LE">images/background/le.jpg</file>
     </qresource>
     <qresource prefix="/configure">
-        <file alias="INI_STORY_1">configure/story_1.INI</file>
+        <file alias="INI_STORY_1_1">configure/story1_1.INI</file>
         <file alias="INI_BATTLE_1">configure/battle_1.json</file>
+        <file alias="INI_LOADING">configure/loading.INI</file>
     </qresource>
     <qresource prefix="/script">
-        <file alias="SCRIPT_STORY_1">script/story1.txt</file>
+        <file alias="SCRIPT_STORY_1_1">script/story1_1.txt</file>
+        <file alias="SCRIPT_STORY_1_1_5">script/story1_1_5.txt</file>
+        <file alias="SCRIPT_STORY_1_2">script/story1_2.txt</file>
+        <file alias="SCRIPT_STORY_1_BE">script/story1_be.txt</file>
+        <file alias="SCRIPT_STORY_1_LE">script/story1_le.txt</file>
+        <file alias="SCRIPT_STORY_2_1">script/story2_1.txt</file>
+        <file alias="SCRIPT_STORY_2_2">script/story2_2.txt</file>
+        <file alias="SCRIPT_STORY_2_HE">script/story2_he.txt</file>
+        <file alias="SCRIPT_STORY_2_IE">script/story2_ie.txt</file>
     </qresource>
 </RCC>

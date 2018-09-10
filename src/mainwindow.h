@@ -53,7 +53,8 @@ private slots:
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void changeScene(Scene* newScene);
+    void changeSceneFromThread(Scene* newScene);
+    void changeSceneNoThread(Scene* newScene);
 
     //TODO 确定场景切换方式 自动机orswitch
      void chooseNewScene(SCENE_ID old_scene, int/*TODO information*/ );//选择新场景,场景切换利用SWITCH大概就够了

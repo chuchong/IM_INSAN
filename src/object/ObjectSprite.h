@@ -3,7 +3,7 @@
 #define SPRITEOBJECT_H
 
 #include <QObject>
-#include "GameObject.h"
+#include "ObjectGame.h"
 class SpriteObject :public GameObject
 {
 //    Q_OBJECT

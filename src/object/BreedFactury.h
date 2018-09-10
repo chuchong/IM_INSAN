@@ -4,9 +4,9 @@
 #define BREEDFACTURY_H
 //#include <QHash>
 #include "../Constant.h"
-#include "GameObject.h"
-#include "SpriteObject.h"
-#include "BlockObject.h"
+#include "ObjectGame.h"
+#include "ObjectSprite.h"
+#include "ObjectBlock.h"
 class GameObject;
 class BreedFactury
 {

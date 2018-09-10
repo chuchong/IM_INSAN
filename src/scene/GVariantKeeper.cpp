@@ -16,11 +16,15 @@ GVariantKeeper::GVariantKeeper()
     SceneStart *currScene = new SceneStart;
     allScenes.append(currScene);
 
+    SceneStory *story1 = new SceneStory;
+    allScenes.append(story1);
+    story1->parseFromFile(":/configure/INI_STORY_1_1");
+
     S_CONDITIONS *cond = new S_CONDITIONS;
     allConditions.append(cond);
 
     cond->insert(CONDITION_DEBUG);
-    Transition* debugTrans = new Transition(currScene,currScene,*cond);
+    Transition* debugTrans = new Transition(currScene,story1,*cond);
 
     QList<Transition>  *qli = new QList<Transition>();
     qli->append(*debugTrans);
@@ -33,7 +37,8 @@ GVariantKeeper::GVariantKeeper()
 
     loadingScene = new SceneStory();
     allScenes.append(loadingScene);
-    loadingScene->parseFromFile(":/configure/INI_STORY_1");
+    loadingScene->parseFromFile(":/configure/INI_LOADING");
+    loadingScene->load();
 }
 
 GVariantKeeper::~GVariantKeeper()
