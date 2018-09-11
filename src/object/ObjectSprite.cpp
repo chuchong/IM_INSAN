@@ -41,6 +41,26 @@ SpriteObject::~SpriteObject(){
         delete logic;
 }
 
+void SpriteObject::bounceBack()
+{
+    if(pos().y() > 600){
+        pos().setY(600);
+        vy = - vy;
+    }
+    if(pos().y() < 0){
+        vy = - vy;
+        pos().setY(0);
+    }
+    if(pos().x() > 900){
+        vx = -vx;
+        pos().setX(900);
+    }
+    if(pos().x() < 0){
+        vx = - vx;
+        pos().setX(0);
+    }
+}
+
 //SpriteObject::SpriteObject(QString image, int x, int y, qreal px, qreal py)
 //    :GameObject()
 //{
@@ -65,10 +85,7 @@ void SpriteObject::run()
 
 
     if(getType() == "fish"){
-        if(pos().y() > 600){
-            pos().setY(600);
-            vy = - vy;
-        }
+        bounceBack();
     }
     vx = (maxVx < sqrt(vx + ax))? (maxVx * sgn(vx + ax)): (vx + ax);
     vy = (maxVy < sqrt(vy + ay))? (maxVy * sgn(vy + ay)): (vy + ay);

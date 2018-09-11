@@ -13,10 +13,11 @@ class SpriteObject :public GameObject
 {
     int sgn(qreal x);
 private:
+
+
     Logic *logic = nullptr;
 
     Breed & breed_ ;
-    int hp_;
     qreal maxVx;
     qreal maxVy;
     qreal vx;
@@ -30,6 +31,7 @@ private:
     friend class Logic;
 public:
     ~SpriteObject();
+    void bounceBack();
     void timerEvent(QTimerEvent *event);
     void setVelocity(qreal vx, qreal vy);
     virtual void setHp(int hp){hp_ = hp;}

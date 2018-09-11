@@ -105,7 +105,8 @@ void SceneBattle::DeletePhase()
 
         if (fishes[i]->isDead()){
             fishes.removeAt(i);
-        i --;
+            qDebug()<<"one fish starves to death";
+            i --;
         }
         i ++;
     }

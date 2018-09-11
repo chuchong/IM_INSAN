@@ -47,7 +47,9 @@ void BreedFactury::parseFromJson(QString url)
          qreal maxVy = sprite.value("maxVy").toDouble();
          qreal a = sprite.value("a").toDouble();
          int logic = sprite.value("logic").toInt();
-         addBreeds(name,parent,image,maxVx,maxVy,a,hp,logic);
+         qreal vx = sprite.value("vx").toDouble();
+         qreal vy = sprite.value("vy").toDouble();
+         addBreeds(name,parent,image,maxVx,maxVy,a,hp,vx,vy,logic);
      }
 }
 

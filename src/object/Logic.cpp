@@ -38,9 +38,11 @@ void FishLogic::runState0()
     }
 
     object_->HP() --;
-    if(object_->HP() <= 400)
+    if(object_->HP() <= 400){
+        object_->setVelocity(0,0);
         state_ = 1;
-
+    qDebug() << "I'm hungry";
+    }
 }
 
 void FishLogic::runState1()
