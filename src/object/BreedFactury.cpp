@@ -78,7 +78,11 @@ SpriteObject *BreedFactury::getSpriteByTypeName(int x, int y, QString typeName){
 
 BreedFactury::BreedFactury()
 {
+    QHash<QString, Breed*> breedPool;
+}
 
+BreedFactury::~BreedFactury(){
+    qDebug()<<"delete factury";
 }
 
 
@@ -110,15 +114,3 @@ void BreedFactury::killBG(GameObject * o_ptr)
 {
     o_ptr->setHP(0);
 }
-
-//SpriteObject *BreedFactury::getBait(QString image, int x, int y, qreal px, qreal py, qreal vx, qreal vy)
-//{
-//    SpriteObject *s_o = new SpriteObject;
-//    s_o ->setImage(image);
-//    s_o ->setPos(x,y);
-//    s_o ->setHp(HP_OF_BLOCK);
-//    s_o ->setVelocity(px,py);
-
-//    s_o->setZValue(2);
-//}
-

@@ -35,6 +35,7 @@ void SceneBattle::load()
 
 void SceneBattle::unload()
 {
+    qDebug() << "unload";
     for(auto iter: allList)
         delete iter;
     allList.clear();

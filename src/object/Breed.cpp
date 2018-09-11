@@ -2,9 +2,11 @@
 
 Breed::Breed(){}
 
+Breed::~Breed(){qDebug() << "delete breed" << name_;}
+
 void Breed::setHp(int hp){
     if(parent_)
-    hp_ = ((parent_ && hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
+        hp_ = ((parent_ && hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
     }
 
 void Breed::setMaxVx(qreal maxVx){

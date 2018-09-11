@@ -30,8 +30,8 @@ GVariantKeeper::GVariantKeeper()
                           QSet<int>::fromList({CONDITION_START}));
     allTransitions.append(debugTrans);
 
-    QList<Transition>  qli;
-    qli.append(*debugTrans);
+    QList<Transition*>  qli;
+    qli.append(debugTrans);
 
 //    firstWMachine =new SceneMachine(qli,startScene);//好烦啊,这些Machine里面的指针好容易漏出去
     secondWMachine =new SceneMachine(qli,startScene);

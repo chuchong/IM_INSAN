@@ -7,5 +7,14 @@
         "maxVx": 0,
         "maxVy": 10,
         "a": 0.2
+        },
+        {
+        "name": "fish",
+        "image": ":/SPRITE_BAIT",
+        "parent": "",
+        "hp": 500,
+        "maxVx": 5,
+        "maxVy": 5,
+        "a": 0.1
         }]
 }

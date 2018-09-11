@@ -41,6 +41,8 @@ SpriteObject::~SpriteObject(){
 
 void SpriteObject::timerEvent(QTimerEvent *event)
 {
+    if(logic)
+    logic->run(this);
     qreal new_x = this->pos().x() + vx;
     qreal new_y = this->pos().y() + vy;
     vx = (maxVx < sqrt(vx + ax))? (maxVx * sgn(vx + ax)): (vx + ax);
@@ -52,4 +54,8 @@ SpriteObject::setVelocity(qreal vx, qreal vy)
 {
     this->vx = vx;
     this->vy = vy;
+}
+
+QString SpriteObject::getType(){
+    return breed_.getName();
 }

@@ -22,7 +22,6 @@ struct Transition{
     }
 private:
     friend class GVariantKeeper;//负责让他帮忙析构
-    friend class QList<Transition>;
     ~Transition(){//他不能去delete,因为这指针不属于他
     qDebug() << "delete transition";
     }
@@ -33,9 +32,9 @@ class SceneMachine : public QObject
 private:
     Scene *start_;
     Scene *current;
-    QList<Transition> transitions;
+    QList<Transition *> transitions;//不用指针的话会被自动析构
 public:
-    explicit SceneMachine(QList<Transition> trans,
+    explicit SceneMachine(QList<Transition *> trans,
                           Scene *start,
                           QObject *parent = nullptr)
         : start_(start),
@@ -51,11 +50,11 @@ public:
         current = getNextScene(conditions);
     }
     Scene *getNextScene(S_CONDITIONS conditions){
-        for(Transition& transition : transitions){
-            bool currentMatches = transition.from->equal(current);
-            bool conditionMatches = transition.consitions.operator ==(conditions);
+        for(Transition* transition : transitions){
+            bool currentMatches = transition->from->equal(current);
+            bool conditionMatches = transition->consitions.operator ==(conditions);
             if(currentMatches && conditionMatches){
-                return transition.to;
+                return transition->to;
             }
         }
         return nullptr;

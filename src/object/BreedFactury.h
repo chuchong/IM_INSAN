@@ -28,7 +28,7 @@ public:
     void parseFromJson(QString url);
     SpriteObject *getSpriteByTypeName(int x, int y, QString typeName);
     BreedFactury();
-    ~BreedFactury(){qDebug()<<"delete factury";}
+    ~BreedFactury();
     BlockObject *getBG(QString image, int x, int y, qreal px, qreal py);
     BlockObject *getButton(QString image, int x, int y, qreal px, qreal py, CONDITIONS_ID a_cond);
     void killBG(GameObject *);
