@@ -6,7 +6,7 @@ SceneMachine *GVariantKeeper::firstWMachine =nullptr;
 SceneMachine *GVariantKeeper::secondWMachine = nullptr;
 std::mutex GVariantKeeper::mutex_;
 QList<Scene *> GVariantKeeper::allScenes;
-QList<S_CONDITIONS *> GVariantKeeper::allConditions;
+//QList<S_CONDITIONS *> GVariantKeeper::allConditions;
 QList<Transition *> GVariantKeeper::allTransitions;
 
 
@@ -51,14 +51,15 @@ GVariantKeeper::~GVariantKeeper()
 {
     delete firstWMachine;
     delete secondWMachine;
-    for(auto iter: allScenes)
-        delete iter;
+    foreach(auto var,allTransitions)
+        delete var;
+    foreach(auto var, allScenes)
+        delete var;
+//    foreach(auto var, allConditions)
+//        delete var;
+
     allScenes.clear();
-    for(auto iter: allConditions)
-        delete iter;
-    allConditions.clear();
-    for(auto tran:allTransitions)
-        delete tran;
+//    allConditions.clear();
     allTransitions.clear();
 }
 

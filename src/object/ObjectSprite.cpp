@@ -23,7 +23,7 @@ SpriteObject::SpriteObject(Breed &breed):breed_(breed)
 
     //TODO change!
     ay = breed.getA();
-    startTimer(100);
+    startTimer(16);
     a = 0;
     vx = vy = ax = 0;
     setImage(imageRc_);
@@ -43,10 +43,18 @@ void SpriteObject::timerEvent(QTimerEvent *event)
 {
     if(logic)
     logic->run(this);
-    qreal new_x = this->pos().x() + vx;
-    qreal new_y = this->pos().y() + vy;
+
+
+    if(pos().y() > 600){
+        pos().setY(600);
+        vy = - vy;
+    }
     vx = (maxVx < sqrt(vx + ax))? (maxVx * sgn(vx + ax)): (vx + ax);
     vy = (maxVy < sqrt(vy + ay))? (maxVy * sgn(vy + ay)): (vy + ay);
+
+    qreal new_x = this->pos().x() + vx;
+    qreal new_y = this->pos().y() + vy;
+
     setPos(new_x,new_y);
 }
 
