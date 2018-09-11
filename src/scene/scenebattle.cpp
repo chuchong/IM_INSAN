@@ -29,7 +29,7 @@ void SceneBattle::load()
     background= factury.getBG(background_url,900,600,0,0);
     allList.push_back(background);
     addItem(background);
-    timerId = startTimer(16);
+    timerId = startTimer(FRAME);
 
 }
 

@@ -33,7 +33,6 @@ SOURCES += \
     src/scene/SceneSelect.cpp \
     src/object/BreedFactury.cpp \
     src/object/Logic.cpp \
-    src/object/LogicDFAutomata.cpp \
     src/object/Effect.cpp \
     src/object/EffectContainer.cpp \
     src/component/ComponentPaint.cpp \
@@ -55,7 +54,6 @@ HEADERS += \
     src/Constant.h \
     src/object/BreedFactury.h \
     src/object/Logic.h \
-    src/object/LogicDFAutomata.h \
     src/object/Effect.h \
     src/object/EffectContainer.h \
     src/component/ComponentPaint.h \

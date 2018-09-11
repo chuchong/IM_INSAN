@@ -3,9 +3,11 @@
 #include <QtDebug>
 #include <QString>
 #include "ObjectSprite.h"
+#include "Logic.h"
 class SpriteObject;
 class BreedFactury;
 class Breed{//表示sprite 的种类,这才是真正的类!
+
 private:
     //大概率会继承自父类的量
     void setHp(int hp = 0);

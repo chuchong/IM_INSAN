@@ -14,6 +14,7 @@
 #include "ObjectSprite.h"
 #include "ObjectBlock.h"
 #include "Breed.h"
+
 class BreedFactury
 {
 private:

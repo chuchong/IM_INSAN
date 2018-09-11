@@ -48,5 +48,7 @@ const int CONDITION_NEW_GAME_PLUS = 1010;
 
 const qreal VELOCITY_OF_BAIT = 0.2;
 #define COLOR_AOI 139,129,195,50
+
+const int FRAME = 1000 / 60;
 #define HP_OF_BLOCK 1
 #endif // CONSTANT_H

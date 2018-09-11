@@ -7,10 +7,11 @@
 class SpriteObject;
 class Logic
 {
+protected:
+    SpriteObject* ob_;
 public:
-    Logic();
+    Logic(SpriteObject* ob);
     virtual void run(SpriteObject *ob);
-    virtual void setX();
 };
 
 #endif // LOGIC_H

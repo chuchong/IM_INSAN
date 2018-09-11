@@ -44,7 +44,7 @@ public:
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void timerEvent(QTimerEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+//    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // SCENEBATTLE_H
