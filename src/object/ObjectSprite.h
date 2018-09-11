@@ -27,12 +27,15 @@ private:
     SpriteObject(Breed& breed);
     friend class Breed;
     friend class BreedFactury;
+    friend class Logic;
 public:
     ~SpriteObject();
     void timerEvent(QTimerEvent *event);
     setVelocity(qreal vx, qreal vy);
     virtual void setHp(int hp){hp_ = hp;}
+    virtual void run() override;
     QString getType();
+
 
 };
 

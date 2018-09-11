@@ -9,8 +9,9 @@ private:
     BlockObject *background;
     ObjectScript *script;
     QString script_url;
+
 public:
-    ~SceneStory(){ this->unload();}
+    ~SceneStory(){ qDebug() << "delete story";}
     SceneStory();
     virtual void parseFromFile(QString url);
     virtual void update();
@@ -21,6 +22,7 @@ public:
     virtual SCENE_TYPE getSceneType(){
         return STORY;
     }
+
 //    virtual Scene *duplicateScene(Scene *);
 };
 

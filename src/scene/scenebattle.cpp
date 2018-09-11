@@ -2,7 +2,7 @@
 
 SceneBattle::SceneBattle()
 {
-
+    position = QPointF(0,0);
 }
 
 void SceneBattle::parseFromFile(QString url)
@@ -29,7 +29,7 @@ void SceneBattle::load()
     background= factury.getBG(background_url,900,600,0,0);
     allList.push_back(background);
     addItem(background);
-
+    timerId = startTimer(16);
 
 }
 
@@ -43,6 +43,7 @@ void SceneBattle::unload()
     factury.clearPool();
     clear();
     disconnect();
+    killTimer(timerId);
 }
 
 void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -55,7 +56,17 @@ void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
     allList.append(bait);
     addItem(bait);
     baits.append(bait);
-
-
 }
+
+void SceneBattle::timerEvent(QTimerEvent *event)
+{
+    for(auto iter: allList){
+        iter->run();
+    }
+}
+//看是否需要
+//void SceneBattle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+//{
+//    position = event->scenePos();
+//}
 

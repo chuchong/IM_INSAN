@@ -28,10 +28,11 @@ class SceneBattle : public Scene
 private:
     SCENE_ID next;//
     QList<SpriteObject *> baits;
-
+    int timerId = 0;
+    QPointF position;
 public:
     SceneBattle();
-    ~SceneBattle(){ /*this->unload();*/}
+    ~SceneBattle(){ qDebug() << "delete battle";/*this->unload();*/}
     virtual void parseFromFile(QString j);
     virtual void update();
     virtual void redraw();
@@ -42,7 +43,8 @@ public:
     }
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-//    virtual Scene *duplicateScene(Scene *);
+    void timerEvent(QTimerEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // SCENEBATTLE_H

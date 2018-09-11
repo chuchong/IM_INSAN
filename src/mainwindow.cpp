@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
-//    this->paintComponent = new ComponentPaint(this);
+    ui->graphicsView->setMouseTracking(true);
+    //    this->paintComponent = new ComponentPaint(this);
     gVariantIns = GVariantKeeper::getInstance();
     //TODO 这里加上判断,区分一二周目
     machine = GVariantKeeper::getFirstWeekMachine();

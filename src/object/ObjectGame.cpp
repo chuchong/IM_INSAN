@@ -8,7 +8,7 @@ QRectF GameObject::boundingRect() const
     int x =this->pos().x();
     int y = this->pos().y();
 //    rect.moveTopLeft(QPoint(this->x(),this->y()));
-    qDebug() << w << h << "rect :" << this->pos().x() << this->pos().y();
+//    qDebug() << w << h << "rect :" << this->pos().x() << this->pos().y();
     return QRect(0,0,w,h);
 
 }
@@ -39,6 +39,11 @@ void GameObject::setImage(QString image)
     QPixmap pixmap;
     pixmap.load(image);
     setPixmap(pixmap);
+}
+
+void GameObject::run()
+{
+
 }
 
 //QRectF &GameObject::getRect()

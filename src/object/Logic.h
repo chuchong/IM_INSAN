@@ -10,6 +10,7 @@ class Logic
 public:
     Logic();
     virtual void run(SpriteObject *ob);
+    virtual void setX();
 };
 
 #endif // LOGIC_H

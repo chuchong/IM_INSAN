@@ -40,6 +40,7 @@ void SceneStory::unload()
     for(GameObject* iter : allList)
         delete iter;
     allList.clear();
+    this->clear();
     delete script;
     disconnect();
 }
@@ -53,5 +54,6 @@ void SceneStory::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
     }
 }
+
 
 

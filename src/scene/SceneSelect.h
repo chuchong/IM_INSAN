@@ -7,7 +7,7 @@ class SceneSelect : public Scene
 private:
 
 public:
-    ~SceneSelect(){ this->unload();}
+    ~SceneSelect(){ qDebug() << "delete select";}
     SceneSelect();
     virtual void parseFromFile(QString j);
     virtual void update();

@@ -23,7 +23,7 @@ SpriteObject::SpriteObject(Breed &breed):breed_(breed)
 
     //TODO change!
     ay = breed.getA();
-    startTimer(16);
+//    startTimer(16);
     a = 0;
     vx = vy = ax = 0;
     setImage(imageRc_);
@@ -40,6 +40,17 @@ SpriteObject::~SpriteObject(){
 //}
 
 void SpriteObject::timerEvent(QTimerEvent *event)
+{
+
+}
+
+SpriteObject::setVelocity(qreal vx, qreal vy)
+{
+    this->vx = vx;
+    this->vy = vy;
+}
+
+void SpriteObject::run()
 {
     if(logic)
     logic->run(this);
@@ -58,12 +69,8 @@ void SpriteObject::timerEvent(QTimerEvent *event)
     setPos(new_x,new_y);
 }
 
-SpriteObject::setVelocity(qreal vx, qreal vy)
-{
-    this->vx = vx;
-    this->vy = vy;
-}
-
 QString SpriteObject::getType(){
     return breed_.getName();
 }
+
+

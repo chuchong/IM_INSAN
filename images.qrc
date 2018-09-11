@@ -16,8 +16,8 @@
 
 
 
-
-        <file alias="SPRITE_BAIT">images/sprite/bait.jpg</file>
+        <file alias="SPRITE_FISH">images/sprite/fish.png</file>
+        <file alias="SPRITE_BAIT">images/sprite/bait.png</file>
     </qresource>
     <qresource prefix="/configure">
         <file alias="INI_STORY_1_1">configure/story1_1.INI</file>

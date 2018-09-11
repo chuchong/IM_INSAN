@@ -11,7 +11,7 @@ private:
    QList<BlockObject *>buttons;
    BlockObject *background;
 public:
-   ~SceneStart(){ this->unload();}
+   ~SceneStart(){ qDebug() << "delete start";}
     SceneStart();
     virtual void parseFromFile(QString j);
     virtual void update();

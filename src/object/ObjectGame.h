@@ -37,6 +37,7 @@ public:
     virtual int getRelativeHeight(){//确认画图的上下关系
         return (int)((height << 7) + pixmap().rect().y());
     }
+    virtual void run();
 //    QRectF& getRect();
     friend class ComponentPaint;
 };

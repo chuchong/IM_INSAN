@@ -55,8 +55,6 @@ GVariantKeeper::~GVariantKeeper()
         delete var;
     foreach(auto var, allScenes)
         delete var;
-//    foreach(auto var, allConditions)
-//        delete var;
 
     allScenes.clear();
 //    allConditions.clear();

@@ -78,7 +78,7 @@ SpriteObject *BreedFactury::getSpriteByTypeName(int x, int y, QString typeName){
 
 BreedFactury::BreedFactury()
 {
-    QHash<QString, Breed*> breedPool;
+
 }
 
 BreedFactury::~BreedFactury(){

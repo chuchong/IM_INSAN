@@ -10,7 +10,7 @@
         },
         {
         "name": "fish",
-        "image": ":/SPRITE_BAIT",
+        "image": ":/SPRITE_FISH",
         "parent": "",
         "hp": 500,
         "maxVx": 5,
