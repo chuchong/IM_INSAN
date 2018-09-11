@@ -9,23 +9,6 @@ void BreedFactury::clearPool()
    breedPool.clear();
 }
 
-void BreedFactury::addBreeds(QString name, QString parent, QString image,
-                             qreal maxVx, qreal maxVy, qreal a,
-                             int hp,
-                             qreal vx , qreal vy ){
-    if(breedPool.contains(parent)){
-        Breed * pa = breedPool[parent];
-        Breed * kid = new Breed();
-        kid->setInitial(name,pa,image,maxVx,maxVy,a,hp);
-        kid->setIniVelo(vx,vy);
-        breedPool.insert(name, kid);
-        return;
-    }
-    Breed * kid = new Breed();
-    kid->setInitial(name,nullptr,image,maxVx,maxVy,a,hp);
-    kid->setIniVelo(vx,vy);
-    breedPool.insert(name, kid);
-}
 
 void BreedFactury::parseFromJson(QString url)
 {
@@ -63,9 +46,25 @@ void BreedFactury::parseFromJson(QString url)
          qreal maxVx = sprite.value("maxVx").toDouble();
          qreal maxVy = sprite.value("maxVy").toDouble();
          qreal a = sprite.value("a").toDouble();
-         addBreeds(name,parent,image,maxVx,maxVy,a,hp);
+         int logic = sprite.value("logic").toInt();
+         addBreeds(name,parent,image,maxVx,maxVy,a,hp,logic);
      }
+}
 
+void BreedFactury::addBreeds(QString name, QString parent, QString image,
+                             qreal maxVx, qreal maxVy, qreal a,
+                             int hp,
+                             qreal vx , qreal vy,
+                             int logic){
+    Breed *pa = nullptr;
+    if(breedPool.contains(parent)){
+       pa = breedPool[parent];
+    }
+    Breed * kid = new Breed();
+    kid->setInitial(name,pa,image,maxVx,maxVy,a,hp);
+    kid->setIniVelo(vx,vy);
+    kid->setLogic(logic);
+    breedPool.insert(name, kid);
 }
 
 SpriteObject *BreedFactury::getSpriteByTypeName(int x, int y, QString typeName){

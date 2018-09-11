@@ -30,11 +30,13 @@ void Scene::sortAndPaintPhase()
 
 void Scene::DeletePhase()
 {
-    for(auto iter = allList.begin();iter != allList.end();){
-        if((*iter)->isDead()){
-            delete (*iter);
-            allList.erase(iter ++);//!iter ++ 防止迭代器失效
+    for(int i =0; i < allList.size();){
+        if(allList[i]->isDead()){
+            delete allList[i];
+            allList.removeAt(i);
+            i --;
         }
+        i ++;
     }
 }
 

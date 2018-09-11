@@ -23,9 +23,9 @@ public:
     void clearPool();
     void addBreeds(QString name, QString parent,
                    QString image = "",
-                  qreal maxVx = 0, qreal maxVy = 0,qreal a = 0,
+                  qreal maxVx = 0, qreal maxVy = 0, qreal a = 0,
                    int hp = 0,
-                   qreal vx = 0, qreal vy = 0);
+                   qreal vx = 0, qreal vy = 0, int logic = 0);
     void parseFromJson(QString url);
     SpriteObject *getSpriteByTypeName(int x, int y, QString typeName);
     BreedFactury();

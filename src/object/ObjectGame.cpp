@@ -1,5 +1,10 @@
 #include "ObjectGame.h"
 
+GameObject::~GameObject()
+{
+
+}
+
 QRectF GameObject::boundingRect() const
 {
 
@@ -31,7 +36,7 @@ QPainterPath GameObject::shape() const
 
 void GameObject::setHP(int hp)
 {
-    hp = hp_;
+    hp_ = hp;
 }
 
 void GameObject::setImage(QString image)
@@ -39,6 +44,13 @@ void GameObject::setImage(QString image)
     QPixmap pixmap;
     pixmap.load(image);
     setPixmap(pixmap);
+}
+
+bool GameObject::isDead(){
+    if(hp_ <= 0)
+        return true;
+    else
+        return false;
 }
 
 void GameObject::run()

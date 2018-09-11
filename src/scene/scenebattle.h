@@ -28,6 +28,7 @@ class SceneBattle : public Scene
 private:
     SCENE_ID next;//
     QList<SpriteObject *> baits;
+    QList<SpriteObject *> fishes;
     int timerId = 0;
     QPointF position;
 public:
@@ -41,10 +42,10 @@ public:
     virtual SCENE_TYPE getSceneType(){
         return BATTLE;
     }
-
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void timerEvent(QTimerEvent *event);
-//    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void DeletePhase();
 };
 
 #endif // SCENEBATTLE_H

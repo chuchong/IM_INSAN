@@ -4,25 +4,31 @@ Breed::Breed(){}
 
 Breed::~Breed(){qDebug() << "delete breed" << name_;}
 
+void Breed::setLogic(int type)
+{
+    qDebug() <<"logic" << type;
+    logicType = ((parent_ != nullptr&& type == 0)? parent_->getLogic():type);
+    qDebug() <<"logic" << logicType;
+}
+
 void Breed::setHp(int hp){
-    if(parent_)
-        hp_ = ((parent_ && hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
-    }
+    hp_ = ((parent_ != nullptr&& hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
+}
 
 void Breed::setMaxVx(qreal maxVx){
-    maxVx_ = ((parent_ && maxVx == 0)? parent_->getMaxVx():maxVx);
+    maxVx_ = ((parent_!= nullptr && maxVx == 0)? parent_->getMaxVx():maxVx);
 }
 
 void Breed::setMaxVy(qreal maxVy){
-    maxVy_ = ((parent_ && maxVy == 0)? parent_->getMaxVy():maxVy);
+    maxVy_ = ((parent_!= nullptr && maxVy == 0)? parent_->getMaxVy():maxVy);
 }
 
 void Breed::setA(qreal a){
-    a_ = ((parent_&& a == 0)? parent_->getA():a);
+    a_ = ((parent_!= nullptr&& a == 0)? parent_->getA():a);
 }
 
 void Breed::setImage(QString im){
-    image_ = ((parent_ && im == "")? parent_->getImage():im);
+    image_ = ((parent_!= nullptr && im == "")? parent_->getImage():im);
 }
 
 
@@ -32,6 +38,8 @@ SpriteObject *Breed::newSprite()
 }
 
 int Breed::getHp(){return hp_;}
+
+int Breed::getLogic(){return logicType;}
 
 qreal Breed::getMaxVx(){return maxVx_;}
 

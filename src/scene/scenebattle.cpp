@@ -38,6 +38,8 @@ void SceneBattle::unload()
     qDebug() << "unload";
     for(auto iter: allList)
         delete iter;
+
+    fishes.clear();
     allList.clear();
     baits.clear();
     factury.clearPool();
@@ -63,10 +65,51 @@ void SceneBattle::timerEvent(QTimerEvent *event)
     for(auto iter: allList){
         iter->run();
     }
+    if(qrand() % 100 == 1){
+        SpriteObject* fish = factury.getSpriteByTypeName(position.x(),
+                                                         position.y(),
+                                                         "fish");
+        allList.append(fish);
+        addItem(fish);
+        fishes.append(fish);
+    }
+    for(auto iter : baits){
+        qDebug() << iter->pos().y();
+        if(iter->pos().y() > 600){
+            iter->setHP(-1);
+         }
+     }
+        //删怪了
+   DeletePhase();
+
+
 }
 //看是否需要
-//void SceneBattle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-//{
-//    position = event->scenePos();
-//}
+void SceneBattle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    position = event->scenePos();
+}
+
+void SceneBattle::DeletePhase()
+{
+    for(int i = 0; i< baits.size();){
+
+        if (baits[i]->isDead()){
+            baits.removeAt(i);
+        i --;
+        }
+        i ++;
+    }
+
+    for(int i = 0; i< fishes.size();){
+
+        if (fishes[i]->isDead()){
+            fishes.removeAt(i);
+        i --;
+        }
+        i ++;
+    }
+
+    Scene::DeletePhase();
+}
 

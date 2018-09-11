@@ -1,20 +1,22 @@
 {
     "x": [{
-        "name": "bait",
-        "image": ":/SPRITE_BAIT",
-        "parent": "",
-        "hp": 1,
-        "maxVx": 0,
-        "maxVy": 10,
-        "a": 0.2
+        "name":"bait",
+        "image":":/SPRITE_BAIT",
+        "parent":"",
+        "hp":1,
+        "maxVx":0,
+        "maxVy":10,
+        "a":0.2,
+        "logic":0
         },
         {
-        "name": "fish",
-        "image": ":/SPRITE_FISH",
-        "parent": "",
+        "name":"fish",
+        "image":":/SPRITE_FISH",
+        "parent":"",
         "hp": 500,
-        "maxVx": 5,
-        "maxVy": 5,
-        "a": 0.1
+        "maxVx":5,
+        "maxVy":5,
+        "a":0.1,
+        "logic":1
         }]
 }
