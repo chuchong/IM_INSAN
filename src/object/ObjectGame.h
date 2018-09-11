@@ -12,6 +12,7 @@ class BreedFactury;
 class GameObject: public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
+protected:
     QString imageRc_;
     QPointF point_;//rect_ 和 pixmap().rect() 不一定是一个事物,后者是外轮廓的闭包
                 //而rectf_可以有其他用处

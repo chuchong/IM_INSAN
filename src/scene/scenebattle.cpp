@@ -5,30 +5,12 @@ SceneBattle::SceneBattle()
 
 }
 
-void SceneBattle::parseFromFile(QString j)
+void SceneBattle::parseFromFile(QString url)
 {
-    QFile loadFile(j);
 
-     if(!loadFile.open(QIODevice::ReadOnly))
-     {
-         qDebug() << "could't open projects json";
-         return;
-     }
-
-     QByteArray allData = loadFile.readAll();
-     loadFile.close();
-
-     QJsonParseError json_error;
-     QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
-
-     if(json_error.error != QJsonParseError::NoError)
-     {
-         qDebug() << "json error!";
-         return;
-     }
-    //以上为初始化过程
-     QJsonObject rootObj = jsonDoc.object();
-    //详见qt教程
+   QSettings config(url,QSettings::IniFormat);
+    background_url = config.value("/background/url").toString();
+    factury.parseFromJson(config.value("/breedfactury/url").toString());
 
 }
 
@@ -44,11 +26,35 @@ void SceneBattle::redraw()
 
 void SceneBattle::load()
 {
+    background= factury.getBG(background_url,900,600,0,0);
+    allList.push_back(background);
+    addItem(background);
+
 
 }
 
 void SceneBattle::unload()
 {
+    for(auto iter: allList)
+        delete iter;
+    allList.clear();
+    baits.clear();
+
+    clear();
     disconnect();
+}
+
+void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    //生成bait
+    SpriteObject *bait = factury.getSpriteByTypeName(event->scenePos().x(),
+                                                     event->scenePos().y(),
+                                                     "bait");
+    bait->setPos(event->scenePos());
+    allList.append(bait);
+    addItem(bait);
+    baits.append(bait);
+
+
 }
 

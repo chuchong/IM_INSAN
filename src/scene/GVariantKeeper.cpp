@@ -20,8 +20,12 @@ GVariantKeeper::GVariantKeeper()
     allScenes.append(story1);
     story1->parseFromFile(":/configure/INI_STORY_1_1");
 
+    SceneBattle *battle1 = new SceneBattle;
+    allScenes.append(battle1);
+    battle1->parseFromFile(":/configure/INI_BATTLE_1");
+
     Transition *debugTrans = new Transition
-                         (startScene,
+                         (battle1,
                           story1,
                           QSet<int>::fromList({CONDITION_START}));
     allTransitions.append(debugTrans);
@@ -29,8 +33,10 @@ GVariantKeeper::GVariantKeeper()
     QList<Transition>  qli;
     qli.append(*debugTrans);
 
-    firstWMachine =new SceneMachine(qli,startScene);//好烦啊,这些Machine里面的指针好容易漏出去
+//    firstWMachine =new SceneMachine(qli,startScene);//好烦啊,这些Machine里面的指针好容易漏出去
     secondWMachine =new SceneMachine(qli,startScene);
+    //debug
+    firstWMachine = new SceneMachine(qli,battle1);
 
     //以上的都要给我活着
     //!!!!TODO 弄好这些Scene*的析构 和初始化,全部都要是获得

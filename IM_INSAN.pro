@@ -42,7 +42,8 @@ SOURCES += \
     src/object/ObjectScript.cpp \
     src/object/ObjectBlock.cpp \
     src/object/ObjectSprite.cpp \
-    src/object/ObjectGame.cpp
+    src/object/ObjectGame.cpp \
+    src/object/Breed.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -63,7 +64,8 @@ HEADERS += \
     src/object/ObjectScript.h \
     src/object/ObjectBlock.h \
     src/object/ObjectSprite.h \
-    src/object/ObjectGame.h
+    src/object/ObjectGame.h \
+    src/object/Breed.h
 
 FORMS += \
     src/mainwindow.ui

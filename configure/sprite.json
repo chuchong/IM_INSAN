@@ -1,0 +1,11 @@
+{
+    "x": [{
+        "name": "bait",
+        "image": ":/SPRITE_BAIT",
+        "parent": "",
+        "hp": 1,
+        "maxVx": 0,
+        "maxVy": 10,
+        "a": 0
+        }]
+}

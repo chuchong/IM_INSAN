@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QGraphicsScene>
+#include <QSettings>
 #include <QGraphicsSceneMouseEvent>
 #include "../Constant.h"
 #include "../object/ObjectBlock.h"

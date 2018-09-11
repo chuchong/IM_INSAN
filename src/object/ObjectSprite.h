@@ -3,9 +3,13 @@
 #define SPRITEOBJECT_H
 
 #include <QObject>
+#include <QtMath>
 #include "ObjectGame.h"
+#include "Breed.h"
+class Breed;
 class SpriteObject :public GameObject
 {
+    int sgn(qreal x);
 //    already have
 //    QString imageRc_;
 //    QPointF point_;//rect_ 和 pixmap().rect() 不一定是一个事物,后者是外轮廓的闭包
@@ -22,10 +26,24 @@ class SpriteObject :public GameObject
 //        return (int)((height << 7) + pixmap().rect().y());
 //    }
 private:
-
+    Breed & breed_ ;
+    int hp_;
+    qreal maxVx;
+    qreal maxVy;
+    qreal vx;
+    qreal vy;
+    qreal ax;
+    qreal ay;
+    qreal a;
+//    SpriteObject();
+    SpriteObject(Breed& breed);
+//    SpriteObject(QString image, int x, int y, qreal px, qreal py);
+    friend class Breed;
+    friend class BreedFactury;
 public:
-    SpriteObject();
-    SpriteObject(QString image, int x, int y, qreal px, qreal py);
+    void timerEvent(QTimerEvent *event);
+    setVelocity(qreal vx, qreal vy);
+    virtual void setHp(int hp){hp_ = hp;}
 
 };
 

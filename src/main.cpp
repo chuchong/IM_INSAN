@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow *w = new MainWindow;
+
 
 
     //调皮一下
@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     splash.setPixmap(pixmap);
     splash.show();
 
+    MainWindow *w = new MainWindow;
     QDateTime n=QDateTime::currentDateTime();
     QDateTime now;
     do{
