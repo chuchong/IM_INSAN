@@ -41,6 +41,7 @@ private:
     friend class Breed;
     friend class BreedFactury;
 public:
+    ~SpriteObject();
     void timerEvent(QTimerEvent *event);
     setVelocity(qreal vx, qreal vy);
     virtual void setHp(int hp){hp_ = hp;}

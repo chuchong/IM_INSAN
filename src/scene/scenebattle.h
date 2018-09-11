@@ -31,7 +31,7 @@ private:
 
 public:
     SceneBattle();
-    ~SceneBattle(){ this->unload();}
+    ~SceneBattle(){ /*this->unload();*/}
     virtual void parseFromFile(QString j);
     virtual void update();
     virtual void redraw();

@@ -2,10 +2,9 @@
 
 void BreedFactury::clearPool()
 {
-   QHashIterator<QString, Breed*> i(breedPool);
-   while(i.hasNext()){
+   QHash<QString, Breed*>::Iterator i;
+   for(i=breedPool.begin(); i != breedPool.end(); i ++) {
        delete i.value();
-        i.next();//???;
    }
    breedPool.clear();
 }

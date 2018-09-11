@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+//
     delete ui;
 }
 //以下为利用多线程来显示加载页面的函数*3
@@ -82,6 +83,13 @@ void MainWindow::changeSceneNoThread(Scene *newScene){
     currScene->load();
     connectToScene();
     update();
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    qDebug()<< "mainwindow delete";
+    currScene->unload();
+    gVariantIns->destroyInstance();
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)

@@ -29,6 +29,10 @@ SpriteObject::SpriteObject(Breed &breed):breed_(breed)
     setImage(imageRc_);
 }
 
+SpriteObject::~SpriteObject(){
+    qDebug()<<"delete" << breed_.getName();
+}
+
 //SpriteObject::SpriteObject(QString image, int x, int y, qreal px, qreal py)
 //    :GameObject()
 //{

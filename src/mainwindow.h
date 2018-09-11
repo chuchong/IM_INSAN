@@ -59,6 +59,7 @@ public:
 
     //TODO 确定场景切换方式 自动机orswitch
      void chooseNewScene(SCENE_ID old_scene, int/*TODO information*/ );//选择新场景,场景切换利用SWITCH大概就够了
+     void closeEvent(QCloseEvent *);
      void paintEvent(QPaintEvent *event);
      void start();
 private:

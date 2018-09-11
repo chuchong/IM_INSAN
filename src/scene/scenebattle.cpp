@@ -39,7 +39,7 @@ void SceneBattle::unload()
         delete iter;
     allList.clear();
     baits.clear();
-
+    factury.clearPool();
     clear();
     disconnect();
 }

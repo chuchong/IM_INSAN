@@ -1,5 +1,6 @@
 #ifndef BREED_H
 #define BREED_H
+#include <QtDebug>
 #include <QString>
 #include "ObjectSprite.h"
 class SpriteObject;
@@ -32,6 +33,7 @@ private:
      //讲道理真的会有人这么弄吗
      void setIniVelo(qreal vx, qreal vy);
     Breed();
+    ~Breed(){qDebug() << "delete breed";}
 //    static  QHash<QString, Breed*> breedPool; 疑似应该放在factury中
     int hp_;
     qreal maxVx_;

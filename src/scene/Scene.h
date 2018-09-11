@@ -30,7 +30,7 @@ protected:
     BlockObject *background;
 
     QString background_url;
-    virtual ~Scene(){}//只允许在栈上使用
+    virtual ~Scene(){qDebug() << "delete scene";}//只允许在栈上使用
     friend class GVariantKeeper;//负责让他帮忙析构
 signals:
     virtual void sendCondition(S_CONDITIONS conditions);
