@@ -19,6 +19,7 @@ private:
     void setMaxVy(qreal maxVy = 0);
     void setA(qreal a = 0);
     void setImage(QString im);
+    void setType(QString type);
 public:
     EffectSeed skillSeedList[4];//4个技能足够了
 
@@ -34,6 +35,7 @@ public:
     qreal getA();
     QString getImage();
     QString getName();
+    QString getType();
     static void clearPool();
 private:
     friend class BreedFactury;

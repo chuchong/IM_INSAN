@@ -16,7 +16,6 @@ class SpriteObject :public GameObject
     int sgn(qreal x);
 private:
     Logic *logic = nullptr;
-
     Breed & breed_ ;
     qreal maxVx;
     qreal maxVy;

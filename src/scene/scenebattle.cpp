@@ -163,3 +163,11 @@ void SceneBattle::addSpriteFromName(QPointF point, QString name)
     addSprite(point, name);
 }
 
+void SceneBattle::DirectOneToAnother(SpriteObject *mover, QString targetName)
+{
+    QList<SpriteObject*> selectList;
+    for(auto iter : allList){
+        if(iter->)
+    }
+}
+

@@ -57,6 +57,7 @@ public:
 public slots:
     void addSkill(const EffectSeed& seed, SpriteObject *from);
     void addSpriteFromName(QPointF point, QString name);
+    void DirectOneToAnother(SpriteObject * mover, QString targetName);
 };
 
 #endif // SCENEBATTLE_H

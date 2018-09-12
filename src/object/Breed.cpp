@@ -77,7 +77,7 @@ QString Breed::getImage(){return image_;}
 
 QString Breed::getName(){return name_;}
 
-QString Breed::getType(){return type_;}
+QString Breed::getType(){return type_;}//下一步根据type
 
 void Breed::setInitial(QString name, Breed* parent,
                   QString image,
