@@ -37,12 +37,19 @@ void SceneStory::load()
 
 void SceneStory::unload()
 {
-    for(GameObject* iter : allList)
+    for(GameObject* iter : allList){
         delete iter;
+//        removeItem(iter);不需要,自动remove了
+    }
     allList.clear();
-    this->clear();
     delete script;
+//    removeItem(script);
     disconnect();
+}
+
+void SceneStory::getIn()
+{
+
 }
 
 void SceneStory::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -51,6 +58,7 @@ void SceneStory::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if(!script->showNextLine()){
             S_CONDITIONS battle; battle.insert(CONDITION_START);
             emit sendCondition(battle);
+            return;//!return is important
         }
     }
 }

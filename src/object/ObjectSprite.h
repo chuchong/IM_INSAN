@@ -36,6 +36,8 @@ public:
     void setVelocity(qreal vx, qreal vy);
     virtual void setHp(int hp){hp_ = hp;}
     virtual void run() override;
+    virtual void input(int message);
+
     virtual bool isDead(){
         if(hp_ <= 0)
             return 1;
@@ -52,6 +54,8 @@ public:
     qreal &AY(){return ay;}
     int &HP(){return hp_;}
 
+    int &XFRAME(){return xframe_;}
+    int &YFRAME(){return yframe_;}
     qreal maxVX(){return maxVx;}
     qreal maxVY(){return maxVy;}
 

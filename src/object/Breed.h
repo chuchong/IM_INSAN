@@ -18,6 +18,8 @@ private:
     void setImage(QString im);
 public:
     SpriteObject* newSprite();
+    int getWidth();
+    int getHeight();
     int getHp();
     int getLogic();
     qreal getMaxVx();
@@ -37,9 +39,13 @@ private:
      //讲道理真的会有人这么弄吗
     void setIniVelo(qreal vx, qreal vy);
     void setLogic(int type = 0);
+    void setHeight(int h);
+    void setWidth(int w);
     Breed();
     ~Breed();
-//    static  QHash<QString, Breed*> breedPool; 疑似应该放在factury中
+private:
+    int width;
+    int height;
     int hp_;
     int logicType;//1 就是鱼的逻辑 , 0 是父亲的逻辑
     qreal maxVx_;

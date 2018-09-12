@@ -21,7 +21,7 @@ private:
     QHash<QString, Breed*> breedPool; //疑似应该放在factury中
 public:
     void clearPool();
-    void addBreeds(QString name, QString parent,
+    Breed* addBreeds(QString name, QString parent,
                    QString image = "",
                   qreal maxVx = 0, qreal maxVy = 0, qreal a = 0,
                    int hp = 0,

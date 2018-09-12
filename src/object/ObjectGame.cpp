@@ -8,29 +8,27 @@ GameObject::~GameObject()
 QRectF GameObject::boundingRect() const
 {
 
-    int w = pixmap().width();
-    int h = pixmap().height();
-    int x =this->pos().x();
-    int y = this->pos().y();
-//    rect.moveTopLeft(QPoint(this->x(),this->y()));
-//    qDebug() << w << h << "rect :" << this->pos().x() << this->pos().y();
-    return QRect(0,0,w,h);
-
+//    qDebug() << pointf_;
+    return QRect(0,0,width_,height_);
 }
 
 void GameObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
-    painter->drawPixmap(0,0,pixmap().width(),pixmap().height(),
-                        pixmap());
+//    qDebug() << width_ << "" << height_ << pointf_;
+    painter->drawPixmap(0,0, width_, height_,
+                        pixmap(),
+                        xframe_ * width_ , yframe_ * height_, width_, height_);
+    qDebug() <<pos().x() << pos().y();
 }
 
 QPainterPath GameObject::shape() const
 {
     //注意paint默认返回boundingrect 坑啊
+
     QPainterPath path;
-    QRect r(this->pos().x(),this->pos().y(),pixmap().width(),pixmap().height());
-    path.addRect(r);
+    QRect boundingrect(pos().x(),pos().y(),width_ , height_ );
+    qDebug() << width_ << height_;
+    path.addRect(boundingrect);
     return path;
 }
 

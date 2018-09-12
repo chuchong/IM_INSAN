@@ -54,6 +54,7 @@ const int FRAME = 1000 / 60;
 //鱼的血量为1000
 const int LOGIC_INPUT_DANGER = 0;
 const int LOGIC_INPUT_SAFE = 1;
+const int LOGIC_INPUT_FEED = 2;
 
 const int HP_OF_BLOCK = 1;
 

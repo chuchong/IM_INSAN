@@ -11,6 +11,16 @@ void Breed::setLogic(int type)
     qDebug() <<"logic" << logicType;
 }
 
+void Breed::setHeight(int h)
+{
+    height = ((parent_ != nullptr&& h == 0)? parent_->getHeight():h);
+}
+
+void Breed::setWidth(int w)
+{
+    width = ((parent_ != nullptr&& w == 0)? parent_->getWidth():w);
+}
+
 void Breed::setHp(int hp){
     hp_ = ((parent_ != nullptr&& hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
 }
@@ -36,6 +46,9 @@ SpriteObject *Breed::newSprite()
 {
     return new SpriteObject(*this);
 }
+
+int Breed::getWidth(){return width;}
+int Breed::getHeight(){return height;}
 
 int Breed::getHp(){return hp_;}
 

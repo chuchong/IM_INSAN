@@ -40,8 +40,10 @@ public:
     virtual void parseFromFile(QString j) = 0;
     virtual void update() = 0;//逻辑
     virtual void redraw() = 0;//绘制
-    virtual void load() = 0;
-    virtual void unload() = 0;
+    virtual void load() = 0; //加载资源
+    virtual void getIn() = 0;//真正的开始
+    //virtual void getOut() 若多线程要来清空资源,则必须使用这个
+    virtual void unload() = 0;//退出 + 清空资源,暂时我觉得这个没啥
     virtual SCENE_TYPE getSceneType() = 0;
 //    virtual Scene *duplicateScene(Scene *) = 0;
 

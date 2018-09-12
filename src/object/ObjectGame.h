@@ -13,10 +13,16 @@ class GameObject: public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
 protected:
+//    to debug
+//    virtual void setPos(int x, int y) = delete;
+//    virtual QPointF pos() = delete;
 
+    int xframe_ = 0; //in which part of its image
+    int yframe_ = 0;
+    int height_ = 0;//height of it's box
+    int width_ = 0;//width of it's box
+//    QPointF pointf_;//it's reality box
     QString imageRc_;
-    /*QPointF point_;*///rect_ 和 pixmap().rect() 不一定是一个事物,后者是外轮廓的闭包
-                //而rectf_可以有其他用处
     int hp_ ;//"万物皆精灵",当hp为0的时候,清除,默认情况下,就连背景也有1点hp
 //    int height;//指定高度
 public:
@@ -32,6 +38,17 @@ public:
     //TODO 各种set方便工厂类
     virtual void setHP(int);
     virtual void setImage(QString image);
+    virtual void setRect(int wi, int he){
+        width_ = wi; height_ = he;}
+    virtual void setPosX(qreal x){pos().setX(x);}
+    virtual void setPosY(qreal y){pos().setY(y);}
+//    virtual void setPos(int x, int y){
+//        setPosX(x);setPosY(y);}
+//    virtual void setPos(QPointF p){
+//        pointf_ = p;
+//    }
+//    QPointF pos(){
+//        return pos();}
 
     virtual bool isDead();
     virtual int getRelativeHeight(){//确认画图的上下关系

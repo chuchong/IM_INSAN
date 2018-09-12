@@ -36,16 +36,22 @@ void SceneBattle::load()
 void SceneBattle::unload()
 {
     qDebug() << "unload";
-    for(auto iter: allList)
+    for(auto iter: allList){
         delete iter;
+//        removeItem(iter);
+    }
 
     fishes.clear();
     allList.clear();
     baits.clear();
     factury.clearPool();
-    clear();
     disconnect();
     killTimer(timerId);
+}
+
+void SceneBattle::getIn()
+{
+    timerId = startTimer(FRAME);
 }
 
 void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -63,16 +69,41 @@ void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void SceneBattle::timerEvent(QTimerEvent *event)
 {
     for(auto iter: allList){
+//        iter->setPos(iter->getPosPoint());
         iter->run();
     }
-    if(qrand() % 100 == 1){
+    int r_num = qrand();
+    if(r_num % 500 == 1){
+        QString name;
+        if(r_num %3 == 0)
+            name = "fish";
+        else if(r_num %3 == 1)
+            name = "yellow_fish";
+        else
+            name = "beard_fish";
         SpriteObject* fish = factury.getSpriteByTypeName(position.x(),
                                                          position.y(),
-                                                         "fish");
+                                                         name);
         allList.append(fish);
         addItem(fish);
         fishes.append(fish);
     }
+
+    for(auto bait:baits){
+        if(!bait->isDead()){
+            auto lists = bait->collidingItems();
+            for(auto iter : lists){
+                SpriteObject * fish = dynamic_cast<SpriteObject *>(iter);
+                if(fish != nullptr && fish->getType() != "bait"){
+                    fish->input(LOGIC_INPUT_FEED);
+                    bait->setHp(-1);
+                }
+            }
+        }
+    }
+
+
+
     for(auto iter : baits){
         qDebug() << iter->pos().y();
         if(iter->pos().y() > 600){

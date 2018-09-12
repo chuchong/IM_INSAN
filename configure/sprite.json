@@ -2,6 +2,8 @@
     "x": [{
         "name":"bait",
         "image":":/SPRITE_BAIT",
+        "width":40,
+        "height":40,
         "parent":"",
         "hp":1,
         "maxVx":0,
@@ -14,13 +16,29 @@
         {
         "name":"fish",
         "image":":/SPRITE_FISH",
+        "width":80,
+        "height":80,
         "parent":"",
-        "hp": 2500,
-        "maxVx":5,
-        "maxVy":5,
+        "hp": 2000,
+        "maxVx":1,
+        "maxVy":0.5,
         "a":0,
         "vx":0,
-        "vy":0,
+        "vy":-0.02,
         "logic":1
-        }]
+        },
+        {
+        "name":"yellow_fish",
+        "image":":/SPRITE_FISH_YELLOW",
+        "parent":"fish",
+        "hp": 3000,
+        "maxVx": 2
+        },
+        {
+        "name":"beard_fish",
+        "image":":/SPRITE_FISH_BEARD",
+        "parent":"fish",
+        "maxVx":0.5
+        }
+      ]
 }

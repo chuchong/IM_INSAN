@@ -39,9 +39,11 @@ public:
     virtual void redraw();
     virtual void load();
     virtual void unload();
+    virtual void getIn();
     virtual SCENE_TYPE getSceneType(){
         return BATTLE;
     }
+
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void timerEvent(QTimerEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);

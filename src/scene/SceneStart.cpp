@@ -30,6 +30,7 @@ void SceneStart::load()
     BlockObject *startButton = factury.getButton(":/BUTTON_START",
                                             101, 28, 700, 400,
                                             CONDITION_START);
+    qDebug() << startButton->pos().x() << startButton->pos().y();
     BlockObject *exitButton = factury.getButton(":/BUTTON_EXIT",
                                              101,28,700,500,
                                                 CONDITION_QUIT);
@@ -52,11 +53,16 @@ void SceneStart::unload()
 
     for(GameObject* iter:allList){
         delete iter;
+//        removeItem(iter);
     }
-    this->clear();
     allList.clear();
     buttons.clear();
     disconnect();
+
+}
+
+void SceneStart::getIn()
+{
 
 }
 
@@ -66,10 +72,11 @@ void SceneStart::mousePressEvent(QGraphicsSceneMouseEvent *event)
         for(BlockObject* button: buttons){
             qDebug() << event->scenePos().x();
             qDebug() << event->scenePos().y();
+            qDebug() << button->pos();
             if(button != nullptr && button->contains(event->scenePos())){
                     S_CONDITIONS buf = button->getCondition();
                     emit sendCondition(buf);
-//???                    return;//!!否则两线程撞车
+                    return;//!!否则两线程撞车
              }
          }
     }

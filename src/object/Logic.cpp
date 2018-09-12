@@ -10,7 +10,7 @@ void FishLogic::runState0()
 {
     int r_num = qrand();
     birthtime ++;
-    if(birthtime == 29){
+    if(birthtime % 29 == 0){
         int r_a = r_num % 4;
         switch(r_a){
         case 0:
@@ -21,9 +21,11 @@ void FishLogic::runState0()
             break;
         case 2:
             object_ -> VY() = object_->maxVY();
+            object_ ->AY() = -object_->AY();
             break;
         case 3:
             object_ ->VY() = -object_->maxVY();
+            object_->AY() = - object_->AY();
             break;
         };
     }
@@ -41,17 +43,21 @@ void FishLogic::runState0()
     if(object_->HP() <= 400){
         object_->setVelocity(0,0);
         state_ = 1;
+        object_->XFRAME() = 1;
+        object_->update();
     qDebug() << "I'm hungry";
     }
 }
 
-void FishLogic::runState1()
+void FishLogic::runState1()//饥饿
 {
     object_->HP() --;
     object_->SkillReachTarget();
 
     if(object_->HP() >= 800)
         state_=0;
+
+
 }
 
 void FishLogic::runState2()
@@ -69,12 +75,18 @@ void FishLogic::inputState1(int in)
 {
     if(in == LOGIC_INPUT_DANGER)
         state_ = 2;
+    if(in == LOGIC_INPUT_FEED){
+        object_->XFRAME() = 0;
+        object_->setHP(2000);
+        state_ = 0;
+        object_ ->update();
+    }
 }
 
 void FishLogic::inputState2(int in)
 {
-    if(in == LOGIC_INPUT_SAFE)
-        state_ = 0;
+    if(in == LOGIC_INPUT_SAFE){
+    }
 }
 
 void FishLogic::run()

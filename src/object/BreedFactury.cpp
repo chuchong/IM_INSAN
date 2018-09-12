@@ -49,11 +49,16 @@ void BreedFactury::parseFromJson(QString url)
          int logic = sprite.value("logic").toInt();
          qreal vx = sprite.value("vx").toDouble();
          qreal vy = sprite.value("vy").toDouble();
-         addBreeds(name,parent,image,maxVx,maxVy,a,hp,vx,vy,logic);
+         int width = sprite.value("width").toInt();
+         int height = sprite.value("height").toInt();
+         Breed* breed = addBreeds(name,parent,image,maxVx,maxVy,a,hp,vx,vy,logic);
+         assert( breed!= nullptr);
+         breed->setHeight(height);
+         breed->setWidth(width);
      }
 }
 
-void BreedFactury::addBreeds(QString name, QString parent, QString image,
+Breed* BreedFactury::addBreeds(QString name, QString parent, QString image,
                              qreal maxVx, qreal maxVy, qreal a,
                              int hp,
                              qreal vx , qreal vy,
@@ -67,12 +72,13 @@ void BreedFactury::addBreeds(QString name, QString parent, QString image,
     kid->setIniVelo(vx,vy);
     kid->setLogic(logic);
     breedPool.insert(name, kid);
+    return kid;
 }
 
-SpriteObject *BreedFactury::getSpriteByTypeName(int x, int y, QString typeName){
+SpriteObject *BreedFactury::getSpriteByTypeName(int px, int py, QString typeName){
     assert(breedPool.contains(typeName));
    SpriteObject* ob = new SpriteObject(*breedPool[typeName]);
-    ob->setPos(x,y);
+    ob->setPos(px,py);
     ob->setZValue(2);
     return ob;
 }
@@ -94,8 +100,8 @@ BlockObject *BreedFactury::getBG(QString image, int x, int y, qreal px, qreal py
     o_ptr-> setImage(image);
     o_ptr-> setPos(px,py);
     o_ptr-> setHP(HP_OF_BLOCK);
-
-    o_ptr->setZValue(0);
+    o_ptr-> setRect(x,y);
+    o_ptr-> setZValue(0);
     return o_ptr;
 }
 
@@ -106,8 +112,8 @@ BlockObject *BreedFactury::getButton(QString image, int x, int y, qreal px, qrea
     o_ptr-> setPos(px, py);
     o_ptr-> setHP(HP_OF_BLOCK);
     o_ptr-> setCondition(QSet<int>::fromList({a_condi}));
-
-    o_ptr->setZValue(1);
+    o_ptr-> setRect(x,y);
+    o_ptr-> setZValue(1);
     return o_ptr;
 }
 

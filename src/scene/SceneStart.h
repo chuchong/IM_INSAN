@@ -18,6 +18,7 @@ public:
     virtual void redraw();
     virtual void load();
     virtual void unload();
+    virtual void getIn();
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     virtual SCENE_TYPE getSceneType(){
         return START;

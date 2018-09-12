@@ -40,7 +40,7 @@ void MainWindow::handleConditions(S_CONDITIONS conditions)
 
     //if判断用不用多线程
     if( machine->getNextScene(conditions)!= nullptr){
-        if(loadThread == nullptr /* && machine->getNextScene(conditions)->getSceneType() == BATTLE*/){
+        if(loadThread == nullptr  && machine->getNextScene(conditions)->getSceneType() == BATTLE){
             loadThread = new LoadingThread(this);
             connect(loadThread, SIGNAL(finished()),
                     loadThread, SLOT(deleteLater()));
@@ -67,10 +67,11 @@ void MainWindow::changeSceneFromThread(Scene *newScene)
 {
     //这时因为load unload 费事才放到子线程中,所以不需要再用了
    //更改Scene 实际上实现的是一个自动机
-    currScene->unload();
-    currScene = newScene;
     loadThread->requestInterruption();
     loadThread = nullptr;
+    currScene->unload();
+    currScene = newScene;
+    currScene->getIn();
     connectToScene();
     update();
 }
@@ -81,6 +82,7 @@ void MainWindow::changeSceneNoThread(Scene *newScene){
     currScene->unload();
     currScene=newScene;
     currScene->load();
+    currScene->getIn();
     connectToScene();
     update();
 }
@@ -88,7 +90,7 @@ void MainWindow::changeSceneNoThread(Scene *newScene){
 void MainWindow::closeEvent(QCloseEvent *)
 {
     qDebug()<< "mainwindow delete";
-    currScene->unload();
+//    currScene->unload();
     gVariantIns->destroyInstance();
 }
 

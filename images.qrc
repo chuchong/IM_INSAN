@@ -15,7 +15,8 @@
         <file alias="BG_LE">images/background/le.jpg</file>
 
 
-
+        <file alias="SPRITE_FISH_YELLOW">images/sprite/yellowfish.png</file>
+        <file alias="SPRITE_FISH_BEARD">images/sprite/beardfish.png</file>
         <file alias="SPRITE_FISH">images/sprite/fish.png</file>
         <file alias="SPRITE_BAIT">images/sprite/bait.png</file>
     </qresource>

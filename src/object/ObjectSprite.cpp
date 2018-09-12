@@ -16,15 +16,15 @@ int SpriteObject::sgn(qreal x)
 SpriteObject::SpriteObject(Breed &breed):breed_(breed)
 {
     qDebug()<<"his logictype" << breed.getLogic();
+    width_ = breed.getWidth();
+    height_ = breed.getHeight();
     imageRc_ = breed.getImage();
     hp_ = breed.getHp();
     breed_ = breed;
     maxVx = breed.getMaxVx();
     maxVy = breed.getMaxVy();
-
     //TODO change!
     ay = breed.getA();
-//    startTimer(16);
     a = 0;
     vx = vy = ax = 0;
     setImage(imageRc_);
@@ -44,8 +44,8 @@ SpriteObject::~SpriteObject(){
 void SpriteObject::bounceBack()
 {
     if(pos().y() > 600){
-        pos().setY(600);
         vy = - vy;
+        pos().setY(600);
     }
     if(pos().y() < 0){
         vy = - vy;
@@ -93,6 +93,10 @@ void SpriteObject::run()
     qreal new_x = this->pos().x() + vx;
     qreal new_y = this->pos().y() + vy;
     setPos(new_x,new_y);
+}
+
+void SpriteObject::input(int message){
+    logic->handleInput(message);
 }
 
 QString SpriteObject::getType(){
