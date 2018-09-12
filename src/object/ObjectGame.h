@@ -42,6 +42,7 @@ public:
         width_ = wi; height_ = he;}
     virtual void setPosX(qreal x){pos().setX(x);}
     virtual void setPosY(qreal y){pos().setY(y);}
+    virtual bool contains(const QPointF &point) const override;
 //    virtual void setPos(int x, int y){
 //        setPosX(x);setPosY(y);}
 //    virtual void setPos(QPointF p){

@@ -26,7 +26,7 @@ QPainterPath GameObject::shape() const
     //注意paint默认返回boundingrect 坑啊
 
     QPainterPath path;
-    QRect boundingrect(pos().x(),pos().y(),width_ , height_ );
+    QRect boundingrect(0,0,width_ , height_ );
     qDebug() << width_ << height_;
     path.addRect(boundingrect);
     return path;
@@ -42,6 +42,12 @@ void GameObject::setImage(QString image)
     QPixmap pixmap;
     pixmap.load(image);
     setPixmap(pixmap);
+}
+
+bool GameObject::contains(const QPointF &point) const
+{
+    QPointF realP = point - this->pos();
+    return shape().contains(realP);
 }
 
 bool GameObject::isDead(){
