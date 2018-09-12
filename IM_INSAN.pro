@@ -43,7 +43,9 @@ SOURCES += \
     src/object/ObjectSprite.cpp \
     src/object/ObjectGame.cpp \
     src/object/Breed.cpp \
-    src/object/LogicFSM.cpp
+    src/object/LogicFSM.cpp \
+    src/object/EffectFactury.cpp \
+    src/object/EffectSeed.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -65,7 +67,9 @@ HEADERS += \
     src/object/ObjectSprite.h \
     src/object/ObjectGame.h \
     src/object/Breed.h \
-    src/object/LogicFSM.h
+    src/object/LogicFSM.h \
+    src/object/EffectFactury.h \
+    src/object/EffectSeed.h
 
 FORMS += \
     src/mainwindow.ui

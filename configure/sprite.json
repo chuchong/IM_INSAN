@@ -33,7 +33,7 @@
         "parent":"fish",
         "hp": 3000,
         "maxVx": 2
-        },
+       },
         {
         "name":"beard_fish",
         "image":":/SPRITE_FISH_BEARD",

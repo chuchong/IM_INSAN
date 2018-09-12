@@ -19,7 +19,6 @@ public:
     void setScriptFromText(QString url);
     bool showNextLine();//if is end, send 0
 signals:
-
 public slots:
 };
 

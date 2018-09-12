@@ -41,6 +41,15 @@ void Breed::setImage(QString im){
     image_ = ((parent_!= nullptr && im == "")? parent_->getImage():im);
 }
 
+void Breed::setType(QString type)
+{
+    if(parent_ != nullptr){
+        type_ = parent_ -> getType();
+        return;
+    }
+    type_ = type;
+}
+
 
 SpriteObject *Breed::newSprite()
 {
@@ -67,6 +76,8 @@ qreal Breed::getA(){return a_;}
 QString Breed::getImage(){return image_;}
 
 QString Breed::getName(){return name_;}
+
+QString Breed::getType(){return type_;}
 
 void Breed::setInitial(QString name, Breed* parent,
                   QString image,

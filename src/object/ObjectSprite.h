@@ -9,12 +9,12 @@
 #include "Logic.h"
 class Logic;
 class Breed;
+//生产技能的种子
+
 class SpriteObject :public GameObject
 {
     int sgn(qreal x);
 private:
-
-
     Logic *logic = nullptr;
 
     Breed & breed_ ;
@@ -62,15 +62,22 @@ public:
     //以下为"技能":能对scene中其他sprite产生效果的,能杀掉自己的
 public:
     //即进化为新的一条鱼--自己死亡
-    void SkillEvolve(){}
-    //即产生一个新的东西
-    void SkillGenerate(){}
-    //靠近目标
-    void SkillReachTarget(){}
-    //远离目标
-    void SkillLeaveTarget(){}
-    //产生自己的尸体
-    void SkillCreateBody(){}
-};
+//    void SkillEvolve(){
+//        const SceneBattle * battle = this->scene();
+//    }
+//    //即产生一个新的东西
+//    void SkillGenerate(){}
+//    //靠近目标
+//    void SkillReachTarget(){}
+//    //远离目标
+//    void SkillLeaveTarget(){}
+//    //产生自己的尸体
+//    void SkillCreateBody(){}
+
+//    void SkillFirst();
+//    void SkillSecond();
+//    void SkillThird();
+signals:
+    void generateSkill(const EffectInitialInfo& seed, SpriteObject *from);//通过哦generate breed 中不同的参数
 
 #endif // SPRITEOBJECT_H

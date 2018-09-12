@@ -30,13 +30,13 @@ void FishLogic::runState0()
         };
     }
     if(birthtime >= 1800){
-        object_->SkillEvolve();
+//        object_->SkillEvolve();
     }
 
     if(birthtime % 50 == 0){
         int r_b = r_num %100;
         if(r_b <= 80)
-            object_->SkillGenerate();
+//            object_->SkillGenerate();
     }
 
     object_->HP() --;
@@ -52,7 +52,7 @@ void FishLogic::runState0()
 void FishLogic::runState1()//饥饿
 {
     object_->HP() --;
-    object_->SkillReachTarget();
+//    object_->SkillReachTarget();
 
     if(object_->HP() >= 800)
         state_=0;
@@ -62,7 +62,7 @@ void FishLogic::runState1()//饥饿
 
 void FishLogic::runState2()
 {
-    object_->SkillLeaveTarget();
+//    object_->SkillLeaveTarget();
 }
 
 void FishLogic::inputState0(int in)

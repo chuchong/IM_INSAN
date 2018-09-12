@@ -4,8 +4,11 @@
 #include <QString>
 #include "ObjectSprite.h"
 #include "Logic.h"
+#include "EffectSeed.h"
 class SpriteObject;
 class BreedFactury;
+//产生技能的种子
+
 class Breed{//表示sprite 的种类,这才是真正的类!
 
 private:
@@ -17,6 +20,8 @@ private:
     void setA(qreal a = 0);
     void setImage(QString im);
 public:
+    EffectSeed skillSeedList[4];//4个技能足够了
+
     SpriteObject* newSprite();
     int getWidth();
     int getHeight();
@@ -56,5 +61,6 @@ private:
     QString image_;
     Breed* parent_ = nullptr;
     QString name_;
+    QString type_;//type 表示它是什么种族的, name表示他的真名从而为子类继承帮忙
 };
 #endif // BREED_H

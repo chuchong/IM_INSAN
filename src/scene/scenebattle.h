@@ -7,11 +7,14 @@
 #include <QDebug>
 #include <QJsonArray>
 #include "Scene.h"
-//BreedFactury factury;
+#include "../object/Effect.h"
+#include "../object/EffectFactury.h"
+
+
+//BreedFactury factury; //我真是一个小智障
 //SCENE_ID sceneId;
 //QList<GameObject *> allList;
 //BlockObject *background;
-
 //QString background_url;
 //virtual ~Scene(){}//只允许在栈上使用
 //friend class GVariantKeeper;//负责让他帮忙析构
@@ -22,15 +25,18 @@
 //virtual void setBG(QString image, int x, int y, qreal px, qreal py);
 //virtual void resetBG(QString image, int x, int y, qreal px, qreal py);
 
-
+class Effect;
 class SceneBattle : public Scene
 {
 private:
+    EffectFactury effextFactury;
     SCENE_ID next;//
     QList<SpriteObject *> baits;
     QList<SpriteObject *> fishes;
     int timerId = 0;
     QPointF position;
+    QList<Effect*> effectList;
+    SpriteObject* addSprite(QPointF point, QString name);
 public:
     SceneBattle();
     ~SceneBattle(){ qDebug() << "delete battle";/*this->unload();*/}
@@ -48,6 +54,9 @@ public:
     void timerEvent(QTimerEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void DeletePhase();
+public slots:
+    void addSkill(const EffectSeed& seed, SpriteObject *from);
+    void addSpriteFromName(QPointF point, QString name);
 };
 
 #endif // SCENEBATTLE_H

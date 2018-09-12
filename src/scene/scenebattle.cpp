@@ -1,5 +1,17 @@
 #include "SceneBattle.h"
 
+SpriteObject* SceneBattle::addSprite(QPointF point,QString name)
+{
+    SpriteObject* sprite = factury.getSpriteByTypeName(point.x(),
+                                                        point.y(),
+                                                         name);
+    assert(sprite != nullptr);
+    allList.append(sprite);
+    addItem(sprite);
+    connect(sprite,SIGNAL(generateSkill(EffectSeed,SpriteObject*)),
+            this,SLOT(addSkill(EffectSeed,SpriteObject*)));
+}
+
 SceneBattle::SceneBattle()
 {
     position = QPointF(0,0);
@@ -81,13 +93,9 @@ void SceneBattle::timerEvent(QTimerEvent *event)
             name = "yellow_fish";
         else
             name = "beard_fish";
-        SpriteObject* fish = factury.getSpriteByTypeName(position.x(),
-                                                         position.y(),
-                                                         name);
-        allList.append(fish);
-        addItem(fish);
-        fishes.append(fish);
     }
+   SpriteObject* fish = addSprite(position,name);
+   fishes.append(fish);
 
     for(auto bait:baits){
         if(!bait->isDead()){
@@ -143,5 +151,15 @@ void SceneBattle::DeletePhase()
     }
 
     Scene::DeletePhase();
+}
+
+void SceneBattle::addSkill(const EffectInitialInfo &seed, SpriteObject *from)
+{
+
+}
+
+void SceneBattle::addSpriteFromName(QPointF point, QString name)
+{
+    addSprite(point, name);
 }
 
