@@ -1,4 +1,6 @@
 #include "Logic.h"
+#include "ObjectSprite.h"
+Logic::~Logic(){}
 
 Logic::Logic(SpriteObject *ob):object_(ob)
 {
@@ -30,18 +32,27 @@ void FishLogic::runState0()
         };
     }
     if(birthtime >= 1800){
-//        object_->SkillEvolve();
+//        进化成下一条鱼
+        if(object_->haveSkill(1)){
+            object_->useSkill(1);
+            object_->setHp(-1);
+        }
     }
 
     if(birthtime % 50 == 0){
         int r_b = r_num %100;
-        if(r_b <= 80)
-//            object_->SkillGenerate();
+        if(r_b <= 80){
+//         产生金币
+            if(object_->haveSkill(2)){
+                object_->useSkill(2);
+            }
+        }
+
     }
 
     object_->HP() --;
     if(object_->HP() <= 400){
-        object_->setVelocity(0,0);
+//        object_->setVelocity(0,0);
         state_ = 1;
         object_->XFRAME() = 1;
         object_->update();
@@ -52,41 +63,62 @@ void FishLogic::runState0()
 void FishLogic::runState1()//饥饿
 {
     object_->HP() --;
-//    object_->SkillReachTarget();
+//    找食物
+//    int r_num = qrand() % 100;
+//    if(r_num <= 20){
+        if(object_->haveSkill(3))
+        object_->useSkill(3);
+//    }
 
-    if(object_->HP() >= 800)
+    if(object_->HP() >= 800){
         state_=0;
-
-
+        object_->XFRAME() = 0;
+        object_->update();
+    }
 }
 
 void FishLogic::runState2()
 {
-//    object_->SkillLeaveTarget();
+//   躲外星人
+    int r_num = qrand() % 100;
+    if(r_num <= 40){
+        if(object_->haveSkill(4))
+        object_->useSkill(4);
+    }
 }
 
-void FishLogic::inputState0(int in)
+int FishLogic::inputState0(int in)
 {
-    if(in == LOGIC_INPUT_DANGER)
+    if(in == LOGIC_INPUT_DANGER){
         state_ = 2;
+        return INPUT_SUCCESS;
+    }
+    return INPUT_UNSECCESS;
 }
 
-void FishLogic::inputState1(int in)
+int FishLogic::inputState1(int in)
 {
-    if(in == LOGIC_INPUT_DANGER)
+    if(in == LOGIC_INPUT_DANGER){
         state_ = 2;
+        return INPUT_SUCCESS;
+    }
     if(in == LOGIC_INPUT_FEED){
         object_->XFRAME() = 0;
         object_->setHP(2000);
         state_ = 0;
         object_ ->update();
+        return INPUT_SUCCESS;
     }
+    return INPUT_UNSECCESS;
 }
 
-void FishLogic::inputState2(int in)
+int FishLogic::inputState2(int in)
 {
     if(in == LOGIC_INPUT_SAFE){
+        state_ = 0;
+        return INPUT_SUCCESS;
     }
+    return INPUT_UNSECCESS;
 }
 
 void FishLogic::run()
@@ -99,12 +131,24 @@ void FishLogic::run()
         runState2();
 }
 
-void FishLogic::handleInput(int input)
+int FishLogic::handleInput(int input)
 {
+if( input == LOGIC_INPUT_HEAL)
+        return INPUT_SUCCESS;
 if(state_ == 0)
-    inputState0(input);
+    return inputState0(input);
 else if(state_ == 1)
-    inputState1(input);
+    return inputState1(input);
 else if(state_ == 2)
-    inputState2(input);
+    return inputState2(input);
+}
+
+void BaitLogic::run(){
+    QRectF rect = object_->boundingRect();
+    rect.moveTopLeft(object_->pos());
+    object_->useTargetRectSkill(1,rect);
+}
+
+int BaitLogic::handleInput(int INPUT_NUMBER){
+    return INPUT_SUCCESS;
 }

@@ -21,8 +21,10 @@ private:
     void setImage(QString im);
     void setType(QString type);
 public:
-    EffectSeed skillSeedList[4];//4个技能足够了
-
+    QHash<int, EffectSeed* > skillBar;//再多个技能都足够了
+                                    //如何继承技能?
+    void clearHash();
+    const  QHash<int, EffectSeed* > &getSkillBar();
     SpriteObject* newSprite();
     int getWidth();
     int getHeight();
@@ -48,12 +50,13 @@ private:
     void setLogic(int type = 0);
     void setHeight(int h);
     void setWidth(int w);
+    void addSkill(const EffectSeed & seed);
     Breed();
     ~Breed();
 private:
     int width;
     int height;
-    int hp_;
+    int maxHp_;//表示最大血量,现在先不区分最大血量和初始血量
     int logicType;//1 就是鱼的逻辑 , 0 是父亲的逻辑
     qreal maxVx_;
     qreal maxVy_;

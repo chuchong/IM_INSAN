@@ -28,6 +28,7 @@ void BreedFactury::parseFromJson(QString url)
 
      if(json_error.error != QJsonParseError::NoError)
      {
+         assert(json_error.error == QJsonParseError::NoError);
          qDebug() << "json error!";
          return;
      }
@@ -51,10 +52,25 @@ void BreedFactury::parseFromJson(QString url)
          qreal vy = sprite.value("vy").toDouble();
          int width = sprite.value("width").toInt();
          int height = sprite.value("height").toInt();
+         QString type = sprite.value("type").toString();
          Breed* breed = addBreeds(name,parent,image,maxVx,maxVy,a,hp,vx,vy,logic);
          assert( breed!= nullptr);
          breed->setHeight(height);
          breed->setWidth(width);
+         breed->setType(type);
+
+         QJsonArray skills = sprite.value("skills").toArray();
+         for(int i = 0; i < skills.size(); i ++){
+            QJsonObject aSkill = skills[i].toObject();
+            QString name = aSkill.value("name").toString();
+            QString to = aSkill.value("to").toString();
+            int num = aSkill.value("number").toInt();
+            bool inherit = aSkill.value("inherit").toBool();
+            int parameter = aSkill.value("parameter").toInt();
+            EffectSeed seed(name,to,num,inherit,parameter);
+            breed->addSkill(seed);
+         }
+
      }
 }
 
@@ -72,10 +88,12 @@ Breed* BreedFactury::addBreeds(QString name, QString parent, QString image,
     kid->setIniVelo(vx,vy);
     kid->setLogic(logic);
     breedPool.insert(name, kid);
+    qDebug() << name;
     return kid;
 }
 
 SpriteObject *BreedFactury::getSpriteByTypeName(int px, int py, QString typeName){
+    qDebug()<< typeName;
     assert(breedPool.contains(typeName));
    SpriteObject* ob = new SpriteObject(*breedPool[typeName]);
     ob->setPos(px,py);

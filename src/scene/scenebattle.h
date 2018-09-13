@@ -6,30 +6,16 @@
 #include <QJsonObject>
 #include <QDebug>
 #include <QJsonArray>
+#include <QtMath>
 #include "Scene.h"
 #include "../object/Effect.h"
-#include "../object/EffectFactury.h"
+#include "../object/ObjectSprite.h"
 
 
-//BreedFactury factury; //我真是一个小智障
-//SCENE_ID sceneId;
-//QList<GameObject *> allList;
-//BlockObject *background;
-//QString background_url;
-//virtual ~Scene(){}//只允许在栈上使用
-//friend class GVariantKeeper;//负责让他帮忙析构
-//virtual SCENE_ID getSceneId();
-//virtual bool equal(Scene *newScene);
-//virtual void sortAndPaintPhase();
-//virtual void DeletePhase();
-//virtual void setBG(QString image, int x, int y, qreal px, qreal py);
-//virtual void resetBG(QString image, int x, int y, qreal px, qreal py);
-
-class Effect;
 class SceneBattle : public Scene
 {
 private:
-    EffectFactury effextFactury;
+    EffectFactury effectFactury;
     SCENE_ID next;//
     QList<SpriteObject *> baits;
     QList<SpriteObject *> fishes;
@@ -37,6 +23,9 @@ private:
     QPointF position;
     QList<Effect*> effectList;
     SpriteObject* addSprite(QPointF point, QString name);
+
+    int spriteDis(SpriteObject * o1, SpriteObject * o2);
+//    QList<SpriteObject *>& findSpriteListByType(QString type);
 public:
     SceneBattle();
     ~SceneBattle(){ qDebug() << "delete battle";/*this->unload();*/}
@@ -55,9 +44,13 @@ public:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void DeletePhase();
 public slots:
-    void addSkill(const EffectSeed& seed, SpriteObject *from);
+    void addSkillWithTargetRect(EffectSeed * seed, SpriteObject *from,const QRectF & rect);
+    void addSkill(EffectSeed * seed, SpriteObject *from);
     void addSpriteFromName(QPointF point, QString name);
-    void DirectOneToAnother(SpriteObject * mover, QString targetName);
+    void directOneToAnother(SpriteObject * mover, QString targetName);
+    void aoeKill(QRectF aoeRect, QString killType);
+    QList<SpriteObject*> findTargetsInRect(QRectF rect, QString type);
+    bool healSprite(SpriteObject * object,int parameter);//1 for works , 0 for not work
 };
 
 #endif // SCENEBATTLE_H

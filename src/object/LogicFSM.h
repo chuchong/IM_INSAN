@@ -17,10 +17,10 @@ struct LogicTransition{
     from_(from),to_(to),input_(input){
     }
 };
-class LogicStateRandomWalk: public LogicState{
-    LogicStateRandomWalk(SpriteObject *ob):LogicState(ob){}
-    void stateRun();
-};
+//class LogicStateRandomWalk: public LogicState{
+//    LogicStateRandomWalk(SpriteObject *ob):LogicState(ob){}
+//    void stateRun();
+//};
 
 class LogicFSM{
     LogicFSM()

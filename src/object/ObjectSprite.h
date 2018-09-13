@@ -9,10 +9,13 @@
 #include "Logic.h"
 class Logic;
 class Breed;
+class BreedFactury;
 //生产技能的种子
 
 class SpriteObject :public GameObject
 {
+    Q_OBJECT
+
     int sgn(qreal x);
 private:
     Logic *logic = nullptr;
@@ -24,7 +27,7 @@ private:
     qreal ax;
     qreal ay;
     qreal a;
-    SpriteObject(Breed& breed);
+    SpriteObject(Breed& breed, GameObject * parent =nullptr);
     friend class Breed;
     friend class BreedFactury;
     friend class Logic;
@@ -33,50 +36,36 @@ public:
     void bounceBack();
     void timerEvent(QTimerEvent *event);
     void setVelocity(qreal vx, qreal vy);
-    virtual void setHp(int hp){hp_ = hp;}
+    virtual void setHp(int hp);
     virtual void run() override;
-    virtual void input(int message);
+    virtual int input(int message);
+    void moveToPoint(QPointF p);
 
-    virtual bool isDead(){
-        if(hp_ <= 0)
-            return 1;
-        else
-            return 0;
-    }
+    virtual bool isDead();
     QString getType();
 
     //use for logic
 public:
-    qreal &VX(){return vx;}
-    qreal &VY(){return vy;}
-    qreal &AX(){return ax;}
-    qreal &AY(){return ay;}
-    int &HP(){return hp_;}
+    qreal &VX();
+    qreal &VY();
+    qreal &AX();
+    qreal &AY();
+    int &HP();
 
-    int &XFRAME(){return xframe_;}
-    int &YFRAME(){return yframe_;}
-    qreal maxVX(){return maxVx;}
-    qreal maxVY(){return maxVy;}
+    int &XFRAME();
+    int &YFRAME();
+    qreal maxVX();
+    qreal maxVY();
 
     //以下为"技能":能对scene中其他sprite产生效果的,能杀掉自己的
+private:
+    void clearSkills();
 public:
-    //即进化为新的一条鱼--自己死亡
-//    void SkillEvolve(){
-//        const SceneBattle * battle = this->scene();
-//    }
-//    //即产生一个新的东西
-//    void SkillGenerate(){}
-//    //靠近目标
-//    void SkillReachTarget(){}
-//    //远离目标
-//    void SkillLeaveTarget(){}
-//    //产生自己的尸体
-//    void SkillCreateBody(){}
-
-//    void SkillFirst();
-//    void SkillSecond();
-//    void SkillThird();
+    void useSkill(int);//使用几技能
+    void useTargetRectSkill(int,const QRectF & rect);
+    bool haveSkill(int);
 signals:
-    void generateSkill(const EffectInitialInfo& seed, SpriteObject *from);//通过哦generate breed 中不同的参数
-
+    void generateSkill(EffectSeed *, SpriteObject *from);//通过哦generate breed 中不同的参数
+    void generateSkillWithTargetRect(EffectSeed * seed, SpriteObject *from,const QRectF & rect);
+};
 #endif // SPRITEOBJECT_H

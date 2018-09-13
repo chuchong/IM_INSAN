@@ -55,7 +55,13 @@ const int FRAME = 1000 / 60;
 const int LOGIC_INPUT_DANGER = 0;
 const int LOGIC_INPUT_SAFE = 1;
 const int LOGIC_INPUT_FEED = 2;
+const int LOGIC_INPUT_HEAL = 3;
 
+const int INPUT_SUCCESS = 0;
+const int INPUT_UNSECCESS = 1;
+
+const int EFFECT_SUCCESS = 0;
+const int EFFECT_UNSUCCESS = 1;
 const int HP_OF_BLOCK = 1;
 
 #define HP_OF_BLOCK 1

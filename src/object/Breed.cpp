@@ -1,6 +1,6 @@
 #include "Breed.h"
 
-Breed::Breed(){}
+Breed::Breed(){ clearHash();}
 
 Breed::~Breed(){qDebug() << "delete breed" << name_;}
 
@@ -21,8 +21,23 @@ void Breed::setWidth(int w)
     width = ((parent_ != nullptr&& w == 0)? parent_->getWidth():w);
 }
 
+void Breed::addSkill(const EffectSeed &seed)
+{
+    if(seed.inherit == 1){
+        assert(parent_ != nullptr);
+        skillBar[seed.num] = parent_->getSkillBar().value(seed.num);
+    }
+    else{
+        if(seed.effectName == "")
+            return;
+        else
+            skillBar[seed.num] = new EffectSeed(seed.effectName,seed.toName,seed.num,seed.inherit
+                                            ,seed.parameter);
+    }
+}
+
 void Breed::setHp(int hp){
-    hp_ = ((parent_ != nullptr&& hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
+    maxHp_ = ((parent_ != nullptr&& hp == 0)? parent_->getHp():hp);//若有父指针且输入零,则选择父亲的血量
 }
 
 void Breed::setMaxVx(qreal maxVx){
@@ -43,11 +58,26 @@ void Breed::setImage(QString im){
 
 void Breed::setType(QString type)
 {
-    if(parent_ != nullptr){
+    if(parent_ != nullptr && type == ""){
         type_ = parent_ -> getType();
         return;
     }
-    type_ = type;
+    else
+        type_ = type;
+}
+
+void Breed::clearHash()
+{
+    QHash<int,EffectSeed*>::Iterator i;
+    for(i = skillBar.begin(); i != skillBar.end(); i ++) {
+        delete i.value();
+    }
+    skillBar.clear();
+}
+
+const QHash<int, EffectSeed *> &Breed::getSkillBar()
+{
+    return skillBar;
 }
 
 
@@ -59,7 +89,7 @@ SpriteObject *Breed::newSprite()
 int Breed::getWidth(){return width;}
 int Breed::getHeight(){return height;}
 
-int Breed::getHp(){return hp_;}
+int Breed::getHp(){return maxHp_;}
 
 int Breed::getLogic(){return logicType;}
 

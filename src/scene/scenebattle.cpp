@@ -1,16 +1,23 @@
 #include "SceneBattle.h"
-
+#include "../object/ObjectSprite.h"
 SpriteObject* SceneBattle::addSprite(QPointF point,QString name)
 {
     SpriteObject* sprite = factury.getSpriteByTypeName(point.x(),
                                                         point.y(),
                                                          name);
+    qDebug()<<"add" << name;
     assert(sprite != nullptr);
     allList.append(sprite);
     addItem(sprite);
-    connect(sprite,SIGNAL(generateSkill(EffectSeed,SpriteObject*)),
-            this,SLOT(addSkill(EffectSeed,SpriteObject*)));
+    connect(sprite,&SpriteObject::generateSkill,
+            this,&SceneBattle::addSkill);
+    connect(sprite, &SpriteObject::generateSkillWithTargetRect,
+            this, &SceneBattle::addSkillWithTargetRect);
+
+    return sprite;
 }
+
+
 
 SceneBattle::SceneBattle()
 {
@@ -52,6 +59,12 @@ void SceneBattle::unload()
         delete iter;
 //        removeItem(iter);
     }
+    if(effectList.size() != 0){
+        for(auto iter: effectList){
+            delete iter;
+        }
+        effectList.clear();
+    }
 
     fishes.clear();
     allList.clear();
@@ -69,48 +82,29 @@ void SceneBattle::getIn()
 void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //生成bait
-    SpriteObject *bait = factury.getSpriteByTypeName(event->scenePos().x(),
-                                                     event->scenePos().y(),
-                                                     "bait");
-    bait->setPos(event->scenePos());
-    allList.append(bait);
-    addItem(bait);
+//    SpriteObject *bait = factury.getSpriteByTypeName(event->scenePos().x(),
+//                                                     event->scenePos().y(),
+//                                                     "bait");
+    SpriteObject*bait = addSprite(position,"bait");
     baits.append(bait);
+
+    QPointF p1 = position + QPointF(50,50);
+    SpriteObject* fish = addSprite(p1,"fish");
+    fishes.append(fish);
 }
 
 void SceneBattle::timerEvent(QTimerEvent *event)
 {
+
+
     for(auto iter: allList){
 //        iter->setPos(iter->getPosPoint());
         iter->run();
     }
-    int r_num = qrand();
-    if(r_num % 500 == 1){
-        QString name;
-        if(r_num %3 == 0)
-            name = "fish";
-        else if(r_num %3 == 1)
-            name = "yellow_fish";
-        else
-            name = "beard_fish";
+    for(auto iter: effectList){
+        iter->Happen();
+        iter->setDead();
     }
-   SpriteObject* fish = addSprite(position,name);
-   fishes.append(fish);
-
-    for(auto bait:baits){
-        if(!bait->isDead()){
-            auto lists = bait->collidingItems();
-            for(auto iter : lists){
-                SpriteObject * fish = dynamic_cast<SpriteObject *>(iter);
-                if(fish != nullptr && fish->getType() != "bait"){
-                    fish->input(LOGIC_INPUT_FEED);
-                    bait->setHp(-1);
-                }
-            }
-        }
-    }
-
-
 
     for(auto iter : baits){
         qDebug() << iter->pos().y();
@@ -119,6 +113,7 @@ void SceneBattle::timerEvent(QTimerEvent *event)
          }
      }
         //删怪了
+
    DeletePhase();
 
 
@@ -150,12 +145,31 @@ void SceneBattle::DeletePhase()
         i ++;
     }
 
+    for(int i = 0; i< effectList.size();){
+        if(effectList[i]->isDead()){
+            delete effectList[i];
+            effectList.removeAt(i);
+            i --;
+        }
+        i ++;
+    }
     Scene::DeletePhase();
 }
 
-void SceneBattle::addSkill(const EffectInitialInfo &seed, SpriteObject *from)
+void SceneBattle::addSkillWithTargetRect(EffectSeed *seed, SpriteObject *from, const QRectF &rect)
 {
+    EffectInitialInfo i(*seed);
+    i.bornPoint = from->pos();
+    i.targetRect = rect;
+    Effect* newEf = effectFactury.getEffect(from,this,i);
+    effectList.append(newEf);
+}
 
+void SceneBattle::addSkill(EffectSeed *seed, SpriteObject *from)
+{
+    EffectInitialInfo i(*seed); i.bornPoint = from->pos();
+    Effect* newEf = effectFactury.getEffect(from,this,i);
+    effectList.append(newEf);
 }
 
 void SceneBattle::addSpriteFromName(QPointF point, QString name)
@@ -163,11 +177,82 @@ void SceneBattle::addSpriteFromName(QPointF point, QString name)
     addSprite(point, name);
 }
 
-void SceneBattle::DirectOneToAnother(SpriteObject *mover, QString targetName)
+void SceneBattle::aoeKill(QRectF aoeRect, QString killType)
+{
+    QGraphicsRectItem bufRec (aoeRect);
+    this->addItem(&bufRec);
+    auto intersectList = bufRec.collidingItems();
+    if(intersectList.size() == 0)
+        return;
+    QList<SpriteObject*> selectList;
+    for(auto iter : intersectList){
+        SpriteObject* sprite = dynamic_cast<SpriteObject*> (iter);
+        if(sprite!=nullptr){
+            if(sprite->getType() == killType)
+                selectList.append(sprite);
+        }
+    }
+
+    if(selectList.size()!= 0){
+        for(auto i :selectList){
+            i->setHp(-1);
+        }
+    }
+}
+
+QList<SpriteObject *> SceneBattle::findTargetsInRect(QRectF rect, QString type)
+{
+    QGraphicsRectItem bufRec (rect);
+    addItem(&bufRec);
+    auto intersectList = bufRec.collidingItems();
+    QList<SpriteObject *>objectList;
+
+    for(auto iter: intersectList){
+        SpriteObject * ob = dynamic_cast<SpriteObject *>(iter);
+        if( ob != nullptr && ob->getType() == type)
+            objectList.append(ob);
+    }
+    return objectList;
+}
+
+bool SceneBattle::healSprite(SpriteObject *object, int parameter)
+{
+    int result = object->input(LOGIC_INPUT_HEAL);
+    if(result == INPUT_SUCCESS){
+        object->HP() += parameter;
+        return 1;
+    }
+    else
+        return 0;
+}
+
+void SceneBattle::directOneToAnother(SpriteObject *mover, QString targetName)
 {
     QList<SpriteObject*> selectList;
     for(auto iter : allList){
-        if(iter->)
+        SpriteObject* sprite = dynamic_cast<SpriteObject*> (iter);
+        if(sprite!=nullptr){
+            if(sprite->getType() == targetName)
+                selectList.append(sprite);
+        }
     }
+    if(!selectList.isEmpty()){
+        SpriteObject* target;
+        int min_d = INT_MAX;//int 足够了吧
+        for(auto i:selectList){
+            int dis = spriteDis(mover, i);
+            if(dis < min_d && dis > 1e-5){
+                target = i;
+                min_d = dis;
+            }
+        }
+        mover->moveToPoint(target->pos());
+        return;
+    }
+}
+
+int SceneBattle::spriteDis(SpriteObject *o1, SpriteObject *o2)
+{
+    return (o1->pos() - o2->pos()).manhattanLength();
 }
 
