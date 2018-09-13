@@ -49,6 +49,8 @@ void SceneBattle::load()
     allList.push_back(background);
     addItem(background);
     timerId = startTimer(FRAME);
+    moneyText = new QGraphicsSimpleTextItem();
+    addItem(moneyText);
 
 }
 
@@ -66,6 +68,7 @@ void SceneBattle::unload()
         effectList.clear();
     }
 
+    delete moneyText;
     fishes.clear();
     allList.clear();
     baits.clear();
@@ -82,15 +85,34 @@ void SceneBattle::getIn()
 void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //生成bait
-//    SpriteObject *bait = factury.getSpriteByTypeName(event->scenePos().x(),
-//                                                     event->scenePos().y(),
-//                                                     "bait");
-    SpriteObject*bait = addSprite(position,"bait");
+
+    QPointF p2 = position;
+    static bool bug = 0;
+    if(!bug){
+    QPointF p1 = position;
+    bug = 1;
+
+    SpriteObject* fish = addSprite(p1,"fish_little");
+    fishes.append(fish);
+    }
+    SpriteObject*bait = addSprite(p2,"bait");
     baits.append(bait);
 
-    QPointF p1 = position + QPointF(50,50);
-    SpriteObject* fish = addSprite(p1,"fish");
-    fishes.append(fish);
+//鼠标点击的物体
+    QList<SpriteObject*> selectList;
+    for(auto iter:allList){
+        SpriteObject* sprite = dynamic_cast<SpriteObject*> (iter);
+        if(sprite!=nullptr && sprite->contains(position)){
+                selectList.append(sprite);
+        }
+    }
+    for(auto iter:selectList){
+        int respond = iter->input(LOGIC_INPUT_CLICK);
+        if(respond == OUTPUT_MONEY){
+           money += iter->HP();
+           iter->setHp(-1);
+        }
+    }
 }
 
 void SceneBattle::timerEvent(QTimerEvent *event)
@@ -112,7 +134,9 @@ void SceneBattle::timerEvent(QTimerEvent *event)
             iter->setHP(-1);
          }
      }
-        //删怪了
+
+    moneyText->setText(QString::number(money));
+    //删怪了
 
    DeletePhase();
 
@@ -218,7 +242,7 @@ QList<SpriteObject *> SceneBattle::findTargetsInRect(QRectF rect, QString type)
 bool SceneBattle::healSprite(SpriteObject *object, int parameter)
 {
     int result = object->input(LOGIC_INPUT_HEAL);
-    if(result == INPUT_SUCCESS){
+    if(result == OUTPUT_SUCCESS){
         object->HP() += parameter;
         return 1;
     }

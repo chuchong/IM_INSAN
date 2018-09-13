@@ -56,9 +56,11 @@ const int LOGIC_INPUT_DANGER = 0;
 const int LOGIC_INPUT_SAFE = 1;
 const int LOGIC_INPUT_FEED = 2;
 const int LOGIC_INPUT_HEAL = 3;
+const int LOGIC_INPUT_CLICK = 4;
 
-const int INPUT_SUCCESS = 0;
-const int INPUT_UNSECCESS = 1;
+const int OUTPUT_SUCCESS = 0;
+const int OUTPUT_UNSECCESS = 1;
+const int OUTPUT_MONEY = 2;
 
 const int EFFECT_SUCCESS = 0;
 const int EFFECT_UNSUCCESS = 1;

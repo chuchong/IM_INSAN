@@ -26,16 +26,17 @@ SpriteObject::SpriteObject(Breed &breed, GameObject *parent):
     maxVx = breed.getMaxVx();
     maxVy = breed.getMaxVy();
     //TODO change!
-    ay = breed.getA();
-    a = 0;
-    vx = vy = ax = 0;
+    vx = breed.getVx();
+    vy = breed.getVy();
+    a = breed.getA();
     setImage(imageRc_);
 
     if(breed.getLogic() == 1)
         this->logic = new FishLogic(this);
     else if(breed.getLogic() == 2)
         this->logic = new BaitLogic(this);
-
+    else if(breed.getLogic() == 3)
+        this->logic = new MoneyLogic(this);
     qDebug() << "my HP" << hp_;
 }
 
@@ -146,9 +147,9 @@ int &SpriteObject::XFRAME(){return xframe_;}
 
 int &SpriteObject::YFRAME(){return yframe_;}
 
-qreal SpriteObject::maxVX(){return maxVx;}
+qreal& SpriteObject::maxVX(){return maxVx;}
 
-qreal SpriteObject::maxVY(){return maxVy;}
+qreal &SpriteObject::maxVY(){return maxVy;}
 
 void SpriteObject::clearSkills()
 {

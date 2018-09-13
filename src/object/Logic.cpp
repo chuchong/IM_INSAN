@@ -39,7 +39,7 @@ void FishLogic::runState0()
         }
     }
 
-    if(birthtime % 50 == 0){
+    if(birthtime  % 250 == 0){
         int r_b = r_num %100;
         if(r_b <= 80){
 //         产生金币
@@ -56,6 +56,9 @@ void FishLogic::runState0()
         state_ = 1;
         object_->XFRAME() = 1;
         object_->update();
+        object_->maxVX() *= 2;
+        object_->maxVY() *= 4;
+        object_->VX() *= 2;
     qDebug() << "I'm hungry";
     }
 }
@@ -74,6 +77,9 @@ void FishLogic::runState1()//饥饿
         state_=0;
         object_->XFRAME() = 0;
         object_->update();
+        object_->maxVX() /= 2;
+        object_->maxVY() /=4;
+        object_->VX() /= 2;
     }
 }
 
@@ -91,34 +97,34 @@ int FishLogic::inputState0(int in)
 {
     if(in == LOGIC_INPUT_DANGER){
         state_ = 2;
-        return INPUT_SUCCESS;
+        return OUTPUT_SUCCESS;
     }
-    return INPUT_UNSECCESS;
+    return OUTPUT_UNSECCESS;
 }
 
 int FishLogic::inputState1(int in)
 {
     if(in == LOGIC_INPUT_DANGER){
         state_ = 2;
-        return INPUT_SUCCESS;
+        return OUTPUT_SUCCESS;
     }
     if(in == LOGIC_INPUT_FEED){
         object_->XFRAME() = 0;
         object_->setHP(2000);
         state_ = 0;
         object_ ->update();
-        return INPUT_SUCCESS;
+        return OUTPUT_SUCCESS;
     }
-    return INPUT_UNSECCESS;
+    return OUTPUT_UNSECCESS;
 }
 
 int FishLogic::inputState2(int in)
 {
     if(in == LOGIC_INPUT_SAFE){
         state_ = 0;
-        return INPUT_SUCCESS;
+        return OUTPUT_SUCCESS;
     }
-    return INPUT_UNSECCESS;
+    return OUTPUT_UNSECCESS;
 }
 
 void FishLogic::run()
@@ -134,7 +140,7 @@ void FishLogic::run()
 int FishLogic::handleInput(int input)
 {
 if( input == LOGIC_INPUT_HEAL)
-        return INPUT_SUCCESS;
+        return OUTPUT_SUCCESS;
 if(state_ == 0)
     return inputState0(input);
 else if(state_ == 1)
@@ -150,5 +156,21 @@ void BaitLogic::run(){
 }
 
 int BaitLogic::handleInput(int INPUT_NUMBER){
-    return INPUT_SUCCESS;
+    return OUTPUT_SUCCESS;
+}
+
+void MoneyLogic::run()
+{
+
+}
+
+int MoneyLogic::handleInput(int INPUT_NUMBER)
+{
+    if(INPUT_NUMBER == LOGIC_INPUT_CLICK){
+        return OUTPUT_MONEY;
+        object_->setHp(-1);
+    }
+    else
+        return OUTPUT_UNSECCESS;
+
 }

@@ -1,0 +1,87 @@
+{
+    "x": [
+        {
+            "type": "bait",
+            "name": "bait",
+            "image": ":/SPRITE_BAIT",
+            "width": 40,
+            "height": 40,
+            "parent": "",
+            "hp": 1,
+            "maxVx": 0,
+            "maxVy": 10,
+            "a": 0.2,
+            "vx": 0,
+            "vy": 0,
+            "logic": 2,
+            "skills": [
+                {
+                    "name": "sacrifice",
+                    "to": "fish",
+                    "number": 1,
+                    "inherit": false,
+                    "parameter": 500
+                }
+            ]
+        },
+        {
+            "type": "fish",
+            "name": "fish",
+            "image": ":/SPRITE_FISH",
+            "width": 80,
+            "height": 80,
+            "parent": "",
+            "hp": 1000,
+            "maxVx": 1,
+            "maxVy": 0.5,
+            "a": 0,
+            "vx": 0,
+            "vy": -0.02,
+            "logic": 1,
+            "skills": [
+                {
+                    "name": "generate",
+                    "to": "yellow_fish",
+                    "number": 1,
+                    "inherit": false,
+                    "parameter": 0
+                },
+                {
+                    "name": "chase",
+                    "to": "bait",
+                    "number": 2,
+                    "inherit": false,
+                    "parameter": 0
+                }
+            ]
+        },
+        {
+            "name": "yellow_fish",
+            "image": ":/SPRITE_FISH_YELLOW",
+            "parent": "fish",
+            "hp": 3000,
+            "maxVx": 2,
+            "skills": [
+                {
+                    "number": 1,
+                    "name": "generate",
+                    "to": "beard_fish",
+                    "inherit": false,
+                    "parameter": 0
+                }
+            ]
+        },
+        {
+            "name": "beard_fish",
+            "image": ":/SPRITE_FISH_BEARD",
+            "parent": "fish",
+            "maxVx": 0.5,
+            "skills": [
+                {
+                    "number": 1,
+                    "inherit": true
+                }
+            ]
+        }
+    ]
+}

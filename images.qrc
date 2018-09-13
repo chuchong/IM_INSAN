@@ -14,7 +14,10 @@
         <file alias="BG_IE">images/background/ie.jpg</file>
         <file alias="BG_LE">images/background/le.jpg</file>
 
-
+        <file alias="SPRITE_MONEY_3">images/sprite/money_3.png</file>
+        <file alias="SPRITE_MONEY_2">images/sprite/money_2.png</file>
+        <file alias="SPRITE_MONEY_1">images/sprite/money_1.png</file>
+        <file alias="SPRITE_FISH_LITTLE">images/sprite/fish_little.png</file>
         <file alias="SPRITE_FISH_YELLOW">images/sprite/yellowfish.png</file>
         <file alias="SPRITE_FISH_BEARD">images/sprite/beardfish.png</file>
         <file alias="SPRITE_FISH">images/sprite/fish.png</file>

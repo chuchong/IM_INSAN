@@ -54,8 +54,8 @@ public:
 
     int &XFRAME();
     int &YFRAME();
-    qreal maxVX();
-    qreal maxVY();
+    qreal& maxVX();
+    qreal& maxVY();
 
     //以下为"技能":能对scene中其他sprite产生效果的,能杀掉自己的
 private:

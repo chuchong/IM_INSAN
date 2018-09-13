@@ -15,6 +15,8 @@
 class SceneBattle : public Scene
 {
 private:
+    QGraphicsSimpleTextItem * moneyText;
+
     EffectFactury effectFactury;
     SCENE_ID next;//
     QList<SpriteObject *> baits;
@@ -23,7 +25,7 @@ private:
     QPointF position;
     QList<Effect*> effectList;
     SpriteObject* addSprite(QPointF point, QString name);
-
+    int money = 0;
     int spriteDis(SpriteObject * o1, SpriteObject * o2);
 //    QList<SpriteObject *>& findSpriteListByType(QString type);
 public:

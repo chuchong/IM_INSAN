@@ -46,12 +46,25 @@ public:
     virtual void run();
     virtual int handleInput(int);
 };
-//一技能治疗鱼
+//bait 的 ai
+//一技能可以治疗鱼
+//以后可以弄个二技能伤害怪物
+//也可以怪物伤害鱼
 class BaitLogic: public Logic{
 public:
     BaitLogic(SpriteObject * ob):Logic(ob){
 
     }
+    virtual void run();
+    virtual int handleInput(int INPUT_NUMBER);
+};
+//入侵者Alien的 ai
+//
+//金币 的 ai
+class MoneyLogic: public Logic{
+public:
+    MoneyLogic(SpriteObject * ob):Logic(ob){
+                                      }
     virtual void run();
     virtual int handleInput(int INPUT_NUMBER);
 };

@@ -1,87 +1,184 @@
 {
-    "x": [
-        {
-            "type": "bait",
-            "name": "bait",
-            "image": ":/SPRITE_BAIT",
-            "width": 40,
-            "height": 40,
-            "parent": "",
-            "hp": 1,
-            "maxVx": 0,
-            "maxVy": 10,
-            "a": 0.2,
-            "vx": 0,
-            "vy": 0,
-            "logic": 2,
-            "skills": [
-                {
-                    "name": "sacrifice",
-                    "to": "fish",
-                    "number": 1,
-                    "inherit": false,
-                    "parameter": 500
-                }
-            ]
-        },
-        {
-            "type": "fish",
-            "name": "fish",
-            "image": ":/SPRITE_FISH",
-            "width": 80,
-            "height": 80,
-            "parent": "",
-            "hp": 1000,
-            "maxVx": 1,
-            "maxVy": 0.5,
-            "a": 0,
-            "vx": 0,
-            "vy": -0.02,
-            "logic": 1,
-            "skills": [
-                {
-                    "name": "generate",
-                    "to": "yellow_fish",
-                    "number": 1,
-                    "inherit": false,
-                    "parameter": 0
-                },
-                {
-                    "name": "chase",
-                    "to": "bait",
-                    "number": 2,
-                    "inherit": false,
-                    "parameter": 0
-                }
-            ]
-        },
-        {
-            "name": "yellow_fish",
-            "image": ":/SPRITE_FISH_YELLOW",
-            "parent": "fish",
-            "hp": 3000,
-            "maxVx": 2,
-            "skills": [
-                {
-                    "number": 1,
-                    "name": "generate",
-                    "to": "beard_fish",
-                    "inherit": false,
-                    "parameter": 0
-                }
-            ]
-        },
-        {
-            "name": "beard_fish",
-            "image": ":/SPRITE_FISH_BEARD",
-            "parent": "fish",
-            "maxVx": 0.5,
-            "skills": [
-                {
-                    "number": 1,
-                    "inherit": true
-                }
-            ]
-        }
-    ]
+	"x": [{
+			"type": "bait",
+			"name": "bait",
+			"image": ":/SPRITE_BAIT",
+			"width": 40,
+			"height": 40,
+			"parent": "",
+			"hp": 1,
+			"maxVx": 0,
+			"maxVy": 10,
+			"a": 0,
+			"vx": 0,
+			"vy": 0.05,
+			"logic": 2,
+			"skills": [{
+				"name": "sacrifice",
+				"to": "fish",
+				"number": 1,
+				"inherit": false,
+				"parameter": 500
+			}]
+		},
+		{
+			"type": "fish",
+			"name": "fish_little",
+			"image": ":/SPRITE_FISH_LITTLE",
+			"width": 80,
+			"height": 80,
+			"parent": "",
+			"hp": 1000,
+			"maxVx": 0.5,
+			"maxVy": 0.2,
+			"a": 0,
+			"vx": 0,
+			"vy": -0.02,
+			"logic": 1,
+			"skills": [{
+					"name": "chase",
+					"to": "bait",
+					"number": 3,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"name": "generate",
+					"to": "fish",
+					"number": 1,
+					"inherit": false,
+					"parameter": 0
+				}
+			]
+		},
+		{
+			"type": "fish",
+			"name": "fish",
+			"image": ":/SPRITE_FISH",
+			"width": 80,
+			"height": 80,
+			"parent": "",
+			"hp": 1000,
+			"maxVx": 1,
+			"maxVy": 0.5,
+			"a": 0,
+			"vx": 0,
+			"vy": -0.02,
+			"logic": 1,
+			"skills": [{
+					"name": "chase",
+					"to": "bait",
+					"number": 3,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"name": "generate",
+					"to": "fish_yellow",
+					"number": 1,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"name": "generate",
+					"to": "money_1",
+					"number": 2,
+					"inherit": false,
+					"parameter": 0
+				}
+			]
+		},
+		{
+			"name": "fish_yellow",
+			"image": ":/SPRITE_FISH_YELLOW",
+			"parent": "fish",
+			"hp": 1200,
+			"maxVx": 2,
+			"skills": [{
+					"number": 1,
+					"name": "generate",
+					"to": "fish_beard",
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"number": 2,
+					"name": "generate",
+					"to": "money_2",
+					"inherit": false
+				},
+				{
+					"number": 3,
+					"inherit": true
+				}
+			]
+		},
+		{
+			"name": "fish_beard",
+			"image": ":/SPRITE_FISH_BEARD",
+			"parent": "fish",
+			"maxVx": 0.5,
+			"skills": [{
+					"number": 1,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"number": 2,
+					"name": "generate",
+					"to": "money_3",
+					"inherit": false
+				},
+				{
+					"number": 3,
+					"inherit": true
+				}
+			]
+		},
+		{
+			"type": "money",
+			"name": "money_1",
+			"image": ":/SPRITE_MONEY_1",
+			"width": 40,
+			"height": 40,
+			"parent": "",
+			"hp": 15,
+			"maxVx": 0,
+			"maxVy": 1,
+			"a": 0,
+			"vx": 0,
+			"vy": 1,
+			"logic": 3
+		},
+		{
+			"type": "money",
+			"name": "money_2",
+			"image": ":/SPRITE_MONEY_2",
+			"width": 40,
+			"height": 40,
+			"parent": "",
+			"hp": 35,
+			"maxVx": 0,
+			"maxVy": 1,
+			"a": 0,
+			"vx": 0,
+			"vy": 1,
+			"logic": 3
+		},
+		{
+			"type": "money",
+			"name": "money_3",
+			"image": ":/SPRITE_MONEY_3",
+			"width": 40,
+			"height": 40,
+			"parent": "",
+			"hp": 200,
+			"maxVx": 0,
+			"maxVy": 1,
+			"a": 0,
+			"vx": 0,
+			"vy": 1,
+			"logic": 3
+		}
+	]
 }
