@@ -36,6 +36,7 @@ public:
     void bounceBack();
     void timerEvent(QTimerEvent *event);
     void setVelocity(qreal vx, qreal vy);
+    virtual void toDie() override;
     virtual void setHp(int hp);
     virtual void run() override;
     virtual int input(int message);
@@ -43,7 +44,7 @@ public:
 
     virtual bool isDead();
     QString getType();
-
+    QString getName();
     //use for logic
 public:
     qreal &VX();
@@ -51,11 +52,16 @@ public:
     qreal &AX();
     qreal &AY();
     int &HP();
+    qreal getY();
+    qreal getX();
+    int getWidth();
+    int getHeight();
 
     int &XFRAME();
     int &YFRAME();
     qreal& maxVX();
     qreal& maxVY();
+    int getMaxHp();
 
     //以下为"技能":能对scene中其他sprite产生效果的,能杀掉自己的
 private:

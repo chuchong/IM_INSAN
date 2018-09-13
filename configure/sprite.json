@@ -11,15 +11,23 @@
 			"maxVy": 10,
 			"a": 0,
 			"vx": 0,
-			"vy": 0.05,
+			"vy": 1,
 			"logic": 2,
 			"skills": [{
-				"name": "sacrifice",
-				"to": "fish",
-				"number": 1,
-				"inherit": false,
-				"parameter": 500
-			}]
+					"name": "sacrifice",
+					"to": "fish",
+					"number": 1,
+					"inherit": false,
+					"parameter": 500
+				},
+				{
+					"name": "sacrifice",
+					"to": "alien",
+					"number": 2,
+					"inherit": false,
+					"parameter": -500
+				}
+			]
 		},
 		{
 			"type": "fish",
@@ -48,6 +56,12 @@
 					"number": 1,
 					"inherit": false,
 					"parameter": 0
+				},
+				{
+					"name": "duck",
+					"to": "alien",
+					"number": 4,
+					"inherit": false
 				}
 			]
 		},
@@ -85,6 +99,12 @@
 					"number": 2,
 					"inherit": false,
 					"parameter": 0
+				},
+				{
+					"name": "duck",
+					"to": "alien",
+					"number": 4,
+					"inherit": false
 				}
 			]
 		},
@@ -110,6 +130,10 @@
 				{
 					"number": 3,
 					"inherit": true
+				},
+				{
+					"number": 4,
+					"inherit": true
 				}
 			]
 		},
@@ -131,6 +155,10 @@
 				},
 				{
 					"number": 3,
+					"inherit": true
+				},
+				{
+					"number": 4,
 					"inherit": true
 				}
 			]
@@ -179,6 +207,141 @@
 			"vx": 0,
 			"vy": 1,
 			"logic": 3
+		},
+		{
+			"type": "alien",
+			"name": "alien_1",
+			"image": ":/SPRITE_ALIEN_1",
+			"width": 120,
+			"height": 120,
+			"parent": "",
+			"hp": 2000,
+			"maxVx": 1,
+			"maxVy": 1,
+			"a": 0.5,
+			"vx": 0,
+			"vy": 0,
+			"logic": 4,
+			"skills": [{
+					"name": "chase",
+					"to": "fish",
+					"number": 1,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"name": "heal",
+					"to": "fish",
+					"number": 2,
+					"inherit": false,
+					"parameter": -1000
+				},
+				{
+					"name": "generate",
+					"to": "money_3",
+					"number": 4,
+					"inherit": false,
+					"parameter": -1000
+				}
+			]
+		},
+		{
+			"type": "alien",
+			"name": "alien_2",
+			"image": ":/SPRITE_ALIEN_2",
+			"width": 120,
+			"height": 120,
+			"parent": "",
+			"hp": 2000,
+			"maxVx": 1,
+			"maxVy": 1,
+			"a": 0.5,
+			"vx": 0,
+			"vy": 0,
+			"logic": 4,
+			"skills": [{
+					"name": "chase",
+					"to": "fish",
+					"number": 1,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"name": "heal",
+					"to": "fish",
+					"number": 2,
+					"inherit": false,
+					"parameter": -1000
+				},
+				{
+					"name": "chase",
+					"to": "bait",
+					"number": 3,
+					"inherit": false
+				},
+				{
+					"name": "generate",
+					"to": "money_3",
+					"number": 4,
+					"inherit": false,
+					"parameter": -1000
+				}
+			]
+		},
+		{
+			"type": "friend",
+			"name": "friend_saya",
+			"image": ":/SPRITE_SAYA",
+			"width": 30,
+			"height": 60,
+			"parent": "",
+			"hp": 1000,
+			"maxVx": 1,
+			"maxVy": 0,
+			"a": 0.1,
+			"vx": 0.1,
+			"vy": 0,
+			"logic": 4,
+			"skills": [{
+					"name": "chase",
+					"to": "money",
+					"number": 3,
+					"inherit": false,
+					"parameter": 0
+				},
+				{
+					"name": "heal",
+					"to": "money",
+					"number": 2,
+					"parameter": -10000
+				}
+			]
 		}
+    {
+      "name": "meat_beard",
+      "image": ":/SPRITE_FISH_BEARD",
+      "parent": "fish",
+      "maxVx": 0.5,
+      "skills": [{
+          "number": 1,
+          "inherit": false,
+          "parameter": 0
+        },
+        {
+          "number": 2,
+          "name": "generate",
+          "to": "money_3",
+          "inherit": false
+        },
+        {
+          "number": 3,
+          "inherit": true
+        },
+        {
+          "number": 4,
+          "inherit": true
+        }
+      ]
+    },
 	]
 }

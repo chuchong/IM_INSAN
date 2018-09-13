@@ -25,6 +25,8 @@ private:
     QPointF position;
     QList<Effect*> effectList;
     SpriteObject* addSprite(QPointF point, QString name);
+    QList<SpriteObject*> aliens;
+    QList<SpriteObject*> moneyList;
     int money = 0;
     int spriteDis(SpriteObject * o1, SpriteObject * o2);
 //    QList<SpriteObject *>& findSpriteListByType(QString type);
@@ -44,6 +46,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void timerEvent(QTimerEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void keyPressEvent(QKeyEvent *event);
     void DeletePhase();
 public slots:
     void addSkillWithTargetRect(EffectSeed * seed, SpriteObject *from,const QRectF & rect);
@@ -53,6 +56,10 @@ public slots:
     void aoeKill(QRectF aoeRect, QString killType);
     QList<SpriteObject*> findTargetsInRect(QRectF rect, QString type);
     bool healSprite(SpriteObject * object,int parameter);//1 for works , 0 for not work
+    int moveSpriteToPoint(SpriteObject * object, QPointF p);
+    void sendAlienMessage();
+    void sendNoAlienMessage();
+    bool outOfRect(SpriteObject * ob);
 };
 
 #endif // SCENEBATTLE_H

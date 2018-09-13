@@ -14,6 +14,9 @@
         <file alias="BG_IE">images/background/ie.jpg</file>
         <file alias="BG_LE">images/background/le.jpg</file>
 
+        <file alias="SPRITE_SAYA">images/sprite/saya.png</file>
+        <file alias="SPRITE_ALIEN_2">images/sprite/alien_2.png</file>
+        <file alias="SPRITE_ALIEN_1">images/sprite/alien.png</file>
         <file alias="SPRITE_MONEY_3">images/sprite/money_3.png</file>
         <file alias="SPRITE_MONEY_2">images/sprite/money_2.png</file>
         <file alias="SPRITE_MONEY_1">images/sprite/money_1.png</file>

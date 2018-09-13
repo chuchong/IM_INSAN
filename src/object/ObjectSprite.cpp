@@ -28,7 +28,7 @@ SpriteObject::SpriteObject(Breed &breed, GameObject *parent):
     //TODO change!
     vx = breed.getVx();
     vy = breed.getVy();
-    a = breed.getA();
+    ax = ay = a = breed.getA();
     setImage(imageRc_);
 
     if(breed.getLogic() == 1)
@@ -37,6 +37,8 @@ SpriteObject::SpriteObject(Breed &breed, GameObject *parent):
         this->logic = new BaitLogic(this);
     else if(breed.getLogic() == 3)
         this->logic = new MoneyLogic(this);
+    else if(breed.getLogic() == 4)
+        this->logic = new AlienLogic(this);
     qDebug() << "my HP" << hp_;
 }
 
@@ -84,29 +86,46 @@ void SpriteObject::setVelocity(qreal vx, qreal vy)
     this->vy = vy;
 }
 
+void SpriteObject::toDie()
+{
+    if(logic != nullptr)
+        logic->die();
+}
+
 void SpriteObject::setHp(int hp){hp_ = hp;}
 
 void SpriteObject::run()
 {
     if(this->hp_ > breed_.getHp())
         hp_ = breed_.getHp();
-    if(logic)
-    logic->run();
 
-
-    if(getType() == "fish"){
+    if(getType() == "fish" || getType() == "alien" || getType() == "friend"){
         bounceBack();
     }
+    qreal V2 = sqrt(vx * vx + vy *vy);
+    if(V2 != 0){
+        ax = vx / V2 * a;
+        ay = vy / V2 * a;
+    }
+    else
+        ax = ay = 0.1;
     vx = (maxVx < abs(vx + ax))? (maxVx * sgn(vx + ax)): (vx + ax);
     vy = (maxVy < abs(vy + ay))? (maxVy * sgn(vy + ay)): (vy + ay);
 
+    if(maxVY() == 0) vy = 0;
     qreal new_x = this->pos().x() + vx;
     qreal new_y = this->pos().y() + vy;
     setPos(new_x,new_y);
+
+    if(logic)
+    logic->run();
 }
 
 int SpriteObject::input(int message){
-    return logic->handleInput(message);
+    if(message == LOGIC_INPUT_HEAL)
+        return OUTPUT_SUCCESS;
+    else
+        return logic->handleInput(message);
 }
 
 void SpriteObject::moveToPoint(QPointF target)
@@ -118,8 +137,10 @@ void SpriteObject::moveToPoint(QPointF target)
     qreal dx = d.x();
     qreal dy = d.y();
     qreal D = sqrt(dx * dx + dy * dy);
-    vx = dx * ABSV / D;
-    vy = dy * ABSV / D;
+    vx = dx /D * ABSV;
+
+    vy = dy /D * ABSV;
+
 }
 
 bool SpriteObject::isDead(){
@@ -133,6 +154,11 @@ QString SpriteObject::getType(){
     return breed_.getType();
 }
 
+QString SpriteObject::getName()
+{
+    return breed_.getName();
+}
+
 qreal &SpriteObject::VX(){return vx;}
 
 qreal &SpriteObject::VY(){return vy;}
@@ -143,6 +169,26 @@ qreal &SpriteObject::AY(){return ay;}
 
 int &SpriteObject::HP(){return hp_;}
 
+qreal SpriteObject::getY()
+{
+ return pos().y();
+}
+
+qreal SpriteObject::getX()
+{
+return pos().x();
+}
+
+int SpriteObject::getWidth()
+{
+return width_;
+}
+
+int SpriteObject::getHeight()
+{
+return height_;
+}
+
 int &SpriteObject::XFRAME(){return xframe_;}
 
 int &SpriteObject::YFRAME(){return yframe_;}
@@ -150,6 +196,8 @@ int &SpriteObject::YFRAME(){return yframe_;}
 qreal& SpriteObject::maxVX(){return maxVx;}
 
 qreal &SpriteObject::maxVY(){return maxVy;}
+
+int SpriteObject::getMaxHp(){return breed_.getHp();  }
 
 void SpriteObject::clearSkills()
 {

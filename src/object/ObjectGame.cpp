@@ -32,6 +32,11 @@ QPainterPath GameObject::shape() const
     return path;
 }
 
+void GameObject::toDie()
+{
+
+}
+
 void GameObject::setHP(int hp)
 {
     hp_ = hp;

@@ -99,6 +99,17 @@ public:
     virtual int Happen();
 };
 
+class MoveEffect:public Effect{
+private:
+    QPointF point_;
+public:
+    MoveEffect(SpriteObject * from, SceneBattle * scene,
+               const EffectInitialInfo&info):
+        Effect(from, scene, info),point_(info.targetRect.topLeft()){
+
+    }
+    virtual int Happen();
+};
 class EffectFactury
 {
 private:

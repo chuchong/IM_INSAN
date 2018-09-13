@@ -99,7 +99,7 @@ int FishLogic::inputState0(int in)
         state_ = 2;
         return OUTPUT_SUCCESS;
     }
-    return OUTPUT_UNSECCESS;
+    return OUTPUT_UNSUCCESS;
 }
 
 int FishLogic::inputState1(int in)
@@ -115,7 +115,7 @@ int FishLogic::inputState1(int in)
         object_ ->update();
         return OUTPUT_SUCCESS;
     }
-    return OUTPUT_UNSECCESS;
+    return OUTPUT_UNSUCCESS;
 }
 
 int FishLogic::inputState2(int in)
@@ -124,7 +124,7 @@ int FishLogic::inputState2(int in)
         state_ = 0;
         return OUTPUT_SUCCESS;
     }
-    return OUTPUT_UNSECCESS;
+    return OUTPUT_UNSUCCESS;
 }
 
 void FishLogic::run()
@@ -135,6 +135,11 @@ void FishLogic::run()
         runState1();
     else if(state_ == 2)
         runState2();
+}
+
+void FishLogic::die()
+{
+
 }
 
 int FishLogic::handleInput(int input)
@@ -149,14 +154,25 @@ else if(state_ == 2)
     return inputState2(input);
 }
 
+void BaitLogic::die()
+{
+
+}
+
 void BaitLogic::run(){
     QRectF rect = object_->boundingRect();
     rect.moveTopLeft(object_->pos());
     object_->useTargetRectSkill(1,rect);
+    object_->useTargetRectSkill(2,rect);
 }
 
 int BaitLogic::handleInput(int INPUT_NUMBER){
     return OUTPUT_SUCCESS;
+}
+
+void MoneyLogic::die()
+{
+
 }
 
 void MoneyLogic::run()
@@ -171,6 +187,64 @@ int MoneyLogic::handleInput(int INPUT_NUMBER)
         object_->setHp(-1);
     }
     else
-        return OUTPUT_UNSECCESS;
+        return OUTPUT_UNSUCCESS;
+
+}
+
+void AlienLogic::die()
+{
+    //
+    object_->useSkill(4);
+}
+
+void AlienLogic::run()
+{
+    if(object_->HP() <= 0){
+        object_->useSkill(4);
+    }
+    birthtime ++;
+    if(birthtime % 10 == 0){
+        object_->useSkill(1);
+        object_->useSkill(3);
+    }
+
+    QRectF rect = object_->boundingRect();
+    rect.moveTopLeft(object_->pos());
+    object_->useTargetRectSkill(2,rect);
+}
+
+int AlienLogic::handleInput(int INPUT_NUMBER)
+{
+    if(INPUT_NUMBER == LOGIC_INPUT_CLICK && object_->getName() != "alien_2"){
+        return OUTPUT_ALIEN;
+    }
+    else if(INPUT_NUMBER == LOGIC_INPUT_HEAL && object_->getName() == "alien_2")
+        return OUTPUT_SUCCESS;
+    else
+        return OUTPUT_UNSUCCESS;
+}
+
+void FriendLogic::die()
+{
+
+}
+
+void FriendLogic::run()
+{
+    object_->VX() = 0;
+    birthtime ++;
+    if(birthtime % 10 == 0){
+        object_->useSkill(3);
+    }
+
+    if(birthtime % 3 == 0){
+    QRectF rect = object_->boundingRect();
+    rect.moveTopLeft(object_->pos());
+    object_->useTargetRectSkill(2,rect);
+    }
+}
+
+int FriendLogic::handleInput(int INPUT_NUMBER)
+{
 
 }

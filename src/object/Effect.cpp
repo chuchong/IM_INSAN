@@ -36,6 +36,10 @@ Effect *EffectFactury::getEffect(SpriteObject * from, SceneBattle * scene,
         return new HealEffect(from,scene,initInfo);
     else if(initInfo.seed.effectName == "sacrifice")
         return new SacrificeEffect(from,scene,initInfo);
+    else if(initInfo.seed.effectName == "move")
+        return new MoveEffect(from,scene,initInfo);
+    else if(initInfo.seed.effectName == "chasebyname")
+        return new ChaseByNameEffect(from,scene,initInfo);
     assert(1);//something has got wrong
     return nullptr;
 }
@@ -58,7 +62,7 @@ int KillEffect::Happen(){
 }
 
 int HealEffect::Happen(){
-    auto sprites = scene_->findTargetsInRect( rect,toName_);
+    auto sprites = scene_->findTargetsInRect(rect,toName_);
     for(auto iter:sprites){
         if(scene_->healSprite(iter,parameter))
             return EFFECT_SUCCESS;
@@ -77,4 +81,14 @@ int SacrificeEffect::Happen(){
 int GenerateEffect::Happen(){
     scene_->addSpriteFromName(point_,toName_);
     return EFFECT_SUCCESS;
+}
+
+int MoveEffect::Happen()
+{
+    scene_->moveSpriteToPoint(from_, point_);
+}
+
+int ChaseByNameEffect::Happen()
+{
+    scene_->directOneToAnotherByName(from_, toName_);
 }

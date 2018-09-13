@@ -33,6 +33,7 @@ void Scene::DeletePhase()
     for(int i =0; i < allList.size();){
         if(allList[i]->isDead()){
             qDebug()<< "delete object";
+            allList[i]->toDie();
             delete allList[i];
             allList.removeAt(i);
             i --;

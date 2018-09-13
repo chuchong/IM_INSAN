@@ -36,6 +36,7 @@ public:
     QGraphicsPixmapItem(parent){}//以让工厂类能较好的工作而设计,直接使用会出错
 
     //TODO 各种set方便工厂类
+    virtual void toDie();
     virtual void setHP(int);
     virtual void setImage(QString image);
     virtual void setRect(int wi, int he){

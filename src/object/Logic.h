@@ -18,6 +18,8 @@ public:
     virtual ~Logic();
     Logic(SpriteObject* ob);
     virtual void run() = 0;
+    //死亡时的逻辑,注意!!使用需要自身指针的技能会产生bug!
+    virtual void die() = 0;
     virtual int handleInput(int INPUT_NUMBER) =0;
 };
 
@@ -44,6 +46,7 @@ public:
         state_ = 0;
     }
     virtual void run();
+    virtual void die();
     virtual int handleInput(int);
 };
 //bait 的 ai
@@ -55,16 +58,44 @@ public:
     BaitLogic(SpriteObject * ob):Logic(ob){
 
     }
+    virtual void die();
     virtual void run();
     virtual int handleInput(int INPUT_NUMBER);
 };
-//入侵者Alien的 ai
-//
+
 //金币 的 ai
 class MoneyLogic: public Logic{
 public:
     MoneyLogic(SpriteObject * ob):Logic(ob){
                                       }
+    virtual void die();
+    virtual void run();
+    virtual int handleInput(int INPUT_NUMBER);
+};
+//入侵者Alien的 ai
+//
+class AlienLogic: public Logic{
+int birthtime = 0;
+public:
+    AlienLogic(SpriteObject * ob):Logic(ob){
+
+    }
+    virtual void die();
+    virtual void run();
+    virtual int handleInput(int INPUT_NUMBER);
+};
+//武器的Ai
+class WeaponLogic: public Logic{
+public:
+};
+class FriendLogic: public Logic{
+private:
+    int birthtime = 0;
+public:
+    FriendLogic(SpriteObject * ob):Logic(ob){
+
+    }
+    virtual void die();
     virtual void run();
     virtual int handleInput(int INPUT_NUMBER);
 };
