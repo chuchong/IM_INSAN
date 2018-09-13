@@ -51,6 +51,15 @@ public:
     }
     virtual int Happen();
 };
+class ChaseByNameEffect :public Effect{
+public:
+    ChaseByNameEffect(SpriteObject * from, SceneBattle * scene,
+                      const EffectInitialInfo &initInfo):
+        Effect(from,scene,initInfo){
+
+    }
+        virtual int Happen();
+};
 //将from的速度调整到远离toname的一个对象的方向
 class DuckEffect: public Effect{
 public:

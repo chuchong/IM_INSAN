@@ -14,6 +14,11 @@
         <file alias="BG_IE">images/background/ie.jpg</file>
         <file alias="BG_LE">images/background/le.jpg</file>
 
+        <file alias="SPRITE_MONEY_4">images/sprite/money_4.png</file>
+        <file alias="SPRITE_FISH_MAMA">images/sprite/mamafish.png</file>
+        <file alias="SPRITE_FISH_BIG_MAMA">images/sprite/bigmamafish.png</file>
+        <file alias="SPRITE_FISH_BIG_MEAT">images/sprite/big_meat_fish.png</file>
+        <file alias="SPRITE_FISH_MEAT">images/sprite/meatfish.png</file>
         <file alias="SPRITE_SAYA">images/sprite/saya.png</file>
         <file alias="SPRITE_ALIEN_2">images/sprite/alien_2.png</file>
         <file alias="SPRITE_ALIEN_1">images/sprite/alien.png</file>

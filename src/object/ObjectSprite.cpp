@@ -39,6 +39,10 @@ SpriteObject::SpriteObject(Breed &breed, GameObject *parent):
         this->logic = new MoneyLogic(this);
     else if(breed.getLogic() == 4)
         this->logic = new AlienLogic(this);
+    else if(breed.getLogic() == 5)
+        this->logic = new BigMamaLogic(this);
+    else if(breed.getLogic() == 6)
+        this->logic = new FriendLogic(this);
     qDebug() << "my HP" << hp_;
 }
 
@@ -51,20 +55,24 @@ SpriteObject::~SpriteObject(){
 
 void SpriteObject::bounceBack()
 {
-    if(pos().y() > 600){
+    if(pos().y() > 600 - height_){
         vy = - vy;
-        pos().setY(600);
+        ay = 0;
+        pos().setY(600 - height_);
     }
     if(pos().y() < 0){
         vy = - vy;
+        ay = 0;
         pos().setY(0);
     }
-    if(pos().x() > 900){
-        vx = -vx;
-        pos().setX(900);
+    if(pos().x() > 900 - width_){
+        vx = - vx;
+        ax = 0;
+        pos().setX(900 - width_);
     }
     if(pos().x() < 0){
         vx = - vx;
+        ax = 0;
         pos().setX(0);
     }
 }
@@ -99,9 +107,20 @@ void SpriteObject::run()
     if(this->hp_ > breed_.getHp())
         hp_ = breed_.getHp();
 
-    if(getType() == "fish" || getType() == "alien" || getType() == "friend"){
+
+    if(maxVY() == 0) vy = 0;
+
+    qreal new_x = this->pos().x() + vx;
+    qreal new_y = this->pos().y() + vy;
+
+
+
+    setPos(new_x,new_y);
+
+    if(getType() != "bait" && getType() != "money"){
         bounceBack();
     }
+
     qreal V2 = sqrt(vx * vx + vy *vy);
     if(V2 != 0){
         ax = vx / V2 * a;
@@ -109,13 +128,9 @@ void SpriteObject::run()
     }
     else
         ax = ay = 0.1;
+
     vx = (maxVx < abs(vx + ax))? (maxVx * sgn(vx + ax)): (vx + ax);
     vy = (maxVy < abs(vy + ay))? (maxVy * sgn(vy + ay)): (vy + ay);
-
-    if(maxVY() == 0) vy = 0;
-    qreal new_x = this->pos().x() + vx;
-    qreal new_y = this->pos().y() + vy;
-    setPos(new_x,new_y);
 
     if(logic)
     logic->run();

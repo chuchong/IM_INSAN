@@ -33,6 +33,9 @@ private:
     int birthtime = 0;// 记录出生活活了多久了
     int frame = 0;// to set time//一帧 1/60秒
     int state_;//0:游荡 1:饥饿 2: 躲避 3:饱了
+protected:
+    int para_evolvetime = 1800;
+    int para_moneytime = 250;
     void runState0();
     void runState1();
     void runState2();
@@ -89,6 +92,7 @@ class WeaponLogic: public Logic{
 public:
 };
 class FriendLogic: public Logic{
+    bool has_enemy = 0;
 private:
     int birthtime = 0;
 public:
@@ -98,5 +102,12 @@ public:
     virtual void die();
     virtual void run();
     virtual int handleInput(int INPUT_NUMBER);
+};
+class BigMamaLogic: public FishLogic{
+public:
+    BigMamaLogic(SpriteObject * ob)
+        :FishLogic( ob){
+        para_moneytime /= 2;
+    }
 };
 #endif // LOGIC_H

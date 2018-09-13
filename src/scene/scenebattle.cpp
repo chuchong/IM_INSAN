@@ -12,6 +12,7 @@ SpriteObject* SceneBattle::addSprite(QPointF point,QString name)
     if(sprite->getType() == "money")
         moneyList.append(sprite);
 
+
     addItem(sprite);
     connect(sprite,&SpriteObject::generateSkill,
             this,&SceneBattle::addSkill);
@@ -113,6 +114,10 @@ void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     SpriteObject* fish = addSprite(p1,"fish_little");
     fishes.append(fish);
+    fishes.append(addSprite(p1,"fish_meat"));
+    fishes.append(addSprite(p1,"fish_big_meat"));
+    fishes.append(addSprite(p1,"fish_mama"));
+    fishes.append(addSprite(p1,"fish_big_mama"));
     }
 //鼠标点击的物体
     QList<SpriteObject*> selectList;
@@ -221,20 +226,20 @@ void SceneBattle::DeletePhase()
     }
 
     for(int i = 0; i< moneyList.size();){
-
         if (moneyList[i]->isDead()){
             this->money += moneyList[i]->getMaxHp();
             moneyList.removeAt(i);
-            qDebug()<<"one fish starves to death";
+            qDebug()<<"got a coin";
+            i --;
+        }
+        else if(outOfRect(moneyList[i])){
+            moneyList.removeAt(i);
+            qDebug()<<"got a coin";
             i --;
         }
         i ++;
     }
 
-    for(auto iter :moneyList){
-        if(outOfRect(iter))
-            iter->setHp(0);
-    }
 
     for(int i = 0; i< effectList.size();){
         if(effectList[i]->isDead()){

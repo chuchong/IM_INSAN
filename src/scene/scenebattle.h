@@ -52,7 +52,8 @@ public slots:
     void addSkillWithTargetRect(EffectSeed * seed, SpriteObject *from,const QRectF & rect);
     void addSkill(EffectSeed * seed, SpriteObject *from);
     void addSpriteFromName(QPointF point, QString name);
-    void directOneToAnother(SpriteObject * mover, QString targetName);
+    void directOneToAnother(SpriteObject * mover, QString targetType);
+    void directOneToAnotherByName(SpriteObject * mover, QString targetName);
     void aoeKill(QRectF aoeRect, QString killType);
     QList<SpriteObject*> findTargetsInRect(QRectF rect, QString type);
     bool healSprite(SpriteObject * object,int parameter);//1 for works , 0 for not work

@@ -39,6 +39,7 @@ public:
     QString getName();
     QString getType();
     static void clearPool();
+    int cost;
 private:
     friend class BreedFactury;
     void setInitial(QString name, Breed *parent,

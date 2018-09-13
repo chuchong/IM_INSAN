@@ -31,7 +31,7 @@ void FishLogic::runState0()
             break;
         };
     }
-    if(birthtime >= 1800){
+    if(birthtime >= para_evolvetime){
 //        进化成下一条鱼
         if(object_->haveSkill(1)){
             object_->useSkill(1);
@@ -39,7 +39,7 @@ void FishLogic::runState0()
         }
     }
 
-    if(birthtime  % 250 == 0){
+    if(birthtime  % para_moneytime == 0){
         int r_b = r_num %100;
         if(r_b <= 80){
 //         产生金币
@@ -231,20 +231,34 @@ void FriendLogic::die()
 
 void FriendLogic::run()
 {
-    object_->VX() = 0;
-    birthtime ++;
-    if(birthtime % 10 == 0){
-        object_->useSkill(3);
-    }
+    if(has_enemy == 0){
+        object_->VY() = 0;
+        birthtime ++;
 
-    if(birthtime % 3 == 0){
-    QRectF rect = object_->boundingRect();
-    rect.moveTopLeft(object_->pos());
-    object_->useTargetRectSkill(2,rect);
+        object_->useSkill(3);
+
+        if(birthtime % 3 == 0){
+        QRectF rect = object_->boundingRect();
+        rect.moveTopLeft(object_->pos());
+        object_->useTargetRectSkill(2,rect);
+        }
+    }
+    else{
+        object_->VX() = object_->VY() = 0;
     }
 }
 
 int FriendLogic::handleInput(int INPUT_NUMBER)
 {
-
+    if(INPUT_NUMBER == LOGIC_INPUT_DANGER){
+        has_enemy = 1;
+        object_->XFRAME() = 1;
+        return OUTPUT_SUCCESS;
+    }
+    else if(INPUT_NUMBER == LOGIC_INPUT_SAFE){
+        has_enemy = 0;
+        object_->XFRAME() = 0;
+        return OUTPUT_SUCCESS;
+    }
+    return OUTPUT_UNSUCCESS;
 }
