@@ -129,6 +129,11 @@ int FishLogic::inputState2(int in)
 
 void FishLogic::run()
 {
+    if(object_->haveSkill(5)){
+        QRectF rect = object_->boundingRect();
+        rect.moveTopLeft(object_->pos());
+        object_->useTargetRectSkill(5,rect);
+    }
     if(state_ == 0)
         runState0();
     else if(state_ == 1)

@@ -62,7 +62,13 @@
 					"to": "alien",
 					"number": 4,
 					"inherit": false
-				}
+				},
+        {
+          "name" : "sacrifice",
+          "to": "fish_meat",
+          "parameter":1000,
+          "number": 5
+        }
 			]
 		},
 		{
@@ -357,6 +363,12 @@
         {
           "number": 4,
           "inherit": true
+        },
+        {
+          "number": 5,
+          "name": "sacrifice",
+          "to": "fish_big_meat",
+          "parameter": 2000
         }
       ]
     },

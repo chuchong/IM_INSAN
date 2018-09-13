@@ -107,17 +107,31 @@ void SceneBattle::mousePressEvent(QGraphicsSceneMouseEvent *event)
     //生成bait
     position = event->scenePos();
     QPointF p2 = position;
-    static bool bug = 0;
-    if(!bug){
+    static int bug = 0;
+    if(1)
+    {
     QPointF p1 = position;
-    bug = 1;
 
     SpriteObject* fish = addSprite(p1,"fish_little");
+    switch(bug){
+    case 0:
     fishes.append(fish);
+        break;
+    case 1:
     fishes.append(addSprite(p1,"fish_meat"));
+        break;
+    case 2:
     fishes.append(addSprite(p1,"fish_big_meat"));
+        break;
+    case 3:
     fishes.append(addSprite(p1,"fish_mama"));
+        break;
+    case 4:
     fishes.append(addSprite(p1,"fish_big_mama"));
+        break;
+    };
+    bug ++;
+
     }
 //鼠标点击的物体
     QList<SpriteObject*> selectList;
