@@ -7,6 +7,8 @@ class BlockObject : public GameObject
 {
 private:
     S_CONDITIONS condition_;
+
+//    int
 public:
     BlockObject();
     BlockObject(QString image, int x, int y, qreal px, qreal py);

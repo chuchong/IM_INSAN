@@ -36,6 +36,7 @@ void FishLogic::runState0()
         if(object_->haveSkill(1)){
             object_->useSkill(1);
             object_->setHp(-1);
+            suicide = 1;
         }
     }
 
@@ -54,7 +55,7 @@ void FishLogic::runState0()
     if(object_->HP() <= 400){
 //        object_->setVelocity(0,0);
         state_ = 1;
-        object_->XFRAME() = 1;
+        object_->YFRAME() = 1;
         object_->update();
         object_->maxVX() *= 2;
         object_->maxVY() *= 4;
@@ -75,12 +76,15 @@ void FishLogic::runState1()//饥饿
 
     if(object_->HP() >= 800){
         state_=0;
-        object_->XFRAME() = 0;
+        object_->YFRAME() = 0;
         object_->update();
         object_->maxVX() /= 2;
         object_->maxVY() /=4;
         object_->VX() /= 2;
     }
+//    //换成尸体
+//    if(object_->HP() == 0)
+//        object_->XFRAME() = 2;
 }
 
 void FishLogic::runState2()
@@ -109,7 +113,7 @@ int FishLogic::inputState1(int in)
         return OUTPUT_SUCCESS;
     }
     if(in == LOGIC_INPUT_FEED){
-        object_->XFRAME() = 0;
+        object_->YFRAME() = 0;
         object_->setHP(2000);
         state_ = 0;
         object_ ->update();
@@ -133,7 +137,13 @@ void FishLogic::run()
         QRectF rect = object_->boundingRect();
         rect.moveTopLeft(object_->pos());
         object_->useTargetRectSkill(5,rect);
-    }
+    }// 成为别人的食物
+
+    //共10张图 -maxVX <-> maxVx
+    int i = ((object_->VX() / object_->maxVX()) * 4.5) + 4.5;
+    if( i >= 9) i = 9; if( i<= 0) i = 0;
+    object_->XFRAME() = i;
+
     if(state_ == 0)
         runState0();
     else if(state_ == 1)
@@ -144,7 +154,8 @@ void FishLogic::run()
 
 void FishLogic::die()
 {
-
+    if(object_->haveSkill(8) && suicide == 0)
+    object_->useSkill(8);//变成尸体
 }
 
 int FishLogic::handleInput(int input)
@@ -161,10 +172,14 @@ else if(state_ == 2)
 
 void BaitLogic::die()
 {
-
+//    object_->useSkill(5);
 }
 
 void BaitLogic::run(){
+    object_->XFRAME() ++;
+    if(object_->XFRAME() == 10)
+        object_->XFRAME() = 0;
+
     QRectF rect = object_->boundingRect();
     rect.moveTopLeft(object_->pos());
     object_->useTargetRectSkill(1,rect);
@@ -204,6 +219,8 @@ void AlienLogic::die()
 
 void AlienLogic::run()
 {
+
+
     if(object_->HP() <= 0){
         object_->useSkill(4);
     }
@@ -211,6 +228,11 @@ void AlienLogic::run()
     if(birthtime % 10 == 0){
         object_->useSkill(1);
         object_->useSkill(3);
+
+        object_ -> XFRAME() ++;
+        if(object_->XFRAME() * object_->getWidth() >= object_->pixmap().width() )
+            object_->XFRAME() = 0;
+
     }
 
     QRectF rect = object_->boundingRect();
@@ -223,8 +245,9 @@ int AlienLogic::handleInput(int INPUT_NUMBER)
     if(INPUT_NUMBER == LOGIC_INPUT_CLICK && object_->getName() != "alien_2"){
         return OUTPUT_ALIEN;
     }
-    else if(INPUT_NUMBER == LOGIC_INPUT_HEAL && object_->getName() == "alien_2")
-        return OUTPUT_SUCCESS;
+    else if(INPUT_NUMBER == LOGIC_INPUT_CLICK && object_->getName() == "alien_2"){
+        return OUTPUT_ALIEN_NO_EFFECT;
+    }
     else
         return OUTPUT_UNSUCCESS;
 }
@@ -265,5 +288,73 @@ int FriendLogic::handleInput(int INPUT_NUMBER)
         object_->XFRAME() = 0;
         return OUTPUT_SUCCESS;
     }
+    return OUTPUT_UNSUCCESS;
+}
+
+void BodyLogic::die()
+{
+
+}
+
+void BodyLogic::run()
+{
+    object_->HP() --;
+    if(object_ -> HP() % 15 == 0)
+        object_->XFRAME() += 1;
+}
+
+int BodyLogic::handleInput(int INPUT_NUMBER)
+{
+    return OUTPUT_UNSUCCESS;
+}
+
+void BarLogic::die()
+{
+
+}
+
+void BarLogic::run()
+{
+    if(this->activated){
+        object_ -> HP() --;
+        int hp = object_->HP();
+        if(hp >= 40)
+            object_ ->XFRAME() = 1;
+        else if(hp >= 20)
+            object_ ->XFRAME() = 2;
+        else if(hp < 20)
+            object_->XFRAME() = 3;
+    }
+//    object_->XFRAME() = 0;
+//    object_->update();
+}
+
+int BarLogic::handleInput(int INPUT_NUMBER)
+{
+    if(INPUT_NUMBER == LOGIC_INPUT_ACTIVATE){
+        activated = 1;
+        return OUTPUT_SUCCESS;
+    }
+    return OUTPUT_UNSUCCESS;
+//    if(INPUT_NUMBER == LOGIC_INPUT_CLICK){
+//        if(object_->haveSkill(1))
+//            object_->useSkill(1);
+//        return OUTPUT_SUCCESS;
+//    }
+//    else return OUTPUT_UNSUCCESS;
+}
+
+void NoLogic::die()
+{
+
+}
+
+void NoLogic::run()
+{
+    object_->HP() --;
+}
+
+int NoLogic::handleInput(int INPUT_NUMBER)
+{
     return OUTPUT_UNSUCCESS;
 }

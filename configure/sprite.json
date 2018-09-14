@@ -21,14 +21,74 @@
 					"parameter": 500
 				},
 				{
-					"name": "sacrifice",
-					"to": "alien",
+					"name": "sacrificebyname",
+					"to": "alien_2",
 					"number": 2,
 					"inherit": false,
 					"parameter": -500
 				}
 			]
 		},
+		{
+				"type": "bait",
+				"name": "bait_2",
+				"image": ":/SPRITE_BAIT_2",
+				"width": 40,
+				"height": 40,
+				"parent": "bait",
+				"hp": 1,
+				"maxVx": 0,
+				"maxVy": 10,
+				"a": 0,
+				"vx": 0,
+				"vy": 1,
+				"logic": 2,
+				"skills": [{
+						"name": "sacrifice",
+						"to": "fish",
+						"number": 1,
+						"inherit": false,
+						"parameter": 1000
+					},
+					{
+						"name": "sacrificebyname",
+						"to": "alien_2",
+						"number": 2,
+						"inherit": false,
+						"parameter": -1000
+					}
+				]
+			},
+			{
+					"type": "bait",
+					"name": "bait_3",
+					"image": ":/SPRITE_BAIT_3",
+					"width": 40,
+					"height": 40,
+					"parent": "bait",
+					"hp": 1,
+					"maxVx": 0,
+					"maxVy": 10,
+					"a": 0,
+					"vx": 0,
+					"vy": 1,
+					"logic": 2,
+					"skills": [{
+							"name": "sacrifice",
+							"to": "fish",
+							"number": 1,
+							"inherit": false,
+							"parameter": 1500
+						},
+						{
+							"name": "sacrificebyname",
+							"to": "alien_2",
+							"number": 2,
+							"inherit": false,
+							"parameter": -1500
+						}
+					]
+				},
 		{
 			"type": "fish",
 			"name": "fish_little",
@@ -68,7 +128,12 @@
           "to": "fish_meat",
           "parameter":1000,
           "number": 5
-        }
+        },
+				{
+					"name" : "generate",
+					"to": "body_fish_little",
+					"number": 8
+				}
 			]
 		},
 		{
@@ -111,6 +176,11 @@
 					"to": "alien",
 					"number": 4,
 					"inherit": false
+				},
+				{
+					"name" : "generate",
+					"to": "body_fish",
+					"number": 8
 				}
 			]
 		},
@@ -140,6 +210,11 @@
 				{
 					"number": 4,
 					"inherit": true
+				},
+				{
+					"name" : "generate",
+					"to": "body_fish_big",
+					"number": 8
 				}
 			]
 		},
@@ -166,6 +241,11 @@
 				{
 					"number": 4,
 					"inherit": true
+				},
+				{
+					"name" : "generate",
+					"to": "body_fish_king",
+					"number": 8
 				}
 			]
 		},
@@ -173,8 +253,8 @@
 			"type": "money",
 			"name": "money_1",
 			"image": ":/SPRITE_MONEY_1",
-			"width": 40,
-			"height": 40,
+			"width": 50,
+			"height": 50,
 			"parent": "",
 			"hp": 15,
 			"maxVx": 0,
@@ -188,8 +268,8 @@
 			"type": "money",
 			"name": "money_2",
 			"image": ":/SPRITE_MONEY_2",
-			"width": 40,
-			"height": 40,
+			"width": 50,
+			"height": 50,
 			"parent": "",
 			"hp": 35,
 			"maxVx": 0,
@@ -233,8 +313,8 @@
 			"type": "alien",
 			"name": "alien_1",
 			"image": ":/SPRITE_ALIEN_1",
-			"width": 120,
-			"height": 120,
+			"width": 160,
+			"height": 160,
 			"parent": "",
 			"hp": 2000,
 			"maxVx": 1,
@@ -251,7 +331,7 @@
 					"parameter": 0
 				},
 				{
-					"name": "heal",
+					"name": "healbyclass",
 					"to": "fish",
 					"number": 2,
 					"inherit": false,
@@ -270,8 +350,8 @@
 			"type": "alien",
 			"name": "alien_2",
 			"image": ":/SPRITE_ALIEN_2",
-			"width": 120,
-			"height": 120,
+			"width": 44,
+			"height": 66,
 			"parent": "",
 			"hp": 2000,
 			"maxVx": 1,
@@ -288,7 +368,7 @@
 					"parameter": 0
 				},
 				{
-					"name": "heal",
+					"name": "healbyclass",
 					"to": "fish",
 					"number": 2,
 					"inherit": false,
@@ -343,8 +423,8 @@
       "image": ":/SPRITE_FISH_MEAT",
       "type": "fish_meat",
       "parent": "fish",
-      "width": 100,
-      "height":100,
+      "width": 80,
+      "height":80,
       "maxVx": 1,
       "maxVy": 1,
       "skills": [
@@ -369,7 +449,12 @@
           "name": "sacrifice",
           "to": "fish_big_meat",
           "parameter": 2000
-        }
+        },
+				{
+					"number": 8,
+					"name": "generate",
+					"to": "body_fish_meat"
+				}
       ]
     },
     {
@@ -377,8 +462,8 @@
       "image": ":/SPRITE_FISH_BIG_MEAT",
       "type": "fish_big_meat",
       "parent": "fish",
-      "width": 120,
-      "height":120,
+      "width": 160,
+      "height":160,
       "maxVx": 1,
       "maxVy": 1,
       "skills": [
@@ -397,7 +482,12 @@
         {
           "number": 4,
           "inherit": true
-        }
+        },
+				{
+					"name" : "generate",
+					"to": "body_fish_big_meat",
+					"number": 8
+				}
       ]
     },
     {
@@ -405,8 +495,8 @@
       "image": ":/SPRITE_FISH_MAMA",
       "type": "fish",
       "parent": "fish",
-      "width": 60,
-      "height":60,
+      "width": 80,
+      "height":80,
       "maxVx": 1,
       "maxVy": 1,
       "skills": [
@@ -429,7 +519,12 @@
         {
           "number": 4,
           "inherit": true
-        }
+        },
+				{
+					"name" : "generate",
+					"to": "body_fish_mama",
+					"number": 8
+				}
       ]
     },
     {
@@ -456,8 +551,75 @@
         {
           "number": 4,
           "inherit": true
-        }
+        },
+				{
+					"name" : "generate",
+					"to": "body_fish_mama",
+					"number": 8
+				}
       ]
-    }
+    },
+		{
+			"name": "body_fish_little",
+			"image": ":/SPRITE_BODY_FISH_LITTLE",
+			"type": "body",
+			"parent": "",
+			"width": 80,
+			"height":80,
+			"maxVx": 0,
+			"hp" : 120,
+			"maxVy": 1,
+			"a":0.5,
+			"logic": 7
+		},
+		{
+			"name": "body_fish",
+			"image": ":/SPRITE_BODY_FISH_ADULT",
+			"type": "body",
+			"parent": "body_fish_little"
+		},
+		{
+			"name":"body_fish_big",
+			"image": ":/SPRITE_BODY_FISH_BIG",
+			"type":"body",
+			"parent":"body_fish"
+		},
+		{
+			"name":"body_fish_king",
+			"image": ":/SPRITE_BODY_FISH_KING",
+			"type":"body",
+			"parent":"body_fish"
+		},
+		{
+			"name":"body_fish_meat",
+			"image": ":/SPRITE_BODY_FISH_MEAT",
+			"type":"body",
+			"parent":"body_fish"
+		},
+		{
+			"name":"body_fish_mama",
+			"image": ":/SPRITE_BODY_FISH_MAMA",
+			"type":"body",
+			"parent":"body_fish"
+		},
+		{
+			"name":"body_fish_big_meat",
+			"image": ":/SPRITE_BODY_FISH_BIG_MEAT",
+			"type":"body",
+			"parent":"body_fish",
+			"width":160,
+			"height":160
+		},
+		{
+			"name":"warning",
+			"image": ":/WARNING",
+			"type":"",
+			"logic":"",
+			"parent":"",
+			"width":300,
+			"height":60,
+			"hp": 240,
+			"logic": 9
+		}
 	]
 }

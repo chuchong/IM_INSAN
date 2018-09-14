@@ -40,6 +40,12 @@ Effect *EffectFactury::getEffect(SpriteObject * from, SceneBattle * scene,
         return new MoveEffect(from,scene,initInfo);
     else if(initInfo.seed.effectName == "chasebyname")
         return new ChaseByNameEffect(from,scene,initInfo);
+    else if(initInfo.seed.effectName == "healbyclass")
+        return new HealEffectByClass(from,scene,initInfo);
+    else if(initInfo.seed.effectName == "healbyname")
+        return new HealEffectByName(from,scene,initInfo);
+    else if(initInfo.seed.effectName == "sacrificebyname")
+        return new SacrificeEffectByName(from,scene,initInfo);
     assert(1);//something has got wrong
     return nullptr;
 }
@@ -85,10 +91,36 @@ int GenerateEffect::Happen(){
 
 int MoveEffect::Happen()
 {
-    scene_->moveSpriteToPoint(from_, point_);
+//    scene_->moveSpriteToPoint(from_, point_);
+       return 1;
 }
 
 int ChaseByNameEffect::Happen()
 {
     scene_->directOneToAnotherByName(from_, toName_);
+}
+
+int HealEffectByClass::Happen()
+{
+    scene_->aoeKillByClass(rect, toName_);
+    return EFFECT_SUCCESS;
+}
+
+int HealEffectByName::Happen()
+{
+    auto sprites = scene_->findTargetsInRectByName(rect,toName_);
+    for(auto iter:sprites){
+        if(scene_->healSprite(iter,parameter))
+            return EFFECT_SUCCESS;
+    }
+    return EFFECT_UNSUCCESS;
+}
+
+int SacrificeEffectByName::Happen()
+{
+    if(HealEffectByName::Happen() == EFFECT_SUCCESS){
+        from_->setHp(-1);
+        return EFFECT_SUCCESS;
+    }
+    return EFFECT_UNSUCCESS;
 }

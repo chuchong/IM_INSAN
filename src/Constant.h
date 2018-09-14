@@ -6,17 +6,20 @@ enum SCENE_TYPE{START,BATTLE,STORY,SELECT
 };
 typedef int SCENE_ID;
 const int SCENE_START = 1000;
+const int SCENE_START_BALCK = 1001;
 const int SCENE_BATTLE_1 = 2000;
 const int SCENE_BATTLE_2 = 2001;
 const int SCENE_BATTLE_3 = 2002;
 const int SCENE_BATTLE_4 = 2003;
-const int SCENE_STORY_1 = 3000;
-const int SCENE_STORY_2 = 3001;
-const int SCENE_STORY_3 = 3002;
+const int SCENE_STORY_1_1 = 3000;
+const int SCENE_STORY_1_2 = 3001;
+const int SCENE_STORY_1_3 = 3002;
 const int SCENE_STORY_ENDING_BAD = 3003;
+
 const int SCENE_STORY_ENDING_TRUE = 3004;
 const int SCENE_STORY_ENDING_HAPPY = 3005;
 const int SCENE_STORY_THANKS = 3006;
+const int SCENE_STORY_ENDING_LOSE = 3007;
 const int SCENE_SELECT_1 = 4000;
 
 
@@ -57,11 +60,14 @@ const int LOGIC_INPUT_SAFE = 1;
 const int LOGIC_INPUT_FEED = 2;
 const int LOGIC_INPUT_HEAL = 3;
 const int LOGIC_INPUT_CLICK = 4;
+const int LOGIC_INPUT_REACHTIME = 5;
+const int LOGIC_INPUT_ACTIVATE = 6;
 
 const int OUTPUT_SUCCESS = 0;
 const int OUTPUT_UNSUCCESS = 1;
 const int OUTPUT_MONEY = 2;
 const int OUTPUT_ALIEN = 3;
+const int OUTPUT_ALIEN_NO_EFFECT = 4;
 
 const int EFFECT_SUCCESS = 0;
 const int EFFECT_UNSUCCESS = 1;

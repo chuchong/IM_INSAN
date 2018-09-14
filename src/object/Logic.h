@@ -10,6 +10,7 @@
 #include <QObject>
 #include <QList>
 #include "Effect.h"
+#include "ObjectSprite.h"
 class Logic
 {
 protected:
@@ -30,11 +31,12 @@ public:
 //鱼类四技能是躲避外星人
 class FishLogic:public Logic{
 private:
+    bool suicide = 0;
     int birthtime = 0;// 记录出生活活了多久了
     int frame = 0;// to set time//一帧 1/60秒
     int state_;//0:游荡 1:饥饿 2: 躲避 3:饱了
 protected:
-    int para_evolvetime = 1800;
+    int para_evolvetime = 1000;
     int para_moneytime = 250;
     void runState0();
     void runState1();
@@ -109,5 +111,34 @@ public:
         :FishLogic( ob){
         para_moneytime /= 2;
     }
+};
+//尸体的逻辑
+class BodyLogic: public Logic{
+public:
+    BodyLogic(SpriteObject * ob) :
+        Logic(ob){}
+    virtual void die();
+    virtual void run();
+    virtual int handleInput(int INPUT_NUMBER);
+};
+class BarLogic: public Logic{
+    bool activated = 0;
+    int para;
+    int birthtime = 0;
+public:
+    BarLogic(SpriteObject *ob):Logic(ob){
+    }
+    virtual void die();
+    virtual void run();
+    virtual int handleInput(int INPUT_NUMBER);
+};
+class NoLogic: public Logic{
+public:
+    NoLogic(SpriteObject *ob):Logic(ob){
+
+    }
+    virtual void die();
+    virtual void run();
+    virtual int handleInput(int INPUT_NUMBER);
 };
 #endif // LOGIC_H

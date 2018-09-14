@@ -9,7 +9,8 @@ void SceneStory::parseFromFile(QString j)
     QSettings config(j,QSettings::IniFormat);
     background_url = config.value("/background/url").toString();
     this->script_url = config.value("/script/url").toString();
-
+    this->sceneId = config.value("/sceneid/id").toInt();
+        qDebug()<<sceneId;
 //    qDebug() << background_url << script;
 }
 

@@ -11,9 +11,24 @@
         <file alias="BG_GE">images/background/ge.jpg</file>
         <file alias="BG_BE">images/background/be.jpg</file>
         <file alias="BG_BATTLE_1_1">images/background/battle1_1.jpg</file>
+        <file alias="BG_BATTLE_1_2">images/background/battle1_2.jpg</file>
         <file alias="BG_IE">images/background/ie.jpg</file>
         <file alias="BG_LE">images/background/le.jpg</file>
+        <file alias="BG_START_BLACK">images/background/blackstartMenu.jpg</file>
+        <file alias="WARNING">images/background/warning.png</file>
 
+        <file alias="SPRITE_FAKER_FISH_MEAT_BIG">images/sprite/faker_meat_big.png</file>
+        <file alias="SPRITE_FAKER_FISH_MEAT">images/sprite/faker_fish_meat.png</file>
+        <file alias="SPRITE_FAKER_MAMA">images/sprite/faker_mama.png</file>
+        <file alias="SPRITE_FAKER_FISH">images/sprite/faker_fish.png</file>
+        <file alias="SPRITE_BAR">images/sprite/bar.png</file>
+        <file alias="SPRITE_BODY_FISH_BIG_MEAT">images/sprite/bodyfishbigmeat.png</file>
+        <file alias="SPRITE_BODY_FISH_MAMA">images/sprite/bodyfishmama.png</file>
+        <file alias="SPRITE_BODY_FISH_LITTLE">images/sprite/bodyfishlittle.png</file>
+        <file alias="SPRITE_BODY_FISH_ADULT">images/sprite/bodyfishadult.png</file>
+        <file alias="SPRITE_BODY_FISH_BIG">images/sprite/bodyfishbig.png</file>
+        <file alias="SPRITE_BODY_FISH_MEAT">images/sprite/bodyfishmeat.png</file>
+        <file alias="SPRITE_BODY_FISH_KING">images/sprite/bodyfishking.png</file>
         <file alias="SPRITE_MONEY_4">images/sprite/money_4.png</file>
         <file alias="SPRITE_FISH_MAMA">images/sprite/mamafish.png</file>
         <file alias="SPRITE_FISH_BIG_MAMA">images/sprite/bigmamafish.png</file>
@@ -30,8 +45,13 @@
         <file alias="SPRITE_FISH_BEARD">images/sprite/beardfish.png</file>
         <file alias="SPRITE_FISH">images/sprite/fish.png</file>
         <file alias="SPRITE_BAIT">images/sprite/bait.png</file>
+        <file alias="SPRITE_BAIT_2">images/sprite/bait_2.png</file>
+        <file alias="SPRITE_BAIT_3">images/sprite/bait_3.png</file>
     </qresource>
     <qresource prefix="/configure">
+        <file alias="INI_START_2">configure/start2.INI</file>
+        <file alias="INI_STORY_1_LE">configure/story_lose_end.INI</file>
+        <file alias="INI_STORY_1_BE">configure/story_win_end.INI</file>
         <file alias="INI_STORY_1_1">configure/story1_1.INI</file>
         <file alias="INI_BATTLE_1">configure/battle1_1.INI</file>
         <file alias="INI_LOADING">configure/loading.INI</file>

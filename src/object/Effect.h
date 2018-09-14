@@ -119,6 +119,47 @@ public:
     }
     virtual int Happen();
 };
+
+class HealEffectByClass : public Effect{
+private:
+    int parameter;
+    QRectF rect;
+public:
+    HealEffectByClass(SpriteObject * from, SceneBattle * scene,
+               const EffectInitialInfo &initInfo):
+        Effect(from,scene,initInfo),parameter(initInfo.seed.parameter),
+        rect(initInfo.targetRect){
+
+    }
+    virtual int Happen();
+};
+
+
+class HealEffectByName : public Effect{
+private:
+    int parameter;
+    QRectF rect;
+public:
+    HealEffectByName(SpriteObject * from, SceneBattle * scene,
+               const EffectInitialInfo &initInfo):
+        Effect(from,scene,initInfo),parameter(initInfo.seed.parameter),
+        rect(initInfo.targetRect){
+
+    }
+    virtual int Happen();
+};
+
+class SacrificeEffectByName:public HealEffectByName{
+private:
+public:
+    SacrificeEffectByName(SpriteObject * from, SceneBattle * scene,
+               const EffectInitialInfo &initInfo):
+        HealEffectByName(from,scene,initInfo){
+
+    }
+    virtual int Happen();
+};
+
 class EffectFactury
 {
 private:

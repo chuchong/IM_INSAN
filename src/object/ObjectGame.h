@@ -16,7 +16,6 @@ protected:
 //    to debug
 //    virtual void setPos(int x, int y) = delete;
 //    virtual QPointF pos() = delete;
-
     int xframe_ = 0; //in which part of its image
     int yframe_ = 0;
     int height_ = 0;//height of it's box

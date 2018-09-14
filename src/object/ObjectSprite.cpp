@@ -43,11 +43,19 @@ SpriteObject::SpriteObject(Breed &breed, GameObject *parent):
         this->logic = new BigMamaLogic(this);
     else if(breed.getLogic() == 6)
         this->logic = new FriendLogic(this);
+    else if(breed.getLogic() == 7)
+        this->logic = new BodyLogic(this);
+    else if(breed.getLogic() == 8)
+        this->logic = new BarLogic(this);
+    else if(breed.getLogic() == 9)
+        this->logic = new NoLogic(this);
+    else
+        logic = nullptr;
     qDebug() << "my HP" << hp_;
 }
 
 SpriteObject::~SpriteObject(){
-    qDebug()<<"delete" << breed_.getName();
+//    qDebug()<<"delete" << breed_.getName();
     if(logic != nullptr)
         delete logic;
     clearSkills();
@@ -55,25 +63,25 @@ SpriteObject::~SpriteObject(){
 
 void SpriteObject::bounceBack()
 {
-    if(pos().y() > 600 - height_){
+    if(pos().y() > 596 - height_){
         vy = - vy;
         ay = 0;
-        pos().setY(600 - height_);
+        setY(582 - height_);
     }
-    if(pos().y() < 0){
+    if(pos().y() < 80){
         vy = - vy;
         ay = 0;
-        pos().setY(0);
+        setY(80);
     }
     if(pos().x() > 900 - width_){
         vx = - vx;
         ax = 0;
-        pos().setX(900 - width_);
+        setX(900 - width_);
     }
     if(pos().x() < 0){
         vx = - vx;
         ax = 0;
-        pos().setX(0);
+        setX(0);
     }
 }
 
@@ -139,10 +147,12 @@ void SpriteObject::run()
 int SpriteObject::input(int message){
     if(message == LOGIC_INPUT_HEAL)
         return OUTPUT_SUCCESS;
-    else
+    else{
+        if(logic != nullptr)
         return logic->handleInput(message);
-}
 
+    }
+}
 void SpriteObject::moveToPoint(QPointF target)
 {
     if(QPointF(target - pos()).manhattanLength() < 1e-5)

@@ -8,8 +8,10 @@
 class SceneStart : public Scene
 {
 private:
+   int timerNum;
    QList<BlockObject *>buttons;
    BlockObject *background;
+//   QString bg_url = ":/BG_STARTMENU";
 public:
    ~SceneStart(){ qDebug() << "delete start";}
     SceneStart();
@@ -23,6 +25,7 @@ public:
     virtual SCENE_TYPE getSceneType(){
         return START;
     }
+    void timerEvent(QTimerEvent *event);
 //    virtual Scene *duplicateScene(Scene *);
 };
 

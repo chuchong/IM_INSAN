@@ -7,8 +7,9 @@
 #include "EffectSeed.h"
 class SpriteObject;
 class BreedFactury;
-//产生技能的种子
-
+//Breed 有 父指针 表示它是什么类的子项,方便模仿
+//另外,Breed名称也是类的一部分 fish_meat 是 fish 的子类,用startswith
+//
 class Breed{//表示sprite 的种类,这才是真正的类!
 
 private:
