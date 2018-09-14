@@ -131,21 +131,19 @@ void SceneBattle::unload()
     fishes.clear();
     allList.clear();
     baits.clear();
-//    factury.clearPool();
+
     disconnect();
     killTimer(timerId);
     killTimer(alienTime);
     rects.clear();
-//    selectCells.clear();
-    //TODO
-//    moneyText->setPos(0,500);
+
 }
 
 void SceneBattle::getIn()
 {
     timerId = startTimer(FRAME);
     alienTime = startTimer(5000);
-//    this->update();
+    this->update();
 
 }
 
